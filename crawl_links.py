@@ -12,16 +12,20 @@ LINKS_MD = "links.md"
 DATA_DIR = "dat"
 INDEX_JSON = "index.json"
 
+
 def hash_link(link):
     return hashlib.sha256(link.encode("utf-8")).hexdigest()
 
+
 def is_pdf(url):
     return url.lower().endswith(".pdf") or "pdf" in urlparse(url).path.lower()
+
 
 async def fetch_and_convert(crawler, url):
     if is_pdf(url):
         # Download PDF directly
         import requests
+
         resp = requests.get(url, timeout=15)
         resp.raise_for_status()
         return resp.content, "pdf"
@@ -34,13 +38,14 @@ async def fetch_and_convert(crawler, url):
         exclude_social_media_links=True,
         exclude_domains=[],
         exclude_external_images=True,
-        cache_mode=CacheMode.BYPASS
+        cache_mode=CacheMode.BYPASS,
     )
     result = await crawler.arun(url=url, config=config)
     if result.success:
         return result.markdown, "md"
     else:
         return "", None
+
 
 async def process_link(crawler, link, idx, total):
     id_ = hash_link(link)
@@ -57,6 +62,7 @@ async def process_link(crawler, link, idx, total):
     except Exception as e:
         print(f"[{idx+1}/{total}] Failed: {link}: {e}")
         return {"link": link, "id": id_, "filename": None, "status": f"Failed: {e}"}
+
 
 async def main_async():
     os.makedirs(DATA_DIR, exist_ok=True)
@@ -81,8 +87,10 @@ async def main_async():
     with open(INDEX_JSON, "w", encoding="utf-8") as f:
         json.dump(index, f, indent=2)
 
+
 def main():
     asyncio.run(main_async())
+
 
 if __name__ == "__main__":
     main()
