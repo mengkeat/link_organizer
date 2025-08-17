@@ -1,0 +1,8 @@
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.4.8  # Use the latest stable version
+    hooks:
+      - id: ruff
+        args: ["."]  # Lint all files in the repo
+      - id: ruff-format
+        args: ["."]  # Format all files in the repo
