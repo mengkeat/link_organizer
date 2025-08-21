@@ -1,6 +1,7 @@
 """
-Link Classifier using LiteLLM with OpenRouter
+Link Classifier with modular LLM interface
 Provides automatic categorization, tagging, and summarization of web content
+Supports multiple LLM providers (LiteLLM and OpenRouter direct)
 """
 
 import os
@@ -9,10 +10,12 @@ import asyncio
 from typing import Dict, List, Optional, Any
 from dataclasses import dataclass
 from pathlib import Path
-import litellm
 from dotenv import load_dotenv
 import PyPDF2
 import hashlib
+
+# Import modular LLM interface
+from src.llm import LLMProviderFactory
 
 # Load environment variables
 load_dotenv()
@@ -32,18 +35,15 @@ class ClassificationResult:
     target_audience: str
 
 class LinkClassifier:
-    """Main classifier using LiteLLM with OpenRouter"""
+    """Main classifier with modular LLM interface"""
 
-    def __init__(self, model: str = "openrouter/gpt-4"):
-        """Initialize classifier with specified model"""
-        self.model = model
-        self.api_key = os.getenv("OPENROUTER_API_KEY")
-
-        if not self.api_key:
-            raise ValueError("OPENROUTER_API_KEY environment variable is required")
-
-        # Set up LiteLLM
-        litellm.api_key = self.api_key
+    def __init__(self, llm_provider=None):
+        """Initialize classifier with LLM provider"""
+        # Initialize LLM provider
+        if llm_provider is None:
+            self.llm_provider = LLMProviderFactory.from_env()
+        else:
+            self.llm_provider = llm_provider
 
         # Define classification categories
         self.categories = [
@@ -88,14 +88,15 @@ Be precise and objective in your analysis.
         prompt = self.get_classification_prompt(url, title, content)
 
         try:
-            response = await litellm.acompletion(
-                model=self.model,
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.1,  # Low temperature for consistent results
-                max_tokens=500
-            )
+            print(f"Using LLM provider: {type(self.llm_provider).__name__}")
+            async with self.llm_provider as provider:
+                response = await provider.generate(
+                    prompt,
+                    temperature=0.7,  # Low temperature for consistent results
+                    max_tokens=2048
+                )
 
-            result_text = response.choices[0].message.content
+            result_text = response.content
             result_json = self.parse_llm_response(result_text)
 
             return ClassificationResult(**result_json)
