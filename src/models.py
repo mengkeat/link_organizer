@@ -1,8 +1,10 @@
 """
 Data models for link organization and classification
 """
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import List, Optional, Any, Dict
+import time
+from enum import Enum
 
 
 @dataclass
@@ -59,6 +61,49 @@ class LinkData:
         return result
 
 
+class ProcessingStage(Enum):
+    """Stages of link processing"""
+    PENDING = "pending"
+    FETCHING = "fetching"  
+    FETCH_COMPLETE = "fetch_complete"
+    CLASSIFYING = "classifying"
+    SUCCESS = "success"
+    FAILED = "failed"
+
+
+@dataclass
+class WorkerStatus:
+    """Status of an individual worker"""
+    worker_id: str
+    worker_type: str  # 'fetch' or 'classification'
+    status: str = "idle"  # 'idle', 'working', 'error'
+    current_task: Optional[str] = None
+    last_update: float = field(default_factory=time.time)
+    
+    
+@dataclass
+class QueueStats:
+    """Statistics for queue monitoring"""
+    fetch_queue_size: int = 0
+    classification_queue_size: int = 0
+    completed_count: int = 0
+    failed_count: int = 0
+    total_count: int = 0
+    start_time: float = field(default_factory=time.time)
+    
+    @property
+    def completion_percentage(self) -> float:
+        """Calculate completion percentage"""
+        if self.total_count == 0:
+            return 0.0
+        return ((self.completed_count + self.failed_count) / self.total_count) * 100
+    
+    @property
+    def elapsed_time(self) -> float:
+        """Get elapsed time in seconds"""
+        return time.time() - self.start_time
+
+
 @dataclass
 class CrawlerConfig:
     """Configuration for crawler operations"""
@@ -69,3 +114,4 @@ class CrawlerConfig:
     classification_workers: int = 5
     fetch_workers: int = 5
     request_delay: float = 1.0
+    enable_tui: bool = False
