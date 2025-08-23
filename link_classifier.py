@@ -263,5 +263,8 @@ async def main():
     print(f"Summary: {result.summary}")
     print(f"Confidence: {result.confidence}")
 
+    print(f"\n\nComplete Result:")
+    print(result)
+
 if __name__ == "__main__":
     asyncio.run(main())

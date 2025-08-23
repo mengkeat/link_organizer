@@ -71,7 +71,7 @@ async def main_async():
     index = []
     async with AsyncWebCrawler() as crawler:
         # Run all link processing concurrently, but limit concurrency to avoid overload
-        sem = asyncio.Semaphore(8)  # adjust concurrency as needed
+        sem = asyncio.Semaphore(12)  # adjust concurrency as needed
 
         async def sem_task(idx, link):
             async with sem:

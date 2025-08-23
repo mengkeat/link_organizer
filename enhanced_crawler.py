@@ -19,6 +19,9 @@ LINKS_MD = "links.md"
 DATA_DIR = "dat"
 INDEX_JSON = "index.json"
 CLASSIFICATIONS_JSON = "classifications.json"
+MAX_RETRIES = 3  # Max retries for classification
+CLASSIFICATION_WORKERS = 5  # Number of concurrent classification tasks
+FETCH_WORKERS = 5 # Number of concurrent fetch tasks
 
 def hash_link(link):
     return hashlib.sha256(link.encode("utf-8")).hexdigest()
@@ -51,88 +54,163 @@ async def fetch_and_convert(crawler, url):
     else:
         return "", None
 
-async def process_link_enhanced(crawler, classifier, link, idx, total):
-    """Enhanced link processing with classification"""
+async def fetch_link_content(crawler, link, idx, total):
+    """Fetches content for a link and prepares it for classification."""
     id_ = hash_link(link)
-    print(f"[{idx+1}/{total}] Processing: {link} with hash {id_}")
-
+    print(f"[{idx+1}/{total}] Fetching: {link}")
     try:
-        # Fetch content
         content, typ = await fetch_and_convert(crawler, link)
-
         if not content:
             return {"link": link, "id": id_, "filename": None, "status": "Failed: No content"}
 
-        # Save content to file
         fname = f"{id_}.{typ}"
         fpath = os.path.join(DATA_DIR, fname)
         mode = "wb" if typ == "pdf" else "w"
         with open(fpath, mode, encoding=None if typ == "pdf" else "utf-8") as f:
             f.write(content)
 
-        # Classify content
-        print(f"[{idx+1}/{total}] Classifying content...")
-        title = link.split('/')[-1].replace('-', ' ').replace('_', ' ').title()
-        classification = await classifier.classify_content(link, title, content)
-
-        # Create enhanced result
-        result = {
-            "link": link,
-            "id": id_,
-            "filename": fname,
-            "status": "Success",
-            "classification": {
-                "category": classification.category,
-                "subcategory": classification.subcategory,
-                "tags": classification.tags,
-                "summary": classification.summary,
-                "confidence": classification.confidence,
-                "content_type": classification.content_type,
-                "difficulty": classification.difficulty,
-                "quality_score": classification.quality_score,
-                "key_topics": classification.key_topics,
-                "target_audience": classification.target_audience
-            }
-        }
-
-        print(f"[{idx+1}/{total}] Success: {link} -> {fname} ({classification.category})")
-        return result
-
+        return {"link": link, "id": id_, "filename": fname, "content": content, "status": "Fetched"}
     except Exception as e:
-        print(f"[{idx+1}/{total}] Failed: {link}: {e}")
+        print(f"[{idx+1}/{total}] Failed to fetch {link}: {e}")
         return {"link": link, "id": id_, "filename": None, "status": f"Failed: {e}"}
 
+async def classification_worker(classifier, queue, results, failed_queue):
+    """Worker that processes classification tasks from a queue."""
+    while True:
+        try:
+            task = await queue.get()
+            if task is None:
+                break
+
+            link = task["link"]
+            content = task["content"]
+            retries = task.get("retries", 0)
+
+            print(f"Classifying: {link} (attempt {retries + 1})")
+
+            try:
+                title = link.split('/')[-1].replace('-', ' ').replace('_', ' ').title()
+                classification = await classifier.classify_content(link, title, content)
+
+                result = {
+                    "link": link,
+                    "id": task["id"],
+                    "filename": task["filename"],
+                    "status": "Success",
+                    "classification": {
+                        "category": classification.category,
+                        "subcategory": classification.subcategory,
+                        "tags": classification.tags,
+                        "summary": classification.summary,
+                        "confidence": classification.confidence,
+                        "content_type": classification.content_type,
+                        "difficulty": classification.difficulty,
+                        "quality_score": classification.quality_score,
+                        "key_topics": classification.key_topics,
+                        "target_audience": classification.target_audience,
+                    },
+                }
+                results.append(result)
+                print(f"Success: {link} -> {task['filename']} ({classification.category})")
+            except Exception as e:
+                print(f"Classification failed for {link}: {e}")
+                if retries < MAX_RETRIES:
+                    task["retries"] = retries + 1
+                    await queue.put(task)
+                    print(f"Re-queued {link} for retry.")
+                else:
+                    print(f"Max retries reached for {link}. Marking as failed.")
+                    failed_result = {
+                        "link": link,
+                        "id": task["id"],
+                        "filename": task["filename"],
+                        "status": f"Failed: Max retries exceeded. Last error: {e}",
+                    }
+                    failed_queue.put_nowait(failed_result)
+            finally:
+                queue.task_done()
+        except asyncio.CancelledError:
+            break
+
+
+async def fetch_worker(crawler, in_queue, out_queue, results_list, total):
+    while True:
+        try:
+            idx, link = await in_queue.get()
+            fetched_data = await fetch_link_content(crawler, link, idx, total)
+            if fetched_data and fetched_data.get("content"):
+                await out_queue.put(fetched_data)
+            else:
+                results_list.append(fetched_data)
+            in_queue.task_done()
+        except asyncio.CancelledError:
+            break
+        except Exception as e:
+            # Log error, not much else to do
+            print(f"Error in fetch worker for link {link}: {e}")
+            in_queue.task_done()
+
+
 async def main_enhanced():
-    """Enhanced main function with classification"""
+    """Enhanced main function with classification and retry queue"""
     os.makedirs(DATA_DIR, exist_ok=True)
     links = extract_links_from_file(LINKS_MD)
     total = len(links)
     print(f"Found {total} links in {LINKS_MD}")
 
-    # Initialize classifier
     classifier = LinkClassifier()
+    
+    fetch_queue = asyncio.Queue()
+    classification_queue = asyncio.Queue()
+    results = []
+    failed_classifications = asyncio.Queue()
 
-    index = []
-    classifications = {}
+    for idx, link in enumerate(links):
+        await fetch_queue.put((idx, link))
+
+    # Start classification workers
+    classification_workers = [
+        asyncio.create_task(classification_worker(classifier, classification_queue, results, failed_classifications))
+        for _ in range(CLASSIFICATION_WORKERS)
+    ]
 
     async with AsyncWebCrawler() as crawler:
-        # Process links concurrently with classification
-        sem = asyncio.Semaphore(5)  # Reduced concurrency for API rate limits
+        # Start fetch workers
+        fetch_workers = [
+            asyncio.create_task(fetch_worker(crawler, fetch_queue, classification_queue, results, total))
+            for _ in range(FETCH_WORKERS)
+        ]
 
-        async def sem_task(idx, link):
-            async with sem:
-                return await process_link_enhanced(crawler, classifier, link, idx, total)
+        # Wait for all links to be fetched
+        await fetch_queue.join()
 
-        tasks = [sem_task(idx, link) for idx, link in enumerate(links)]
-        for fut in asyncio.as_completed(tasks):
-            result = await fut
-            index.append(result)
+        # Stop fetch workers
+        for worker in fetch_workers:
+            worker.cancel()
+        await asyncio.gather(*fetch_workers, return_exceptions=True)
 
-            # Store classification separately
-            if "classification" in result:
-                classifications[result["link"]] = result["classification"]
 
-            print(f"Processed {len(index)}/{total} links")
+    # Wait for all classifications to complete
+    await classification_queue.join()
+
+    # Stop classification workers
+    for _ in range(CLASSIFICATION_WORKERS):
+        await classification_queue.put(None)
+    await asyncio.gather(*classification_workers)
+
+    # Add permanently failed items to results
+    while not failed_classifications.empty():
+        results.append(await failed_classifications.get())
+
+    # Create index and classifications from results
+    index = []
+    classifications = {}
+    for result in results:
+        if "classification" in result:
+            classifications[result["link"]] = result["classification"]
+        # ensure we don't have content in the index
+        result.pop("content", None)
+        index.append(result)
 
     # Save index
     with open(INDEX_JSON, "w", encoding="utf-8") as f:
@@ -143,6 +221,7 @@ async def main_enhanced():
         json.dump(classifications, f, indent=2, ensure_ascii=False)
 
     print(f"\nEnhanced crawling complete!")
+    print(f"Processed {len(index)}/{total} links")
     print(f"Index saved to {INDEX_JSON}")
     print(f"Classifications saved to {CLASSIFICATIONS_JSON}")
 
