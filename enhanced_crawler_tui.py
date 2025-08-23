@@ -22,7 +22,7 @@ LINKS_MD = "links.md"
 
 
 async def update_queue_stats(fetch_queue, classification_queue, results, failed_results, total):
-    """Periodically update queue statistics for TUI"""
+    """Periodically update queue statistics for TUI display."""
     status_tracker = get_status_tracker()
     
     while True:
@@ -40,7 +40,7 @@ async def update_queue_stats(fetch_queue, classification_queue, results, failed_
 
 
 async def main_enhanced_tui(enable_tui: bool = True):
-    """Enhanced main function with TUI support"""
+    """Enhanced main function with optional TUI support for real-time monitoring."""
     load_dotenv()
     config = CrawlerConfig(enable_tui=enable_tui)
     os.makedirs(config.data_dir, exist_ok=True)
@@ -118,7 +118,7 @@ async def main_enhanced_tui(enable_tui: bool = True):
 
 async def run_crawler(classification_service, config, fetch_queue, classification_queue,
                      results, failed_results, failed_classifications, total):
-    """Run the crawler workers"""
+    """Run crawler workers with fetch and classification tasks."""
     
     # Start queue stats updater if TUI is enabled
     stats_task = None
@@ -185,7 +185,7 @@ async def run_crawler(classification_service, config, fetch_queue, classificatio
 
 
 def main():
-    """Main entry point with command line argument parsing"""
+    """Main entry point with command line argument parsing for TUI crawler."""
     parser = argparse.ArgumentParser(description="Enhanced Link Crawler with TUI")
     parser.add_argument("--no-tui", action="store_true", 
                        help="Disable TUI and run in console mode")

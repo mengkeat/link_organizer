@@ -17,12 +17,12 @@ class CrawlerUtils:
 
     @staticmethod
     def is_pdf(url: str) -> bool:
-        """Check if URL points to a PDF file"""
+        """Check if URL points to a PDF file based on extension or path."""
         return url.lower().endswith(".pdf") or "pdf" in urlparse(url).path.lower()
 
     @staticmethod
     async def fetch_and_convert(crawler, url: str) -> Tuple[Optional[str], Optional[str]]:
-        """Fetch content from URL and convert to appropriate format"""
+        """Fetch content from URL and convert to appropriate format (PDF or markdown)."""
         if CrawlerUtils.is_pdf(url):
             return CrawlerUtils._download_pdf(url)
         else:
@@ -30,7 +30,7 @@ class CrawlerUtils:
 
     @staticmethod
     def _download_pdf(url: str) -> Tuple[Optional[bytes], Optional[str]]:
-        """Download PDF directly"""
+        """Download PDF content directly from URL."""
         try:
             resp = requests.get(url, timeout=15)
             resp.raise_for_status()
@@ -41,7 +41,7 @@ class CrawlerUtils:
 
     @staticmethod
     async def _fetch_html_content(crawler, url: str) -> Tuple[Optional[str], Optional[str]]:
-        """Fetch HTML content and convert to markdown"""
+        """Fetch HTML content and convert to markdown using crawler."""
         config = CrawlerRunConfig(
             css_selector=None,
             word_count_threshold=10,
@@ -66,7 +66,7 @@ class CrawlerUtils:
 
     @staticmethod
     async def fetch_link_content(crawler, link: str, idx: int, total: int, data_dir: str = "dat") -> LinkData:
-        """Fetch content for a link and prepare LinkData object"""
+        """Fetch content for a link and prepare LinkData object with status."""
         link_id = ContentProcessor.hash_link(link)
         print(f"[{idx+1}/{total}] Fetching: {link}")
         

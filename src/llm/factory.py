@@ -32,7 +32,7 @@ class LLMProviderFactory:
         model: str,
         **kwargs
     ) -> LLMProvider:
-        """Create an LLM provider instance"""
+        """Create an LLM provider instance of specified type."""
         if provider_type not in cls.PROVIDERS:
             raise ValueError(f"Unknown provider type: {provider_type}")
 
@@ -47,7 +47,7 @@ class LLMProviderFactory:
         model_env_var: str = "LITELLM_MODEL",
         default_provider: LLMProviderType = LLMProviderType.LITELLM
     ) -> LLMProvider:
-        """Create provider from environment variables"""
+        """Create provider from environment variables configuration."""
         # Get provider type from environment
         provider_str = os.getenv(provider_env_var, default_provider.value).lower()
 
@@ -82,7 +82,7 @@ class LLMProviderFactory:
 
     @classmethod
     def get_available_providers(cls) -> Dict[str, str]:
-        """Get list of available providers with descriptions"""
+        """Get list of available providers with their descriptions."""
         return {
             LLMProviderType.LITELLM.value: "LiteLLM provider (supports multiple LLM services)",
             LLMProviderType.OPENROUTER.value: "OpenRouter direct API provider"

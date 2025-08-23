@@ -12,7 +12,7 @@ class ContentProcessor:
 
     @staticmethod
     def extract_content_from_file(file_path: Path) -> str:
-        """Extract text content from markdown or PDF files"""
+        """Extract text content from markdown or PDF files."""
         try:
             if file_path.suffix.lower() == '.md':
                 return file_path.read_text(encoding='utf-8')
@@ -25,7 +25,7 @@ class ContentProcessor:
 
     @staticmethod
     def extract_pdf_text(file_path: Path) -> str:
-        """Extract text from PDF files"""
+        """Extract text content from PDF files using PyPDF2."""
         try:
             with open(file_path, 'rb') as file:
                 pdf_reader = PyPDF2.PdfReader(file)
@@ -38,10 +38,10 @@ class ContentProcessor:
 
     @staticmethod
     def hash_link(link: str) -> str:
-        """Generate hash for link (matching existing system)"""
+        """Generate SHA256 hash for link matching existing system format."""
         return hashlib.sha256(link.encode("utf-8")).hexdigest()
 
     @staticmethod
     def generate_title_from_url(url: str) -> str:
-        """Generate a readable title from URL"""
+        """Generate human-readable title from URL path."""
         return url.split('/')[-1].replace('-', ' ').replace('_', ' ').title()

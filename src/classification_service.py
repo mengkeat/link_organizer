@@ -15,7 +15,7 @@ class ClassificationService:
     """Service for classifying web content using LLM providers"""
 
     def __init__(self, llm_provider=None):
-        """Initialize classifier with LLM provider"""
+        """Initialize classification service with specified LLM provider."""
         if llm_provider is None:
             self.llm_provider = LLMProviderFactory.from_env()
         else:
@@ -33,7 +33,7 @@ class ClassificationService:
         ]
 
     def get_classification_prompt(self, url: str, title: str, content: str) -> str:
-        """Generate structured classification prompt"""
+        """Generate structured prompt for LLM content classification."""
         return f"""
 Analyze the following web content and provide a structured classification.
 
@@ -59,7 +59,7 @@ Be precise and objective in your analysis.
 """
 
     async def classify_content(self, url: str, title: str, content: str) -> ClassificationResult:
-        """Classify content using LLM"""
+        """Classify web content using LLM and return structured result."""
         prompt = self.get_classification_prompt(url, title, content)
 
         try:
@@ -81,7 +81,7 @@ Be precise and objective in your analysis.
             return self.get_fallback_classification(url, title, content)
 
     def parse_llm_response(self, response_text: str) -> Dict[str, Any]:
-        """Parse LLM response, handling various formats"""
+        """Parse LLM response text and extract JSON classification data."""
         try:
             json_start = response_text.find('{')
             json_end = response_text.rfind('}') + 1
@@ -97,7 +97,7 @@ Be precise and objective in your analysis.
             return self.parse_text_response(response_text)
 
     def parse_text_response(self, text: str) -> Dict[str, Any]:
-        """Fallback parser for non-JSON responses"""
+        """Fallback parser for non-JSON LLM responses."""
         return {
             "category": "Technology",
             "subcategory": "General",
@@ -112,7 +112,7 @@ Be precise and objective in your analysis.
         }
 
     def get_fallback_classification(self, url: str, title: str, content: str) -> ClassificationResult:
-        """Provide fallback classification when LLM fails"""
+        """Provide default classification when LLM classification fails."""
         return ClassificationResult(
             category="Technology",
             subcategory="General",
@@ -127,7 +127,7 @@ Be precise and objective in your analysis.
         )
 
     async def classify_existing_links(self, index_file: Path = Path("index.json")) -> Dict[str, tuple]:
-        """Classify all existing links from index.json"""
+        """Classify all existing crawled links from index file."""
         if not index_file.exists():
             print(f"Index file {index_file} not found")
             return {}
@@ -164,7 +164,7 @@ Be precise and objective in your analysis.
 
     def save_classifications(self, classifications: Dict[str, tuple], 
                            output_file: Path = Path("classifications.json")):
-        """Save classifications to JSON file"""
+        """Save classification results to JSON output file."""
         output_data = {}
         for link, (result, file_hash) in classifications.items():
             output_data[link] = {

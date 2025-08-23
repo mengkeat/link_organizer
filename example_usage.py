@@ -12,7 +12,7 @@ from src.llm import LLMProviderFactory, LLMProviderType, LiteLLMProvider, OpenRo
 
 
 async def example_with_factory():
-    """Example using the factory pattern with environment configuration"""
+    """Example using the factory pattern with environment configuration."""
     print("=== Example 1: Using Factory with Environment Configuration ===")
 
     # Create provider from environment (as configured in .env)
@@ -45,7 +45,7 @@ async def example_with_factory():
 
 
 async def example_with_specific_providers():
-    """Example using specific providers directly"""
+    """Example using specific LLM providers directly instead of factory."""
     print("=== Example 2: Using Specific Providers ===")
 
     # Get API key from environment
@@ -101,7 +101,7 @@ async def example_with_specific_providers():
 
 
 async def example_provider_switching():
-    """Example of switching between providers"""
+    """Example of switching between different LLM providers for comparison."""
     print("=== Example 3: Provider Switching ===")
 
     api_key = os.getenv("OPENROUTER_API_KEY")
@@ -142,7 +142,7 @@ async def example_provider_switching():
 
 
 async def example_available_providers():
-    """Example of listing available providers"""
+    """Example of listing all available LLM providers and descriptions."""
     print("=== Example 4: Available Providers ===")
 
     providers = LLMProviderFactory.get_available_providers()
@@ -155,7 +155,7 @@ async def example_available_providers():
 
 
 async def main():
-    """Main function to run all examples"""
+    """Main function to run all LLM provider examples sequentially."""
     print("LLM Interface Examples")
     print("=" * 50)
 

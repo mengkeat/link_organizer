@@ -11,7 +11,7 @@ from pathlib import Path
 from link_classifier import LinkClassifier
 
 async def test_single_url():
-    """Test classification with a single URL"""
+    """Test classification with a single URL using sample content."""
     classifier = LinkClassifier()
 
     test_url = "https://example.com/ml-guide"
@@ -43,7 +43,7 @@ async def test_single_url():
     print(f"Summary: {result.summary}")
 
 async def classify_existing_links(limit: int = None, output_file: str = "classifications.json"):
-    """Classify existing links from index.json"""
+    """Classify existing links from index.json with optional limit and output file."""
     classifier = LinkClassifier()
 
     print("Loading existing links from index.json...")
@@ -72,7 +72,7 @@ async def classify_existing_links(limit: int = None, output_file: str = "classif
         print("No links found to classify")
 
 async def interactive_classification():
-    """Interactive mode for testing"""
+    """Interactive mode for testing classification with user input."""
     classifier = LinkClassifier()
 
     print("Interactive Classification Mode")
@@ -107,6 +107,7 @@ async def interactive_classification():
             print(f"Error: {e}")
 
 def main():
+    """Main entry point with command line argument parsing for test script."""
     parser = argparse.ArgumentParser(description="Test Link Classifier")
     parser.add_argument("--single", action="store_true", help="Test with single example")
     parser.add_argument("--existing", action="store_true", help="Classify existing links")

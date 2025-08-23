@@ -22,6 +22,7 @@ class CrawlerTUI:
     """Terminal User Interface for crawler monitoring"""
     
     def __init__(self, status_tracker: Optional[StatusTracker] = None):
+        """Initialize TUI with console and status tracker."""
         self.console = Console()
         self.status_tracker = status_tracker or get_status_tracker()
         self.live_display: Optional[Live] = None
@@ -29,7 +30,7 @@ class CrawlerTUI:
         self._running = False
         
     def create_layout(self) -> Layout:
-        """Create the main TUI layout"""
+        """Create the main TUI layout with header, main content, and footer."""
         layout = Layout()
         
         layout.split_column(
@@ -56,7 +57,7 @@ class CrawlerTUI:
         return layout
         
     def create_header(self) -> Panel:
-        """Create header panel"""
+        """Create header panel with runtime and progress statistics."""
         stats = self.status_tracker.queue_stats
         elapsed = int(stats.elapsed_time)
         hours, remainder = divmod(elapsed, 3600)
@@ -75,7 +76,7 @@ class CrawlerTUI:
         )
         
     def create_queue_panel(self) -> Panel:
-        """Create queue status panel"""
+        """Create queue status panel showing fetch and classification queues."""
         stats = self.status_tracker.queue_stats
         
         table = Table(show_header=True, header_style="bold magenta")
@@ -94,7 +95,7 @@ class CrawlerTUI:
         return Panel(table, title="Queue Status", border_style="green")
         
     def create_worker_panel(self) -> Panel:
-        """Create worker status panel"""
+        """Create worker status panel showing all workers and their states."""
         table = Table(show_header=True, header_style="bold magenta")
         table.add_column("Worker", style="cyan")
         table.add_column("Type", style="yellow")
@@ -122,7 +123,7 @@ class CrawlerTUI:
         return Panel(table, title="Worker Status", border_style="blue")
         
     def create_progress_panel(self) -> Panel:
-        """Create progress panel"""
+        """Create progress panel showing processing stages and completion."""
         stats = self.status_tracker.queue_stats
         stage_summary = self.status_tracker.get_stage_summary()
         
@@ -155,7 +156,7 @@ class CrawlerTUI:
         return Panel(table, title="Progress Summary", border_style="yellow")
         
     def create_activity_panel(self) -> Panel:
-        """Create recent activity panel"""
+        """Create recent activity panel showing latest processing events."""
         activities = self.status_tracker.get_recent_activities(15)
         
         if not activities:
@@ -171,7 +172,7 @@ class CrawlerTUI:
         )
         
     def create_footer(self) -> Panel:
-        """Create footer panel"""
+        """Create footer panel showing currently active tasks."""
         stats = self.status_tracker.queue_stats
         active_tasks = self.status_tracker.get_active_tasks()
         
@@ -192,7 +193,7 @@ class CrawlerTUI:
         )
         
     def update_display(self) -> Layout:
-        """Update the entire display"""
+        """Update the entire TUI display with current data."""
         layout = self.create_layout()
         
         layout["header"].update(self.create_header())
@@ -206,7 +207,7 @@ class CrawlerTUI:
         
     @asynccontextmanager
     async def live_context(self):
-        """Context manager for live display"""
+        """Context manager for live display with automatic updates."""
         try:
             self._running = True
             layout = self.update_display()
@@ -231,7 +232,7 @@ class CrawlerTUI:
             self.live_display = None
             
     async def _update_loop(self):
-        """Background task to update display"""
+        """Background task to continuously update display."""
         while self._running:
             try:
                 if self.live_display:
@@ -246,7 +247,7 @@ class CrawlerTUI:
                 await asyncio.sleep(1)
                 
     def print_summary(self):
-        """Print final summary (non-live mode)"""
+        """Print final summary statistics after crawling completion."""
         stats = self.status_tracker.queue_stats
         
         self.console.print("\n[bold green]Crawling Complete![/bold green]")

@@ -16,7 +16,7 @@ class TestLLMResponse:
     """Test LLMResponse dataclass"""
 
     def test_llm_response_creation(self):
-        """Test creating LLMResponse"""
+        """Test creating LLMResponse with all fields."""
         response = LLMResponse(
             content="Test response",
             model="test-model",
@@ -58,7 +58,7 @@ class TestLiteLLMProvider:
     """Test LiteLLM provider"""
 
     def test_initialization(self):
-        """Test LiteLLM provider initialization"""
+        """Test LiteLLM provider initialization with API key and model."""
         provider = LiteLLMProvider("test_key", "test_model")
 
         assert provider.api_key == "test_key"
@@ -165,7 +165,7 @@ class TestOpenRouterProvider:
     """Test OpenRouter provider"""
 
     def test_initialization(self):
-        """Test OpenRouter provider initialization"""
+        """Test OpenRouter provider initialization with API key and model."""
         provider = OpenRouterProvider("test_key", "gpt-4")
 
         assert provider.api_key == "test_key"

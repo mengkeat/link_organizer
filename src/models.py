@@ -33,7 +33,7 @@ class LinkData:
     classification: Optional[ClassificationResult] = None
 
     def to_dict(self, include_content: bool = False) -> Dict[str, Any]:
-        """Convert to dictionary for JSON serialization"""
+        """Convert LinkData to dictionary format for JSON serialization."""
         result = {
             "link": self.link,
             "id": self.id,
@@ -93,14 +93,14 @@ class QueueStats:
     
     @property
     def completion_percentage(self) -> float:
-        """Calculate completion percentage"""
+        """Calculate completion percentage based on completed and total counts."""
         if self.total_count == 0:
             return 0.0
         return ((self.completed_count + self.failed_count) / self.total_count) * 100
     
     @property
     def elapsed_time(self) -> float:
-        """Get elapsed time in seconds"""
+        """Get elapsed time since start in seconds."""
         return time.time() - self.start_time
 
 

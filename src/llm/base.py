@@ -20,24 +20,25 @@ class LLMProvider(ABC):
     """Abstract base class for LLM providers"""
 
     def __init__(self, api_key: str, model: str, **kwargs):
+        """Initialize LLM provider with API key and model configuration."""
         self.api_key = api_key
         self.model = model
         self.config = kwargs
 
     @abstractmethod
     async def generate(self, prompt: str, **kwargs) -> LLMResponse:
-        """Generate response from LLM"""
+        """Generate response from LLM given input prompt."""
         pass
 
     @abstractmethod
     def validate_config(self) -> bool:
-        """Validate provider configuration"""
+        """Validate provider configuration and credentials."""
         pass
 
     async def __aenter__(self):
-        """Async context manager entry"""
+        """Async context manager entry for resource initialization."""
         return self
 
     async def __aexit__(self, exc_type, exc_val, exc_tb):
-        """Async context manager exit"""
+        """Async context manager exit for resource cleanup."""
         pass

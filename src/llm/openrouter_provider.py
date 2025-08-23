@@ -14,11 +14,12 @@ class OpenRouterProvider(LLMProvider):
     BASE_URL = "https://openrouter.ai/api/v1"
 
     def __init__(self, api_key: str, model: str, **kwargs):
+        """Initialize OpenRouter provider with API key and model configuration."""
         super().__init__(api_key, model, **kwargs)
         self.session = None
 
     def validate_config(self) -> bool:
-        """Validate OpenRouter configuration"""
+        """Validate OpenRouter configuration including API key and model."""
         if not self.api_key:
             raise ValueError("API key is required for OpenRouter provider")
 
@@ -32,19 +33,19 @@ class OpenRouterProvider(LLMProvider):
         return True
 
     async def __aenter__(self):
-        """Setup async HTTP session"""
+        """Setup async HTTP session for API requests."""
         if self.session is None:
             self.session = aiohttp.ClientSession()
         return self
 
     async def __aexit__(self, exc_type, exc_val, exc_tb):
-        """Cleanup HTTP session"""
+        """Cleanup HTTP session resources."""
         if self.session:
             await self.session.close()
             self.session = None
 
     async def generate(self, prompt: str, **kwargs) -> LLMResponse:
-        """Generate response using OpenRouter direct API"""
+        """Generate response using OpenRouter direct API with specified prompt."""
         self.validate_config()
 
         if not self.session:

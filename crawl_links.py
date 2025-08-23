@@ -13,14 +13,17 @@ INDEX_JSON = "index.json"
 
 
 def hash_link(link):
+    """Generate SHA256 hash for a URL string."""
     return hashlib.sha256(link.encode("utf-8")).hexdigest()
 
 
 def is_pdf(url):
+    """Check if URL points to a PDF file based on extension or path."""
     return url.lower().endswith(".pdf") or "pdf" in urlparse(url).path.lower()
 
 
 async def fetch_and_convert(crawler, url):
+    """Fetch content from URL and convert to appropriate format (PDF bytes or markdown text)."""
     if is_pdf(url):
         # Download PDF directly
         import requests
@@ -47,6 +50,7 @@ async def fetch_and_convert(crawler, url):
 
 
 async def process_link(crawler, link, idx, total):
+    """Process a single link by fetching content and saving to file."""
     id_ = hash_link(link)
     print(f"[{idx+1}/{total}] Processing: {link} with hash {id_}")
     try:
@@ -64,6 +68,7 @@ async def process_link(crawler, link, idx, total):
 
 
 async def main_async():
+    """Main async function that processes all links concurrently."""
     os.makedirs(DATA_DIR, exist_ok=True)
     links = extract_links_from_file(LINKS_MD)
     total = len(links)
@@ -88,6 +93,7 @@ async def main_async():
 
 
 def main():
+    """Entry point for the crawler script."""
     asyncio.run(main_async())
 
 

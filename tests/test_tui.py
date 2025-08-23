@@ -12,7 +12,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from src import StatusTracker, CrawlerTUI, ProcessingStage
 
 async def mock_processing_simulation():
-    """Simulate processing with mock data for testing"""
+    """Simulate processing with mock data for TUI testing and demonstration."""
     status_tracker = StatusTracker()
     tui = CrawlerTUI(status_tracker)
     

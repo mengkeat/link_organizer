@@ -110,7 +110,7 @@ async def main_enhanced():
     print(f"Classifications saved to {config.classifications_file}")
 
 def main():
-    """Original main function for compatibility"""
+    """Entry point for enhanced crawler with classification capabilities."""
     asyncio.run(main_enhanced())
 
 if __name__ == "__main__":

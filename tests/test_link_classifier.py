@@ -17,7 +17,7 @@ class TestClassificationResult:
     """Test ClassificationResult dataclass"""
 
     def test_classification_result_creation(self):
-        """Test creating ClassificationResult"""
+        """Test creating ClassificationResult with all required fields."""
         result = ClassificationResult(
             category="Technology",
             subcategory="AI/ML",
@@ -47,7 +47,7 @@ class TestLinkClassifier:
     """Test LinkClassifier"""
 
     def test_initialization_default(self):
-        """Test initialization with default provider"""
+        """Test LinkClassifier initialization with default LLM provider."""
         with patch('src.llm.factory.LLMProviderFactory.from_env') as mock_factory:
             mock_provider = MagicMock()
             mock_factory.return_value = mock_provider
@@ -58,7 +58,7 @@ class TestLinkClassifier:
             assert classifier.llm_provider == mock_provider
 
     def test_initialization_with_provider(self):
-        """Test initialization with custom provider"""
+        """Test LinkClassifier initialization with custom LLM provider."""
         mock_provider = MagicMock()
         classifier = LinkClassifier(llm_provider=mock_provider)
 

@@ -14,7 +14,7 @@ from .status_tracker import get_status_tracker
 async def fetch_worker(crawler, fetch_queue: asyncio.Queue, classification_queue: asyncio.Queue, 
                       failed_results: List[LinkData], total: int, config: CrawlerConfig, 
                       worker_id: Optional[str] = None):
-    """Worker that fetches content from URLs and queues them for classification"""
+    """Worker that fetches content from URLs and queues them for classification."""
     if worker_id is None:
         worker_id = f"fetch-{id(asyncio.current_task())}"
     
@@ -69,7 +69,7 @@ async def classification_worker(classification_service: ClassificationService,
                               failed_queue: asyncio.Queue,
                               config: CrawlerConfig,
                               worker_id: Optional[str] = None):
-    """Worker that processes classification tasks from a queue with retry logic"""
+    """Worker that processes classification tasks from queue with retry logic."""
     if worker_id is None:
         worker_id = f"class-{id(asyncio.current_task())}"
     

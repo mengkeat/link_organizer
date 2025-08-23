@@ -19,7 +19,7 @@ class LinkClassifier(ClassificationService):
     pass
 
 async def main():
-    """Main function for testing"""
+    """Main function for testing link classification with sample content."""
     classifier = LinkClassifier()
 
     test_url = "https://example.com"

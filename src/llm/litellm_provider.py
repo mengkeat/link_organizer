@@ -12,11 +12,12 @@ class LiteLLMProvider(LLMProvider):
     """LiteLLM-based LLM provider"""
 
     def __init__(self, api_key: str, model: str, **kwargs):
+        """Initialize LiteLLM provider with API key and model configuration."""
         super().__init__(api_key, model, **kwargs)
         self._setup_litellm()
 
     def _setup_litellm(self):
-        """Setup LiteLLM configuration"""
+        """Setup LiteLLM configuration with API key and optional base URL."""
         litellm.api_key = self.api_key
 
         # Set additional configuration if provided
@@ -24,7 +25,7 @@ class LiteLLMProvider(LLMProvider):
             litellm.api_base = self.config["base_url"]
 
     def validate_config(self) -> bool:
-        """Validate LiteLLM configuration"""
+        """Validate LiteLLM configuration including API key and model."""
         if not self.api_key:
             raise ValueError("API key is required for LiteLLM provider")
 
@@ -34,7 +35,7 @@ class LiteLLMProvider(LLMProvider):
         return True
 
     async def generate(self, prompt: str, **kwargs) -> LLMResponse:
-        """Generate response using LiteLLM"""
+        """Generate response using LiteLLM with specified prompt and parameters."""
         self.validate_config()
 
         # Merge default kwargs with provided ones

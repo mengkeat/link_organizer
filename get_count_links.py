@@ -2,6 +2,7 @@ import re
 
 
 def extract_links_from_file(filepath):
+    """Extract all HTTP/HTTPS links from a markdown file using regex patterns."""
     with open(filepath, "r", encoding="utf-8") as f:
         content = f.read()
     # Match markdown links: [text](url)
