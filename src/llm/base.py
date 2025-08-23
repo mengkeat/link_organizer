@@ -24,6 +24,7 @@ class LLMProvider(ABC):
         self.api_key = api_key
         self.model = model
         self.config = kwargs
+        self.timeout = kwargs.get('timeout', 30)  # Default 30 second timeout
 
     @abstractmethod
     async def generate(self, prompt: str, **kwargs) -> LLMResponse:

@@ -35,7 +35,8 @@ class OpenRouterProvider(LLMProvider):
     async def __aenter__(self):
         """Setup async HTTP session for API requests."""
         if self.session is None:
-            self.session = aiohttp.ClientSession()
+            timeout = aiohttp.ClientTimeout(total=self.timeout)
+            self.session = aiohttp.ClientSession(timeout=timeout)
         return self
 
     async def __aexit__(self, exc_type, exc_val, exc_tb):

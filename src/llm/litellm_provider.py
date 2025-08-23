@@ -49,6 +49,7 @@ class LiteLLMProvider(LLMProvider):
             response = await litellm.acompletion(
                 model=self.model,
                 messages=[{"role": "user", "content": prompt}],
+                timeout=self.timeout,
                 **call_kwargs
             )
 

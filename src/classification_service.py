@@ -162,24 +162,42 @@ Be precise and objective in your analysis.
 
         return classifications
 
-    def save_classifications(self, classifications: Dict[str, tuple], 
+    def save_classifications(self, classifications: Dict[str, any], 
                            output_file: Path = Path("classifications.json")):
         """Save classification results to JSON output file."""
         output_data = {}
-        for link, (result, file_hash) in classifications.items():
-            output_data[link] = {
-                "hash": file_hash,
-                "category": result.category,
-                "subcategory": result.subcategory,
-                "tags": result.tags,
-                "summary": result.summary,
-                "confidence": result.confidence,
-                "content_type": result.content_type,
-                "difficulty": result.difficulty,
-                "quality_score": result.quality_score,
-                "key_topics": result.key_topics,
-                "target_audience": result.target_audience
-            }
+        for link, classification_data in classifications.items():
+            # Handle both tuple format (result, file_hash) and direct ClassificationResult
+            if isinstance(classification_data, tuple):
+                result, file_hash = classification_data
+                output_data[link] = {
+                    "hash": file_hash,
+                    "category": result.category,
+                    "subcategory": result.subcategory,
+                    "tags": result.tags,
+                    "summary": result.summary,
+                    "confidence": result.confidence,
+                    "content_type": result.content_type,
+                    "difficulty": result.difficulty,
+                    "quality_score": result.quality_score,
+                    "key_topics": result.key_topics,
+                    "target_audience": result.target_audience
+                }
+            else:
+                # Direct ClassificationResult object
+                result = classification_data
+                output_data[link] = {
+                    "category": result.category,
+                    "subcategory": result.subcategory,
+                    "tags": result.tags,
+                    "summary": result.summary,
+                    "confidence": result.confidence,
+                    "content_type": result.content_type,
+                    "difficulty": result.difficulty,
+                    "quality_score": result.quality_score,
+                    "key_topics": result.key_topics,
+                    "target_audience": result.target_audience
+                }
 
         output_file.write_text(json.dumps(output_data, indent=2, ensure_ascii=False))
         print(f"Saved {len(classifications)} classifications to {output_file}")
