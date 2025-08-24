@@ -13,7 +13,7 @@ from dotenv import load_dotenv
 from crawl4ai import AsyncWebCrawler
 from get_count_links import extract_links_from_file
 from src import (
-    LinkData, CrawlerConfig, ClassificationService,
+    CrawlerConfig, ClassificationService,
     fetch_worker, classification_worker
 )
 
@@ -104,7 +104,7 @@ async def main_enhanced():
         Path(config.classifications_file)
     )
 
-    print(f"\nEnhanced crawling complete!")
+    print("\nEnhanced crawling complete!")
     print(f"Processed {len(index)}/{total} links")
     print(f"Index saved to {config.index_file}")
     print(f"Classifications saved to {config.classifications_file}")

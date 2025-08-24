@@ -2,8 +2,6 @@
 LiteLLM provider implementation
 """
 
-import os
-from typing import Dict, Any
 import litellm
 from .base import LLMProvider, LLMResponse
 

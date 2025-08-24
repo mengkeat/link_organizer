@@ -5,7 +5,6 @@ import os
 import base64
 import requests
 from urllib.parse import urlparse
-from pathlib import Path
 from crawl4ai import CrawlerRunConfig, CacheMode
 from typing import Tuple, Optional
 from PIL import Image

@@ -3,7 +3,6 @@ Content processing utilities for extracting and handling different file types
 """
 import hashlib
 from pathlib import Path
-from typing import Optional
 import PyPDF2
 
 

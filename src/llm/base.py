@@ -3,7 +3,7 @@ Base LLM provider interface
 """
 
 from abc import ABC, abstractmethod
-from typing import Dict, List, Optional, Any
+from typing import Dict, Optional
 from dataclasses import dataclass
 
 

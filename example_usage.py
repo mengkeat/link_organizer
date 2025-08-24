@@ -6,9 +6,8 @@ Demonstrates how to use different providers with LinkClassifier
 
 import asyncio
 import os
-from pathlib import Path
 from link_classifier import LinkClassifier
-from src.llm import LLMProviderFactory, LLMProviderType, LiteLLMProvider, OpenRouterProvider
+from src.llm import LLMProviderFactory, LiteLLMProvider, OpenRouterProvider
 
 
 async def example_with_factory():

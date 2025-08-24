@@ -3,7 +3,6 @@ Tests for LLM providers
 """
 
 import pytest
-import asyncio
 import os
 from unittest.mock import AsyncMock, MagicMock, patch
 from src.llm.base import LLMProvider, LLMResponse

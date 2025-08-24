@@ -1,7 +1,6 @@
 """
 Status tracking system for monitoring crawler progress
 """
-import asyncio
 import time
 from typing import Dict, List, Optional
 from collections import deque

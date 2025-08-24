@@ -3,7 +3,6 @@
 Simple TUI test with mock data
 """
 import asyncio
-import time
 import sys
 from pathlib import Path
 

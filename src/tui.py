@@ -2,7 +2,6 @@
 Terminal User Interface for monitoring crawler progress
 """
 import asyncio
-import time
 from typing import Optional
 from contextlib import asynccontextmanager
 
@@ -10,7 +9,7 @@ from rich.console import Console
 from rich.layout import Layout
 from rich.panel import Panel
 from rich.table import Table
-from rich.progress import Progress, TaskID, BarColumn, TextColumn, TimeRemainingColumn
+from rich.progress import TaskID
 from rich.text import Text
 from rich.live import Live
 from rich.align import Align

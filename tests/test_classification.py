@@ -95,7 +95,7 @@ async def interactive_classification():
             print("\nClassifying...")
             result = await classifier.classify_content(url, title, content)
 
-            print(f"\nResults:")
+            print("\nResults:")
             print(f"  Category: {result.category}")
             print(f"  Tags: {', '.join(result.tags)}")
             print(f"  Summary: {result.summary}")

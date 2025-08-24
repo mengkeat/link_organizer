@@ -3,8 +3,6 @@ OpenRouter direct provider implementation
 """
 
 import aiohttp
-import json
-from typing import Dict, Any
 from .base import LLMProvider, LLMResponse
 
 

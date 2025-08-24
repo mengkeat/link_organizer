@@ -3,10 +3,10 @@ Classification service for analyzing web content using LLM providers
 """
 import json
 import asyncio
-from typing import Dict, List, Any
+from typing import Dict, Any
 from pathlib import Path
 
-from .models import ClassificationResult, LinkData
+from .models import ClassificationResult
 from .content_processor import ContentProcessor
 from .llm import LLMProviderFactory
 

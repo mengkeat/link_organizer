@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 from crawl4ai import AsyncWebCrawler
 from get_count_links import extract_links_from_file
 from src import (
-    LinkData, CrawlerConfig, ClassificationService, ProcessingStage,
+    CrawlerConfig, ClassificationService, ProcessingStage,
     fetch_worker, classification_worker, get_status_tracker, CrawlerTUI
 )
 
@@ -110,7 +110,7 @@ async def main_enhanced_tui(enable_tui: bool = True):
     if tui:
         tui.print_summary()
     else:
-        print(f"\nEnhanced crawling complete!")
+        print("\nEnhanced crawling complete!")
         print(f"Processed {len(index)}/{total} links")
         print(f"Index saved to {config.index_file}")
         print(f"Classifications saved to {config.classifications_file}")

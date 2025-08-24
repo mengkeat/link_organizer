@@ -5,11 +5,9 @@ Supports multiple LLM providers (LiteLLM and OpenRouter direct)
 """
 
 import asyncio
-from pathlib import Path
 from dotenv import load_dotenv
 
 from src.classification_service import ClassificationService
-from src.models import ClassificationResult
 
 # Load environment variables
 load_dotenv()
@@ -37,7 +35,7 @@ async def main():
     print(f"Tags: {result.tags}")
     print(f"Summary: {result.summary}")
     print(f"Confidence: {result.confidence}")
-    print(f"\n\nComplete Result:")
+    print("\n\nComplete Result:")
     print(result)
 
 if __name__ == "__main__":
