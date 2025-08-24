@@ -31,6 +31,7 @@ class LinkData:
     status: str = "pending"
     content: Optional[str] = None
     classification: Optional[ClassificationResult] = None
+    screenshot_filename: Optional[str] = None
 
     def to_dict(self, include_content: bool = False) -> Dict[str, Any]:
         """Convert LinkData to dictionary format for JSON serialization."""
@@ -38,7 +39,8 @@ class LinkData:
             "link": self.link,
             "id": self.id,
             "filename": self.filename,
-            "status": self.status
+            "status": self.status,
+            "screenshot_filename": self.screenshot_filename
         }
         
         if include_content and self.content:
