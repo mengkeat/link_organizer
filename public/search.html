@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link Search</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: #2563eb;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .search-box {
+            padding: 20px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 16px;
+            border: 2px solid #e5e5e5;
+            border-radius: 6px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        
+        .search-input:focus {
+            border-color: #2563eb;
+        }
+        
+        .filters {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-select {
+            padding: 6px 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            background: white;
+            font-size: 14px;
+        }
+        
+        .results {
+            min-height: 300px;
+        }
+        
+        .result-item {
+            padding: 16px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .result-item:hover {
+            background: #f8fafc;
+        }
+        
+        .result-item:last-child {
+            border-bottom: none;
+        }
+        
+        .result-title {
+            font-weight: 600;
+            color: #1f2937;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 4px;
+        }
+        
+        .result-title:hover {
+            color: #2563eb;
+        }
+        
+        .result-url {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 8px;
+            word-break: break-all;
+        }
+        
+        .result-summary {
+            color: #374151;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .result-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+        
+        .tag {
+            background: #e5e7eb;
+            color: #374151;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .tag.category {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+        
+        .status {
+            padding: 10px 20px;
+            color: #6b7280;
+            text-align: center;
+            font-style: italic;
+        }
+        
+        .stats {
+            padding: 10px 20px;
+            background: #f8fafc;
+            border-bottom: 1px solid #e5e5e5;
+            font-size: 14px;
+            color: #6b7280;
+        }
+        
+        .worker-status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #1f2937;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            z-index: 1000;
+        }
+        
+        .worker-status.enabled {
+            background: #059669;
+        }
+        
+        @media (max-width: 600px) {
+            .filters {
+                flex-direction: column;
+            }
+            
+            .container {
+                border-radius: 0;
+                margin: -20px;
+            }
+            
+            body {
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 Link Search</h1>
+            <p>Search through your curated links and articles</p>
+        </div>
+        
+        <div class="search-box">
+            <input 
+                type="text" 
+                id="searchInput" 
+                class="search-input" 
+                placeholder="Search by title, tags, or content..."
+                autocomplete="off"
+            >
+            <div class="filters">
+                <select id="categoryFilter" class="filter-select">
+                    <option value="">All Categories</option>
+                </select>
+                <select id="contentTypeFilter" class="filter-select">
+                    <option value="">All Types</option>
+                </select>
+                <select id="difficultyFilter" class="filter-select">
+                    <option value="">All Difficulties</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="stats" id="stats">
+            Loading search data...
+        </div>
+        
+        <div class="results" id="results">
+            <div class="status">Enter a search term to begin</div>
+        </div>
+    </div>
+    
+    <div class="worker-status" id="workerStatus">
+        Search: Main Thread
+    </div>
+    
+    <!-- Load MiniSearch from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/minisearch@6.3.0/dist/umd/index.min.js"></script>
+    
+    <!-- Load search data -->
+    <script src="search-data.js"></script>
+    
+    <script>
+        class SearchApp {
+            constructor() {
+                this.searchIndex = null;
+                this.searchData = null;
+                this.worker = null;
+                this.workerSupported = false;
+                
+                this.initializeApp();
+            }
+            
+            async initializeApp() {
+                try {
+                    // Check if search data is loaded
+                    if (!window.SEARCH_DATA) {
+                        throw new Error('Search data not loaded. Run: python scripts/build_search_docs.py');
+                    }
+                    
+                    this.searchData = window.SEARCH_DATA;
+                    this.updateStats();
+                    this.populateFilters();
+                    
+                    // Try to initialize Web Worker
+                    this.initializeWorker();
+                    
+                    // Fallback to main thread search
+                    if (!this.workerSupported) {
+                        this.initializeMainThreadSearch();
+                    }
+                    
+                    this.setupEventListeners();
+                    this.updateWorkerStatus();
+                    
+                } catch (error) {
+                    this.showError(error.message);
+                }
+            }
+            
+            initializeWorker() {
+                try {
+                    if (typeof Worker !== 'undefined') {
+                        this.worker = new Worker('search-worker.js');
+                        this.worker.postMessage({
+                            type: 'initialize',
+                            data: this.searchData
+                        });
+                        
+                        this.worker.onmessage = (e) => {
+                            if (e.data.type === 'search_results') {
+                                this.displayResults(e.data.results, e.data.query);
+                            } else if (e.data.type === 'initialized') {
+                                this.workerSupported = true;
+                                this.updateWorkerStatus();
+                            }
+                        };
+                        
+                        this.worker.onerror = () => {
+                            this.workerSupported = false;
+                            this.initializeMainThreadSearch();
+                            this.updateWorkerStatus();
+                        };
+                    }
+                } catch (error) {
+                    this.workerSupported = false;
+                    this.initializeMainThreadSearch();
+                    this.updateWorkerStatus();
+                }
+            }
+            
+            initializeMainThreadSearch() {
+                // Initialize MiniSearch index in main thread
+                this.searchIndex = new MiniSearch({
+                    fields: ['title', 'summary', 'tags', 'category', 'subcategory'],
+                    storeFields: ['id', 'url', 'title', 'summary', 'tags', 'category', 'subcategory', 'content_type', 'difficulty', 'quality_score'],
+                    searchOptions: {
+                        boost: { title: 2, category: 1.5 },
+                        fuzzy: 0.2,
+                        prefix: true
+                    }
+                });
+                
+                this.searchIndex.addAll(this.searchData.docs);
+            }
+            
+            updateStats() {
+                const stats = document.getElementById('stats');
+                const total = this.searchData.docs.length;
+                const categories = new Set(this.searchData.docs.map(d => d.category).filter(Boolean)).size;
+                
+                stats.textContent = `${total} documents • ${categories} categories • Ready to search`;
+            }
+            
+            populateFilters() {
+                const docs = this.searchData.docs;
+                
+                // Populate categories
+                const categories = [...new Set(docs.map(d => d.category).filter(Boolean))].sort();
+                const categoryFilter = document.getElementById('categoryFilter');
+                categories.forEach(cat => {
+                    const option = document.createElement('option');
+                    option.value = cat;
+                    option.textContent = cat;
+                    categoryFilter.appendChild(option);
+                });
+                
+                // Populate content types
+                const contentTypes = [...new Set(docs.map(d => d.content_type).filter(Boolean))].sort();
+                const contentTypeFilter = document.getElementById('contentTypeFilter');
+                contentTypes.forEach(type => {
+                    const option = document.createElement('option');
+                    option.value = type;
+                    option.textContent = type.replace('_', ' ');
+                    contentTypeFilter.appendChild(option);
+                });
+                
+                // Populate difficulties
+                const difficulties = [...new Set(docs.map(d => d.difficulty).filter(Boolean))].sort();
+                const difficultyFilter = document.getElementById('difficultyFilter');
+                difficulties.forEach(diff => {
+                    const option = document.createElement('option');
+                    option.value = diff;
+                    option.textContent = diff.charAt(0).toUpperCase() + diff.slice(1);
+                    difficultyFilter.appendChild(option);
+                });
+            }
+            
+            setupEventListeners() {
+                const searchInput = document.getElementById('searchInput');
+                const filters = [
+                    document.getElementById('categoryFilter'),
+                    document.getElementById('contentTypeFilter'),
+                    document.getElementById('difficultyFilter')
+                ];
+                
+                let searchTimeout;
+                
+                const performSearch = () => {
+                    clearTimeout(searchTimeout);
+                    searchTimeout = setTimeout(() => {
+                        this.performSearch();
+                    }, 300);
+                };
+                
+                searchInput.addEventListener('input', performSearch);
+                filters.forEach(filter => filter.addEventListener('change', performSearch));
+                
+                // Handle result clicks
+                document.getElementById('results').addEventListener('click', (e) => {
+                    const resultItem = e.target.closest('.result-item');
+                    if (resultItem) {
+                        const url = resultItem.dataset.url;
+                        if (url) {
+                            window.open(url, '_blank', 'noopener,noreferrer');
+                        }
+                    }
+                });
+            }
+            
+            performSearch() {
+                const query = document.getElementById('searchInput').value.trim();
+                const categoryFilter = document.getElementById('categoryFilter').value;
+                const contentTypeFilter = document.getElementById('contentTypeFilter').value;
+                const difficultyFilter = document.getElementById('difficultyFilter').value;
+                
+                if (!query && !categoryFilter && !contentTypeFilter && !difficultyFilter) {
+                    this.showEmptyState();
+                    return;
+                }
+                
+                if (this.workerSupported && this.worker) {
+                    // Use Web Worker
+                    this.worker.postMessage({
+                        type: 'search',
+                        query: query,
+                        filters: {
+                            category: categoryFilter,
+                            content_type: contentTypeFilter,
+                            difficulty: difficultyFilter
+                        }
+                    });
+                } else {
+                    // Use main thread
+                    const results = this.searchMainThread(query, {
+                        category: categoryFilter,
+                        content_type: contentTypeFilter,
+                        difficulty: difficultyFilter
+                    });
+                    this.displayResults(results, query);
+                }
+            }
+            
+            searchMainThread(query, filters) {
+                let results = [];
+                
+                if (query) {
+                    results = this.searchIndex.search(query, { 
+                        limit: 100,
+                        fuzzy: 0.2,
+                        prefix: true 
+                    });
+                } else {
+                    // No query, return all documents
+                    results = this.searchData.docs.map((doc, index) => ({
+                        id: doc.id,
+                        score: 1,
+                        ...doc
+                    }));
+                }
+                
+                // Apply filters
+                if (filters.category || filters.content_type || filters.difficulty) {
+                    results = results.filter(result => {
+                        if (filters.category && result.category !== filters.category) return false;
+                        if (filters.content_type && result.content_type !== filters.content_type) return false;
+                        if (filters.difficulty && result.difficulty !== filters.difficulty) return false;
+                        return true;
+                    });
+                }
+                
+                return results.slice(0, 50); // Limit results
+            }
+            
+            displayResults(results, query) {
+                const resultsContainer = document.getElementById('results');
+                
+                if (results.length === 0) {
+                    resultsContainer.innerHTML = '<div class="status">No results found</div>';
+                    return;
+                }
+                
+                const resultsHTML = results.map(result => `
+                    <div class="result-item" data-url="${result.url}">
+                        <a href="${result.url}" class="result-title" target="_blank" rel="noopener noreferrer">
+                            ${this.escapeHtml(result.title)}
+                        </a>
+                        <div class="result-url">${this.escapeHtml(result.url)}</div>
+                        <div class="result-summary">${this.escapeHtml(result.summary || 'No summary available')}</div>
+                        <div class="result-tags">
+                            ${result.category ? `<span class="tag category">${this.escapeHtml(result.category)}</span>` : ''}
+                            ${(result.tags || []).slice(0, 5).map(tag => `<span class="tag">${this.escapeHtml(tag)}</span>`).join('')}
+                        </div>
+                    </div>
+                `).join('');
+                
+                resultsContainer.innerHTML = resultsHTML;
+            }
+            
+            showEmptyState() {
+                document.getElementById('results').innerHTML = '<div class="status">Enter a search term or select filters to begin</div>';
+            }
+            
+            showError(message) {
+                document.getElementById('results').innerHTML = `<div class="status" style="color: #dc2626;">Error: ${this.escapeHtml(message)}</div>`;
+                document.getElementById('stats').textContent = 'Error loading search data';
+            }
+            
+            updateWorkerStatus() {
+                const status = document.getElementById('workerStatus');
+                status.textContent = this.workerSupported ? 'Search: Web Worker' : 'Search: Main Thread';
+                status.className = this.workerSupported ? 'worker-status enabled' : 'worker-status';
+            }
+            
+            escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+        }
+        
+        // Initialize the app when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => new SearchApp());
+        } else {
+            new SearchApp();
+        }
+    </script>
+</body>
+</html>
