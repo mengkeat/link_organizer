@@ -14,6 +14,8 @@ class OpenRouterProvider(LLMProvider):
     def __init__(self, api_key: str, model: str, **kwargs):
         """Initialize OpenRouter provider with API key and model configuration."""
         super().__init__(api_key, model, **kwargs)
+        if self.model and not self.model.startswith("openrouter/"):
+            self.model = f"openrouter/{self.model}"
         self.session = None
 
     def validate_config(self) -> bool:
@@ -24,9 +26,8 @@ class OpenRouterProvider(LLMProvider):
         if not self.model:
             raise ValueError("Model is required for OpenRouter provider")
 
-        # Ensure model starts with openrouter/ if not already
-        # if not self.model.startswith("openrouter/"):
-        #     self.model = f"openrouter/{self.model}"
+        if not self.model:
+            raise ValueError("Model is required for OpenRouter provider")
 
         return True
 

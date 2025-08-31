@@ -37,7 +37,9 @@ class LLMProviderFactory:
             raise ValueError(f"Unknown provider type: {provider_type}")
 
         provider_class = cls.PROVIDERS[provider_type]
-        return provider_class(api_key=api_key, model=model, **kwargs)
+        provider = provider_class(api_key=api_key, model=model, **kwargs)
+        provider.validate_config()
+        return provider
 
     @classmethod
     def from_env(
@@ -58,8 +60,6 @@ class LLMProviderFactory:
 
         # Get API key
         api_key = os.getenv(api_key_env_var)
-        if not api_key:
-            raise ValueError(f"Environment variable {api_key_env_var} is required")
 
         # Get model
         model = os.getenv(model_env_var, "openrouter/openai/gpt-4")

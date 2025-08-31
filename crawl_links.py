@@ -1,15 +1,14 @@
 import os
 import hashlib
-import json
 import asyncio
 from urllib.parse import urlparse
 
 from crawl4ai import AsyncWebCrawler, CrawlerRunConfig, CacheMode
 from get_count_links import extract_links_from_file
+from src.database import Session, LinkData
 
 LINKS_MD = "links.md"
 DATA_DIR = "dat"
-INDEX_JSON = "index.json"
 
 
 def hash_link(link):
@@ -49,10 +48,17 @@ async def fetch_and_convert(crawler, url):
         return "", None
 
 
-async def process_link(crawler, link, idx, total):
+async def process_link(session, crawler, link, idx, total):
     """Process a single link by fetching content and saving to file."""
     id_ = hash_link(link)
     print(f"[{idx+1}/{total}] Processing: {link} with hash {id_}")
+
+    # Check if the link already exists
+    existing_link = session.query(LinkData).filter_by(link=link).first()
+    if existing_link:
+        print(f"[{idx+1}/{total}] Link already exists: {link}")
+        return
+
     try:
         content, typ = await fetch_and_convert(crawler, link)
         fname = f"{id_}.{typ}"
@@ -61,10 +67,27 @@ async def process_link(crawler, link, idx, total):
         with open(fpath, mode, encoding=None if typ == "pdf" else "utf-8") as f:
             f.write(content)
         print(f"[{idx+1}/{total}] Success: {link} -> {fname}")
-        return {"link": link, "id": id_, "filename": fname, "status": "Success"}
+        
+        link_data = LinkData(
+            link=link,
+            id=id_,
+            filename=fname,
+            status="Success",
+            content=content if typ != 'pdf' else None
+        )
+        session.add(link_data)
+        session.commit()
+
     except Exception as e:
         print(f"[{idx+1}/{total}] Failed: {link}: {e}")
-        return {"link": link, "id": id_, "filename": None, "status": f"Failed: {e}"}
+        link_data = LinkData(
+            link=link,
+            id=id_,
+            filename=None,
+            status=f"Failed: {e}"
+        )
+        session.add(link_data)
+        session.commit()
 
 
 async def main_async():
@@ -73,23 +96,21 @@ async def main_async():
     links = extract_links_from_file(LINKS_MD)
     total = len(links)
     print(f"Found {total} links in {LINKS_MD}")
-    index = []
+    
+    session = Session()
+
     async with AsyncWebCrawler() as crawler:
         # Run all link processing concurrently, but limit concurrency to avoid overload
         sem = asyncio.Semaphore(12)  # adjust concurrency as needed
 
         async def sem_task(idx, link):
             async with sem:
-                return await process_link(crawler, link, idx, total)
+                await process_link(session, crawler, link, idx, total)
 
         tasks = [sem_task(idx, link) for idx, link in enumerate(links)]
-        for fut in asyncio.as_completed(tasks):
-            result = await fut
-            index.append(result)
-            print(f"Processed {len(index)}/{total} links")
+        await asyncio.gather(*tasks)
 
-    with open(INDEX_JSON, "w", encoding="utf-8") as f:
-        json.dump(index, f, indent=2)
+    session.close()
 
 
 def main():

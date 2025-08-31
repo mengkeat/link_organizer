@@ -4,9 +4,9 @@ Classification service for analyzing web content using LLM providers
 import json
 import asyncio
 from typing import Dict, Any
-from pathlib import Path
 
-from .models import ClassificationResult
+from .models import ClassificationResult as ClassificationResultModel
+from .database import Session, LinkData, ClassificationResult
 from .content_processor import ContentProcessor
 from .llm import LLMProviderFactory
 
@@ -58,9 +58,9 @@ Please respond with a JSON object containing:
 Be precise and objective in your analysis.
 """
 
-    async def classify_content(self, url: str, title: str, content: str) -> ClassificationResult:
+    async def classify_link_data(self, link_data: LinkData) -> ClassificationResultModel:
         """Classify web content using LLM and return structured result."""
-        prompt = self.get_classification_prompt(url, title, content)
+        prompt = self.get_classification_prompt(link_data.link, link_data.filename, link_data.content)
 
         try:
             print(f"Using LLM provider: {type(self.llm_provider).__name__}")
@@ -74,11 +74,11 @@ Be precise and objective in your analysis.
             result_text = response.content
             result_json = self.parse_llm_response(result_text)
 
-            return ClassificationResult(**result_json)
+            return ClassificationResultModel(**result_json)
 
         except Exception as e:
-            print(f"Classification failed for {url}: {e}")
-            return self.get_fallback_classification(url, title, content)
+            print(f"Classification failed for {link_data.link}: {e}")
+            return self.get_fallback_classification(link_data.link, link_data.filename, link_data.content)
 
     def parse_llm_response(self, response_text: str) -> Dict[str, Any]:
         """Parse LLM response text and extract JSON classification data."""
@@ -111,9 +111,9 @@ Be precise and objective in your analysis.
             "target_audience": "general"
         }
 
-    def get_fallback_classification(self, url: str, title: str, content: str) -> ClassificationResult:
+    def get_fallback_classification(self, url: str, title: str, content: str) -> ClassificationResultModel:
         """Provide default classification when LLM classification fails."""
-        return ClassificationResult(
+        return ClassificationResultModel(
             category="Technology",
             subcategory="General",
             tags=["web", "content"],
@@ -126,78 +126,40 @@ Be precise and objective in your analysis.
             target_audience="general"
         )
 
-    async def classify_existing_links(self, index_file: Path = Path("index.json")) -> Dict[str, tuple]:
-        """Classify all existing crawled links from index file."""
-        if not index_file.exists():
-            print(f"Index file {index_file} not found")
-            return {}
+    async def classify_pending_links(self, session=None):
+        """Classify all existing crawled links from the database."""
+        if session is None:
+            session = Session()
+            close_session = True
+        else:
+            close_session = False
 
-        index_data = json.loads(index_file.read_text())
-        classifications = {}
+        try:
+            pending_links = session.query(LinkData).filter(LinkData.status == "Success", LinkData.classification == None).all()
 
-        for item in index_data:
-            link = item.get("link")
-            if not link:
-                continue
+            for link_data in pending_links:
+                print(f"Classifying {link_data.link}...")
+                classification_result_model = await self.classify_link_data(link_data)
+                
+                classification_result = ClassificationResult(
+                    category=classification_result_model.category,
+                    subcategory=classification_result_model.subcategory,
+                    tags=classification_result_model.tags,
+                    summary=classification_result_model.summary,
+                    confidence=classification_result_model.confidence,
+                    content_type=classification_result_model.content_type,
+                    difficulty=classification_result_model.difficulty,
+                    quality_score=classification_result_model.quality_score,
+                    key_topics=classification_result_model.key_topics,
+                    target_audience=classification_result_model.target_audience
+                )
 
-            file_hash = item.get("id", ContentProcessor.hash_link(link))
-            filename = item.get("filename")
+                link_data.classification = classification_result
+                link_data.status = "classified"
+                session.commit()
+                print(f"Successfully classified {link_data.link}")
 
-            if not filename:
-                continue
-
-            file_path = Path("dat") / filename
-            if not file_path.exists():
-                print(f"File not found: {file_path}")
-                continue
-
-            content = ContentProcessor.extract_content_from_file(file_path)
-            title = filename
-
-            print(f"Classifying {link}...")
-            classification = await self.classify_content(link, title, content)
-            classifications[link] = (classification, file_hash)
-
-            await asyncio.sleep(1)
-
-        return classifications
-
-    def save_classifications(self, classifications: Dict[str, any], 
-                           output_file: Path = Path("classifications.json")):
-        """Save classification results to JSON output file."""
-        output_data = {}
-        for link, classification_data in classifications.items():
-            # Handle both tuple format (result, file_hash) and direct ClassificationResult
-            if isinstance(classification_data, tuple):
-                result, file_hash = classification_data
-                output_data[link] = {
-                    "hash": file_hash,
-                    "category": result.category,
-                    "subcategory": result.subcategory,
-                    "tags": result.tags,
-                    "summary": result.summary,
-                    "confidence": result.confidence,
-                    "content_type": result.content_type,
-                    "difficulty": result.difficulty,
-                    "quality_score": result.quality_score,
-                    "key_topics": result.key_topics,
-                    "target_audience": result.target_audience
-                }
-            else:
-                # Direct ClassificationResult object
-                result = classification_data
-                output_data[link] = {
-                    "category": result.category,
-                    "subcategory": result.subcategory,
-                    "tags": result.tags,
-                    "summary": result.summary,
-                    "confidence": result.confidence,
-                    "content_type": result.content_type,
-                    "difficulty": result.difficulty,
-                    "quality_score": result.quality_score,
-                    "key_topics": result.key_topics,
-                    "target_audience": result.target_audience
-                }
-
-        output_file.write_text(json.dumps(output_data, indent=2, ensure_ascii=False))
-        print(f"Saved {len(classifications)} classifications to {output_file}")
+                await asyncio.sleep(1)
+        finally:
+            if close_session:
+                session.close()

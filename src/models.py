@@ -110,8 +110,6 @@ class QueueStats:
 class CrawlerConfig:
     """Configuration for crawler operations"""
     data_dir: str = "dat"
-    index_file: str = "index.json"
-    classifications_file: str = "classifications.json"
     max_retries: int = 3
     classification_workers: int = 5
     fetch_workers: int = 5
