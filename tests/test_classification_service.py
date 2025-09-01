@@ -2,23 +2,27 @@
 Tests for the ClassificationService.
 """
 import pytest
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+import tempfile
+import os
 
-from src.database import Base, LinkData
+from src.database import Database
 from src.classification_service import ClassificationService
-from src.models import ClassificationResult
+from src.models import ClassificationResult, LinkData
 
 
 @pytest.fixture
-def db_session():
-    """Creates a new database session for a test."""
-    engine = create_engine('sqlite:///:memory:')
-    Base.metadata.create_all(engine)
-    Session = sessionmaker(bind=engine)
-    session = Session()
-    yield session
-    session.close()
+def test_db():
+    """Creates a new test database."""
+    # Create temporary file for test database
+    temp_db = tempfile.NamedTemporaryFile(delete=False, suffix='.db')
+    temp_db.close()
+    
+    db = Database(temp_db.name)
+    yield db
+    
+    # Cleanup
+    db.close()
+    os.unlink(temp_db.name)
 
 
 class MockLLMProvider:
@@ -107,25 +111,40 @@ def test_parse_llm_response_text_fallback(classification_service):
 
 
 @pytest.mark.asyncio
-async def test_classify_pending_links(db_session, classification_service):
+async def test_classify_pending_links(test_db, classification_service):
     """Test that pending links are classified correctly."""
     # 1. Set up the test data
-    link1 = LinkData(link="http://example.com/page1", status="Success", content="Some content")
-    link2 = LinkData(link="http://example.com/page2", status="classified", content="Some other content")
-    link3 = LinkData(link="http://example.com/page3", status="Success", content="More content")
-    db_session.add_all([link1, link2, link3])
-    db_session.commit()
+    link1 = LinkData(link="http://example.com/page1", id="id1", status="Success", content="Some content")
+    link2 = LinkData(link="http://example.com/page2", id="id2", status="classified", content="Some other content")
+    link3 = LinkData(link="http://example.com/page3", id="id3", status="Success", content="More content")
+    
+    test_db.save_link_data(link1)
+    test_db.save_link_data(link2)
+    test_db.save_link_data(link3)
 
-    # 2. Run the classification service
-    await classification_service.classify_pending_links(session=db_session)
+    # Temporarily replace the global db with test_db for this test
+    original_db = classification_service.__class__.__module__
+    import src.classification_service
+    original_db_instance = src.classification_service.db
+    src.classification_service.db = test_db
 
-    # 3. Assert the results
-    assert link1.status == "classified"
-    assert link1.classification is not None
-    assert link1.classification.category == "AI/ML"
+    try:
+        # 2. Run the classification service
+        await classification_service.classify_pending_links()
 
-    assert link2.classification is None # Should not have been processed
+        # 3. Assert the results
+        link1_updated = test_db.get_link_data("id1")
+        assert link1_updated.status == "classified"
+        assert link1_updated.classification is not None
+        assert link1_updated.classification.category == "AI/ML"
 
-    assert link3.status == "classified"
-    assert link3.classification is not None
-    assert link3.classification.category == "AI/ML"
+        link2_updated = test_db.get_link_data("id2")
+        assert link2_updated.classification is None  # Should not have been processed
+
+        link3_updated = test_db.get_link_data("id3")
+        assert link3_updated.status == "classified"
+        assert link3_updated.classification is not None
+        assert link3_updated.classification.category == "AI/ML"
+    finally:
+        # Restore original db
+        src.classification_service.db = original_db_instance

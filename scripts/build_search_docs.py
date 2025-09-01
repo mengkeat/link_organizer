@@ -12,9 +12,7 @@ from pathlib import Path
 from typing import List, Dict, Any
 from urllib.parse import urlparse
 
-from sqlalchemy.orm import joinedload
-
-from src.database import Session, LinkData
+from src.database import db
 
 
 def extract_title_from_url(url: str) -> str:
@@ -31,7 +29,7 @@ def extract_title_from_url(url: str) -> str:
     
     return domain
 
-def create_search_documents(links: List[LinkData]) -> List[Dict[str, Any]]:
+def create_search_documents(links) -> List[Dict[str, Any]]:
     """
     Create search documents from a list of LinkData objects.
     """
@@ -144,31 +142,29 @@ def main():
     print("Building search documents from the database...")
     print(f"Output file: {output_file}")
     
-    session = Session()
-    try:
-        classified_links = session.query(LinkData).options(joinedload(LinkData.classification)).filter(LinkData.classification != None).all()
-        
-        print(f"Found {len(classified_links)} classified links in the database.")
+    # Get all links with classifications
+    all_links = db.get_all_links()
+    classified_links = [link for link in all_links if link.classification is not None]
+    
+    print(f"Found {len(classified_links)} classified links in the database.")
 
-        docs = create_search_documents(classified_links)
-        
-        if not validate_docs(docs):
-            sys.exit(1)
-        
-        write_search_data(docs, output_file)
-        
-        public_file = repo_root / 'public' / 'search-data.js'
-        try:
-            import shutil
-            shutil.copy2(output_file, public_file)
-            print(f"Copied search data to {public_file}")
-        except Exception as e:
-            print(f"Warning: Could not copy to public directory: {e}")
-        
-        print("\nBuild completed successfully!")
-        return 0
-    finally:
-        session.close()
+    docs = create_search_documents(classified_links)
+    
+    if not validate_docs(docs):
+        sys.exit(1)
+    
+    write_search_data(docs, output_file)
+    
+    public_file = repo_root / 'public' / 'search-data.js'
+    try:
+        import shutil
+        shutil.copy2(output_file, public_file)
+        print(f"Copied search data to {public_file}")
+    except Exception as e:
+        print(f"Warning: Could not copy to public directory: {e}")
+    
+    print("\nBuild completed successfully!")
+    return 0
 
 if __name__ == '__main__':
     sys.exit(main())

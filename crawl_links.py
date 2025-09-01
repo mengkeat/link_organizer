@@ -5,7 +5,8 @@ from urllib.parse import urlparse
 
 from crawl4ai import AsyncWebCrawler, CrawlerRunConfig, CacheMode
 from get_count_links import extract_links_from_file
-from src.database import Session, LinkData
+from src.database import db
+from src.models import LinkData
 
 LINKS_MD = "links.md"
 DATA_DIR = "dat"
@@ -48,13 +49,13 @@ async def fetch_and_convert(crawler, url):
         return "", None
 
 
-async def process_link(session, crawler, link, idx, total):
+async def process_link(crawler, link, idx, total):
     """Process a single link by fetching content and saving to file."""
     id_ = hash_link(link)
     print(f"[{idx+1}/{total}] Processing: {link} with hash {id_}")
 
     # Check if the link already exists
-    existing_link = session.query(LinkData).filter_by(link=link).first()
+    existing_link = db.get_link_by_url(link)
     if existing_link:
         print(f"[{idx+1}/{total}] Link already exists: {link}")
         return
@@ -75,8 +76,7 @@ async def process_link(session, crawler, link, idx, total):
             status="Success",
             content=content if typ != 'pdf' else None
         )
-        session.add(link_data)
-        session.commit()
+        db.save_link_data(link_data)
 
     except Exception as e:
         print(f"[{idx+1}/{total}] Failed: {link}: {e}")
@@ -86,8 +86,7 @@ async def process_link(session, crawler, link, idx, total):
             filename=None,
             status=f"Failed: {e}"
         )
-        session.add(link_data)
-        session.commit()
+        db.save_link_data(link_data)
 
 
 async def main_async():
@@ -96,8 +95,6 @@ async def main_async():
     links = extract_links_from_file(LINKS_MD)
     total = len(links)
     print(f"Found {total} links in {LINKS_MD}")
-    
-    session = Session()
 
     async with AsyncWebCrawler() as crawler:
         # Run all link processing concurrently, but limit concurrency to avoid overload
@@ -105,12 +102,10 @@ async def main_async():
 
         async def sem_task(idx, link):
             async with sem:
-                await process_link(session, crawler, link, idx, total)
+                await process_link(crawler, link, idx, total)
 
         tasks = [sem_task(idx, link) for idx, link in enumerate(links)]
         await asyncio.gather(*tasks)
-
-    session.close()
 
 
 def main():

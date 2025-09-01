@@ -4,9 +4,10 @@ Classification service for analyzing web content using LLM providers
 import json
 import asyncio
 from typing import Dict, Any
+from pathlib import Path
 
-from .models import ClassificationResult as ClassificationResultModel
-from .database import Session, LinkData, ClassificationResult
+from .models import ClassificationResult as ClassificationResultModel, LinkData
+from .database import db
 from .content_processor import ContentProcessor
 from .llm import LLMProviderFactory
 
@@ -58,9 +59,9 @@ Please respond with a JSON object containing:
 Be precise and objective in your analysis.
 """
 
-    async def classify_link_data(self, link_data: LinkData) -> ClassificationResultModel:
+    async def classify_content(self, url: str, title: str, content: str) -> ClassificationResultModel:
         """Classify web content using LLM and return structured result."""
-        prompt = self.get_classification_prompt(link_data.link, link_data.filename, link_data.content)
+        prompt = self.get_classification_prompt(url, title, content)
 
         try:
             print(f"Using LLM provider: {type(self.llm_provider).__name__}")
@@ -77,8 +78,13 @@ Be precise and objective in your analysis.
             return ClassificationResultModel(**result_json)
 
         except Exception as e:
-            print(f"Classification failed for {link_data.link}: {e}")
-            return self.get_fallback_classification(link_data.link, link_data.filename, link_data.content)
+            print(f"Classification failed for {url}: {e}")
+            return self.get_fallback_classification(url, title, content)
+
+    async def classify_link_data(self, link_data: LinkData) -> ClassificationResultModel:
+        """Classify web content from LinkData object using LLM and return structured result."""
+        title = link_data.filename or "Unknown"
+        return await self.classify_content(link_data.link, title, link_data.content)
 
     def parse_llm_response(self, response_text: str) -> Dict[str, Any]:
         """Parse LLM response text and extract JSON classification data."""
@@ -126,40 +132,49 @@ Be precise and objective in your analysis.
             target_audience="general"
         )
 
-    async def classify_pending_links(self, session=None):
+    async def classify_pending_links(self):
         """Classify all existing crawled links from the database."""
-        if session is None:
-            session = Session()
-            close_session = True
-        else:
-            close_session = False
+        pending_links = db.get_links_by_status("Success")
+        
+        # Filter for links without classification
+        unclassified_links = [link for link in pending_links if link.classification is None]
 
+        for link_data in unclassified_links:
+            print(f"Classifying {link_data.link}...")
+            classification_result_model = await self.classify_link_data(link_data)
+            
+            # Save classification to database
+            db.save_classification(link_data.id, classification_result_model)
+            
+            # Update link status
+            db.update_link_status(link_data.id, "classified")
+            print(f"Successfully classified {link_data.link}")
+
+            await asyncio.sleep(1)
+
+    def save_classifications(self, classifications: Dict[str, ClassificationResultModel], 
+                           classifications_file: Path):
+        """Save classification results to JSON file."""
         try:
-            pending_links = session.query(LinkData).filter(LinkData.status == "Success", LinkData.classification == None).all()
-
-            for link_data in pending_links:
-                print(f"Classifying {link_data.link}...")
-                classification_result_model = await self.classify_link_data(link_data)
+            # Convert ClassificationResultModel objects to dictionaries
+            serializable_classifications = {}
+            for url, classification in classifications.items():
+                if classification:
+                    serializable_classifications[url] = {
+                        "category": classification.category,
+                        "subcategory": classification.subcategory,
+                        "tags": classification.tags,
+                        "summary": classification.summary,
+                        "confidence": classification.confidence,
+                        "content_type": classification.content_type,
+                        "difficulty": classification.difficulty,
+                        "quality_score": classification.quality_score,
+                        "key_topics": classification.key_topics,
+                        "target_audience": classification.target_audience,
+                    }
+            
+            with open(classifications_file, "w", encoding="utf-8") as f:
+                json.dump(serializable_classifications, f, indent=2)
                 
-                classification_result = ClassificationResult(
-                    category=classification_result_model.category,
-                    subcategory=classification_result_model.subcategory,
-                    tags=classification_result_model.tags,
-                    summary=classification_result_model.summary,
-                    confidence=classification_result_model.confidence,
-                    content_type=classification_result_model.content_type,
-                    difficulty=classification_result_model.difficulty,
-                    quality_score=classification_result_model.quality_score,
-                    key_topics=classification_result_model.key_topics,
-                    target_audience=classification_result_model.target_audience
-                )
-
-                link_data.classification = classification_result
-                link_data.status = "classified"
-                session.commit()
-                print(f"Successfully classified {link_data.link}")
-
-                await asyncio.sleep(1)
-        finally:
-            if close_session:
-                session.close()
+        except Exception as e:
+            print(f"Failed to save classifications: {e}")

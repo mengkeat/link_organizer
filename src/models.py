@@ -115,3 +115,5 @@ class CrawlerConfig:
     fetch_workers: int = 5
     request_delay: float = 1.0
     enable_tui: bool = False
+    index_file: str = "index.json"
+    classifications_file: str = "classifications.json"

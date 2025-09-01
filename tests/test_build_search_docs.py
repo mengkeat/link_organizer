@@ -4,24 +4,11 @@ Tests for the build_search_docs.py script.
 import json
 from pathlib import Path
 import pytest
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
 
-from src.database import Base, LinkData, ClassificationResult
+from src.models import LinkData, ClassificationResult
 from scripts.build_search_docs import (
     extract_title_from_url, create_search_documents, validate_docs, write_search_data
 )
-
-
-@pytest.fixture
-def db_session():
-    """Creates a new database session for a test."""
-    engine = create_engine('sqlite:///:memory:')
-    Base.metadata.create_all(engine)
-    Session = sessionmaker(bind=engine)
-    session = Session()
-    yield session
-    session.close()
 
 
 def test_extract_title_from_url():
@@ -31,23 +18,28 @@ def test_extract_title_from_url():
     assert extract_title_from_url("https://www.example.com/") == "example.com"
 
 
-def test_create_search_documents(db_session):
+def test_create_search_documents():
     """Test the creation of search documents from database objects."""
     link1 = LinkData(
         link="http://example.com/1",
+        id="id1",
         status="classified",
         classification=ClassificationResult(
             category="Tech",
             subcategory="Programming",
             tags=["python"],
-            summary="A summary"
+            summary="A summary",
+            confidence=0.8,
+            content_type="article",
+            difficulty="beginner",
+            quality_score=7,
+            key_topics=["programming"],
+            target_audience="developers"
         )
     )
-    link2 = LinkData(link="http://example.com/2", status="Success") # No classification
-    db_session.add_all([link1, link2])
-    db_session.commit()
-
-    links = db_session.query(LinkData).all()
+    link2 = LinkData(link="http://example.com/2", id="id2", status="Success")  # No classification
+    
+    links = [link1, link2]
     docs = create_search_documents(links)
 
     assert len(docs) == 1
