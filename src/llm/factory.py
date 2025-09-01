@@ -46,7 +46,7 @@ class LLMProviderFactory:
         cls,
         provider_env_var: str = "LLM_PROVIDER",
         api_key_env_var: str = "OPENROUTER_API_KEY",
-        model_env_var: str = "LITELLM_MODEL",
+        model_env_var: str = "LLM_MODEL",
         default_provider: LLMProviderType = LLMProviderType.LITELLM
     ) -> LLMProvider:
         """Create provider from environment variables configuration."""
@@ -61,8 +61,13 @@ class LLMProviderFactory:
         # Get API key
         api_key = os.getenv(api_key_env_var)
 
-        # Get model
-        model = os.getenv(model_env_var, "openrouter/openai/gpt-4")
+        # Get model - try provider-specific env vars first, then generic
+        if provider_type == LLMProviderType.LITELLM:
+            model = os.getenv("LITELLM_MODEL", os.getenv(model_env_var, "gpt-3.5-turbo"))
+        elif provider_type == LLMProviderType.OPENROUTER:
+            model = os.getenv("OPENROUTER_MODEL", os.getenv(model_env_var, "openai/gpt-3.5-turbo"))
+        else:
+            model = os.getenv(model_env_var, "gpt-3.5-turbo")
 
         # Additional config from environment
         extra_config = {}

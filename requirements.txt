@@ -1,0 +1,11 @@
+pytest
+pytest-asyncio
+crawl4ai
+requests
+pypdf
+litellm
+openrouter-client
+fastapi
+uvicorn[standard]
+sentence-transformers
+apscheduler

@@ -14,8 +14,7 @@ class OpenRouterProvider(LLMProvider):
     def __init__(self, api_key: str, model: str, **kwargs):
         """Initialize OpenRouter provider with API key and model configuration."""
         super().__init__(api_key, model, **kwargs)
-        if self.model and not self.model.startswith("openrouter/"):
-            self.model = f"openrouter/{self.model}"
+        # Don't prefix with "openrouter/" - OpenRouter expects the model name as-is
         self.session = None
 
     def validate_config(self) -> bool:
@@ -77,8 +76,18 @@ class OpenRouterProvider(LLMProvider):
                 headers=headers,
                 json=payload
             ) as response:
-                response.raise_for_status()
+                if response.status != 200:
+                    error_text = await response.text()
+                    raise RuntimeError(
+                        f"OpenRouter API request failed: {response.status}, "
+                        f"message='{response.reason}', url='{response.url}', "
+                        f"error_details='{error_text}'"
+                    )
+                
                 data = await response.json()
+                
+                if "choices" not in data or not data["choices"]:
+                    raise RuntimeError(f"Invalid response from OpenRouter: {data}")
 
                 choice = data["choices"][0]
                 usage = data.get("usage")
@@ -91,6 +100,6 @@ class OpenRouterProvider(LLMProvider):
                 )
 
         except aiohttp.ClientError as e:
-            raise RuntimeError(f"OpenRouter API request failed: {e}") from e
+            raise RuntimeError(f"OpenRouter API client error: {e}") from e
         except Exception as e:
             raise RuntimeError(f"OpenRouter generation failed: {e}") from e

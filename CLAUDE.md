@@ -8,27 +8,23 @@ This is a Python-based link organizer tool that extracts links from a markdown f
 
 ## Core Architecture
 
-The project has a modular architecture with the following components:
+The project has a **simplified, modular architecture** with the following components:
 
 ### Main Scripts:
 1. **`get_count_links.py`** - Link extraction utility that parses markdown files to find URLs using regex patterns for both markdown-style links `[text](url)` and bare URLs
-2. **`crawl_links.py`** - Original basic crawler that processes links using crawl4ai
-3. **`enhanced_crawler.py`** - Enhanced crawler with AI classification capabilities and worker-based architecture
-4. **`enhanced_crawler_tui.py`** - Enhanced crawler with Terminal User Interface (TUI) for live progress monitoring
-5. **`link_classifier.py`** - Standalone link classification utility with LLM provider support
+2. **`crawler.py`** - **MAIN CRAWLER** - Unified link crawler with optional AI classification. Simple, single-file design with controlled concurrency
+3. **`link_classifier.py`** - Standalone link classification utility with LLM provider support (for re-classifying existing content)
 
-### Modular Components (`src/` directory):
-- **`models.py`** - Dataclass-based models for LinkData, ClassificationResult, and TUI status tracking
-- **`database.py`** - Lightweight SQLite database operations using direct sqlite3 connections with thread-local connection management
-- **`classification_service.py`** - AI-powered content classification service using LLM providers
+### Core Modules (`src/` directory):
+- **`models.py`** - Simplified dataclass models for LinkData and ClassificationResult
+- **`database.py`** - Lightweight SQLite database operations using direct sqlite3 connections with thread-local connection management  
+- **`classification.py`** - Simplified AI-powered content classification service using LLM providers
 - **`collection_service.py`** - Smart link collection service with hierarchical clustering based on content embeddings
-- **`content_processor.py`** - Content processing and text extraction utilities  
-- **`crawler_utils.py`** - Web crawling utility functions
-- **`workers.py`** - Async worker implementations for concurrent fetching and classification (with TUI status reporting)
-- **`status_tracker.py`** - Centralized status tracking system for monitoring crawler progress
-- **`tui.py`** - Rich terminal user interface components for live progress monitoring
 - **`api.py`** - FastAPI web server for browser-based interface
 - **`llm/`** - LLM provider abstraction layer supporting LiteLLM and OpenRouter APIs
+
+### Legacy Files (`legacy/` directory):
+- **Old complex implementations** moved here for reference - includes TUI, worker systems, and multiple crawler variants
 
 ### Test Components (`tests/` directory):
 - **`test_classification_service.py`** - Unit tests for classification service functionality
@@ -127,20 +123,20 @@ python get_count_links.py | head -20
 
 #### Web Crawling
 ```bash
-# Basic crawler (simple database operations)
-python crawl_links.py
+# MAIN CRAWLER - Basic crawling without AI classification
+python crawler.py
 
-# Enhanced crawler with AI classification
-python enhanced_crawler.py
+# MAIN CRAWLER - With AI classification (requires .env with LLM API keys)  
+python crawler.py --classify
 
-# Enhanced crawler with Terminal User Interface (recommended)
-python enhanced_crawler_tui.py
+# Adjust concurrent workers (default: 5)
+python crawler.py --workers 10
 
-# Enhanced crawler without TUI (console mode)
-python enhanced_crawler_tui.py --no-tui
+# Specify different input file
+python crawler.py --input my-links.md
 
-# Adjust worker count for concurrent processing
-python enhanced_crawler_tui.py --workers 10
+# Full example with classification and custom settings
+python crawler.py --classify --workers 8 --input links.md
 ```
 
 #### Classification and Organization
