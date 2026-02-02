@@ -1,6 +1,6 @@
 [project]
 name = "link-organizer"
-version = "0.1.0"
+version = "0.2.0"
 description = "A link organizer tool that extracts links from markdown and crawls/downloads content for offline storage"
 readme = "README.md"
 requires-python = ">=3.13"
@@ -14,6 +14,9 @@ dependencies = [
     "PyPDF2>=3.0.0",
     "Pillow>=10.0.0",
 ]
+
+[project.scripts]
+link = "cli:main"
 
 [project.optional-dependencies]
 dev = [
@@ -33,3 +36,6 @@ dev-dependencies = [
 
 [tool.hatch.build.targets.wheel]
 packages = ["src"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/", "cli.py", "get_count_links.py"]
