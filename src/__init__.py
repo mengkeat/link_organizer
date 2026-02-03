@@ -11,6 +11,9 @@ from .tui import CrawlerTUI
 from .filename_generator import FilenameGenerator
 from .link_index import LinkIndex, IndexEntry
 from .static_site_generator import StaticSiteGenerator, SiteConfig
+from .link_extractor import LinkExtractor, extract_links_from_file
+from .config import Config, ClassificationConfig, CrawlerConfigSettings, get_config
+from .unified_crawler import UnifiedCrawler, run_unified_crawl
 
 __all__ = [
     'ClassificationResult',
@@ -31,5 +34,13 @@ __all__ = [
     'LinkIndex',
     'IndexEntry',
     'StaticSiteGenerator',
-    'SiteConfig'
+    'SiteConfig',
+    'LinkExtractor',
+    'extract_links_from_file',
+    'Config',
+    'ClassificationConfig',
+    'CrawlerConfigSettings',
+    'get_config',
+    'UnifiedCrawler',
+    'run_unified_crawl'
 ]

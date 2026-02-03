@@ -1,20 +1,24 @@
-import re
+"""
+Backwards compatibility wrapper for link extraction.
 
+DEPRECATED: This module is deprecated. Use the CLI or import from src instead:
+    from src.link_extractor import LinkExtractor, extract_links_from_file
+"""
 
-def extract_links_from_file(filepath):
-    """Extract all HTTP/HTTPS links from a markdown file using regex patterns."""
-    with open(filepath, "r", encoding="utf-8") as f:
-        content = f.read()
-    # Match markdown links: [text](url)
-    md_links = re.findall(r"\[[^\]]+\]\((https?://[^\s)]+)\)", content)
-    # Match bare URLs (not inside markdown links)
-    bare_links = re.findall(r"(?<!\]\()(?<!\]\s)(https?://[^\s)]+)", content)
-    # Combine and deduplicate
-    links = list(dict.fromkeys(md_links + bare_links))
-    return links
+import warnings
+
+from src.link_extractor import LinkExtractor, extract_links_from_file
+
+__all__ = ["extract_links_from_file", "LinkExtractor"]
 
 
 if __name__ == "__main__":
+    warnings.warn(
+        "get_count_links.py is deprecated. Use 'uv run python cli.py list' or "
+        "import from src.link_extractor instead.",
+        DeprecationWarning,
+        stacklevel=1,
+    )
     links = extract_links_from_file("links.md")
     for link in links:
         print(link)

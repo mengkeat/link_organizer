@@ -1,0 +1,65 @@
+# Link Organizer Configuration
+# Copy this file to config.yaml and customize as needed.
+# All settings are optional - defaults will be used if not specified.
+
+# Classification settings for AI-powered content analysis
+classification:
+  # Categories for classifying links
+  # These are used by the LLM to categorize content
+  categories:
+    - Technology
+    - Science
+    - AI/ML
+    - Programming
+    - Research
+    - Tutorial
+    - News
+    - Blog
+    - Documentation
+    - Business
+    - Design
+    - Security
+    - Data Science
+    - Web Development
+
+  # Content type classifications
+  # Describes the format/purpose of the content
+  content_types:
+    - tutorial
+    - guide
+    - documentation
+    - research_paper
+    - blog_post
+    - news_article
+    - reference
+    - course
+    - tool
+
+# Crawler settings for fetching and processing links
+crawler:
+  # Directory to store downloaded content
+  data_dir: dat
+
+  # Index file for tracking link status and metadata
+  index_file: index.json
+
+  # Legacy classifications file (for backwards compatibility)
+  classifications_file: classifications.json
+
+  # Maximum retry attempts for failed requests
+  max_retries: 3
+
+  # Number of parallel workers for classification
+  classification_workers: 5
+
+  # Number of parallel workers for fetching content
+  fetch_workers: 5
+
+  # Delay between requests in seconds (to avoid rate limiting)
+  request_delay: 1.0
+
+  # Enable Terminal User Interface during crawling
+  enable_tui: false
+
+# Default input file containing links to process
+default_input_file: links.md

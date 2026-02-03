@@ -12,21 +12,27 @@ The project has a modular architecture with CLI interface and the following comp
 
 ### Entry Points:
 1. **`cli.py`** - Main CLI interface (`link` command) for all operations
-2. **`get_count_links.py`** - Link extraction utility
-3. **`enhanced_crawler.py`** - Enhanced crawler with AI classification
-4. **`enhanced_crawler_tui.py`** - Crawler with Terminal User Interface
+2. **`get_count_links.py`** - Link extraction utility (deprecated, use `src.link_extractor`)
+3. **`crawl_links.py`** - Basic crawler (deprecated, use CLI)
+4. **`enhanced_crawler.py`** - Enhanced crawler (deprecated, use CLI)
+5. **`enhanced_crawler_tui.py`** - Crawler with TUI (deprecated, use CLI with `--tui`)
 
 ### Core Modules (`src/` directory):
 
+#### Configuration:
+- **`config.py`** - Configuration management (YAML-based, with defaults)
+
 #### Data Management:
-- **`models.py`** - Data models (LinkData, ClassificationResult, CrawlerConfig, etc.)
+- **`models.py`** - Pydantic data models with validation (LinkData, ClassificationResult, CrawlerConfig, etc.)
 - **`link_index.py`** - Index management with incremental sync support
 - **`filename_generator.py`** - Human-readable filename generation from URLs
+- **`link_extractor.py`** - Link extraction from markdown files
 
 #### Crawling & Processing:
-- **`content_processor.py`** - Content extraction (PDF text, markdown)
+- **`content_processor.py`** - Content extraction (PDF text, markdown, hashing)
 - **`crawler_utils.py`** - Web crawling utilities (PDF download, HTML→markdown)
-- **`incremental_crawler.py`** - Incremental crawl with readable filenames
+- **`unified_crawler.py`** - Unified crawler with all modes (incremental, TUI, classification)
+- **`incremental_crawler.py`** - Incremental crawl (legacy, use UnifiedCrawler)
 - **`workers.py`** - Async worker implementations
 
 #### Classification:
@@ -39,10 +45,15 @@ The project has a modular architecture with CLI interface and the following comp
 - **`tui.py`** - Terminal User Interface components
 
 ### Test Components (`tests/` directory):
-- **`test_classification.py`** - Classification functionality tests
+- **`test_config.py`** - Configuration tests
+- **`test_content_processor.py`** - Content processor tests
+- **`test_incremental_crawler.py`** - Crawler tests with mocks
 - **`test_link_classifier.py`** - Unit tests for LinkClassifier
+- **`test_link_extractor.py`** - Link extraction tests
 - **`test_llm_providers.py`** - Unit tests for LLM providers
+- **`test_models.py`** - Pydantic model validation tests
 - **`test_tui.py`** - TUI testing with mock data
+- **`fixtures.py`** - Shared test fixtures and mocks
 
 ## Data Structure
 
@@ -63,6 +74,7 @@ The project has a modular architecture with CLI interface and the following comp
 - `rich` - Terminal UI
 - `PyPDF2` - PDF text extraction
 - `Pillow` - Screenshot processing
+- `pydantic` - Data validation
 - `pytest` - Testing
 
 ## Python Environment

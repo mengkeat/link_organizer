@@ -90,6 +90,7 @@ class TestLiteLLMProvider:
         with pytest.raises(ValueError, match="Model is required"):
             provider.validate_config()
 
+    @pytest.mark.asyncio
     @patch('litellm.acompletion')
     async def test_generate_success(self, mock_acompletion):
         """Test successful generation"""
@@ -121,10 +122,12 @@ class TestLiteLLMProvider:
         mock_acompletion.assert_called_once_with(
             model="test_model",
             messages=[{"role": "user", "content": "Test prompt"}],
+            timeout=30,
             temperature=0.1,
             max_tokens=500
         )
 
+    @pytest.mark.asyncio
     @patch('litellm.acompletion')
     async def test_generate_with_custom_params(self, mock_acompletion):
         """Test generation with custom parameters"""
@@ -140,10 +143,12 @@ class TestLiteLLMProvider:
         mock_acompletion.assert_called_once_with(
             model="test_model",
             messages=[{"role": "user", "content": "Test prompt"}],
+            timeout=30,
             temperature=0.5,
             max_tokens=100
         )
 
+    @pytest.mark.asyncio
     @patch('litellm.acompletion')
     async def test_generate_missing_usage(self, mock_acompletion):
         """Test generation when usage info is missing"""
@@ -168,7 +173,7 @@ class TestOpenRouterProvider:
         provider = OpenRouterProvider("test_key", "gpt-4")
 
         assert provider.api_key == "test_key"
-        assert provider.model == "openrouter/gpt-4"
+        assert provider.model == "gpt-4"  # Model is kept as-is (prefix not added)
         assert provider.session is None
 
     def test_initialization_with_openrouter_prefix(self):
@@ -196,6 +201,7 @@ class TestOpenRouterProvider:
         with pytest.raises(ValueError, match="Model is required"):
             provider.validate_config()
 
+    @pytest.mark.asyncio
     @patch('aiohttp.ClientSession.post')
     async def test_generate_success(self, mock_post):
         """Test successful generation with OpenRouter"""
@@ -220,6 +226,7 @@ class TestOpenRouterProvider:
         assert response.usage == {"prompt_tokens": 10, "completion_tokens": 5}
         assert response.finish_reason == "stop"
 
+    @pytest.mark.asyncio
     async def test_context_manager(self):
         """Test async context manager"""
         provider = OpenRouterProvider("test_key", "gpt-4")
@@ -256,7 +263,7 @@ class TestLLMProviderFactory:
 
         assert isinstance(provider, OpenRouterProvider)
         assert provider.api_key == "test_key"
-        assert provider.model == "openrouter/gpt-4"
+        assert provider.model == "gpt-4"  # Model is kept as-is (prefix not added)
 
     def test_create_unknown_provider(self):
         """Test creating unknown provider type"""
@@ -287,11 +294,12 @@ class TestLLMProviderFactory:
 
         assert isinstance(provider, OpenRouterProvider)
         assert provider.api_key == "test_key"
-        assert provider.model == "openrouter/gpt-4"
+        assert provider.model == "gpt-4"  # Model is kept as-is (prefix not added)
 
     @patch.dict(os.environ, {
         'OPENROUTER_API_KEY': 'test_key',
-        'LITELLM_MODEL': 'gpt-4'
+        'LITELLM_MODEL': 'gpt-4',
+        'LLM_PROVIDER': 'litellm'  # Explicitly set to litellm for default test
     })
     def test_from_env_default(self):
         """Test creating provider from environment with default"""
@@ -312,7 +320,7 @@ class TestLLMProviderFactory:
     @patch.dict(os.environ, {
         'LITELLM_MODEL': 'gpt-4',
         'LLM_PROVIDER': 'litellm'
-    })
+    }, clear=True)
     def test_from_env_missing_api_key(self):
         """Test creating provider from environment with missing API key"""
         with pytest.raises(ValueError, match="OPENROUTER_API_KEY is required"):

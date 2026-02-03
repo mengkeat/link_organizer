@@ -161,7 +161,7 @@ def cmd_crawl(args):
     """Crawl and classify links."""
     load_dotenv()
     
-    from get_count_links import extract_links_from_file
+    from src.link_extractor import extract_links_from_file
     from src.link_index import LinkIndex
     
     index = LinkIndex(Path("index.json"))
@@ -191,13 +191,14 @@ def cmd_crawl(args):
         return
     
     # Run the crawler
-    from src.incremental_crawler import run_incremental_crawl
-    asyncio.run(run_incremental_crawl(
-        links_to_process, 
-        index,
+    from src.unified_crawler import UnifiedCrawler
+    crawler = UnifiedCrawler(
+        incremental=not args.all,
         use_tui=args.tui,
-        workers=args.workers
-    ))
+        enable_classification=True,
+        workers=args.workers,
+    )
+    asyncio.run(crawler.run(links_to_process, index))
 
 
 def cmd_generate(args):
@@ -273,7 +274,7 @@ def cmd_import(args):
     """Import links from a file."""
     from src.content_processor import ContentProcessor
     from src.link_index import LinkIndex, IndexEntry
-    from get_count_links import extract_links_from_file
+    from src.link_extractor import extract_links_from_file
     
     index = LinkIndex(Path("index.json"))
     

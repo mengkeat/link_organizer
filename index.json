@@ -1,0 +1,2318 @@
+[
+  {
+    "link": "https://www.feabhas.com/sites/default/files/2016-06/Rule%20of%20the%20Big%20Five.pdf",
+    "id": "ad430b1e550e77127c1a25365beb014db8eb2401d06472bbad1c88f4133ae2b4",
+    "filename": "ad430b1e550e77127c1a25365beb014db8eb2401d06472bbad1c88f4133ae2b4.pdf",
+    "status": "Success"
+  },
+  {
+    "link": "https://arxiv.org/pdf/1803.09926.pdf",
+    "id": "44502b1767d9fe155ce968eafab52294e4236f2405b95659d96dde16d730fd3f",
+    "filename": "44502b1767d9fe155ce968eafab52294e4236f2405b95659d96dde16d730fd3f.pdf",
+    "status": "Success"
+  },
+  {
+    "link": "https://s3-us-west-2.amazonaws.com/secure.notion-static.com/06911f22-baaa-4b70-aa56-7e93160852f8/liederivs_tame.pdf",
+    "id": "d5ef926873e535886e4bd1842e12a4131dec92b146c6449d2a876da10de87644",
+    "filename": null,
+    "status": "Failed: 403 Client Error: Forbidden for url: https://s3-us-west-2.amazonaws.com/secure.notion-static.com/06911f22-baaa-4b70-aa56-7e93160852f8/liederivs_tame.pdf"
+  },
+  {
+    "link": "https://prod-files-secure.s3.us-west-2.amazonaws.com/d9bf9533-96b2-4ccb-a3df-159d6be7dcba/6f4ba269-c63b-4ad0-9c68-23d53c88547e/3DGeometry.pdf",
+    "id": "d60cd35621a0424b471f4f5046e5b6cc18f3fa5aee79851544325397608c8065",
+    "filename": null,
+    "status": "Failed: 403 Client Error: Forbidden for url: https://prod-files-secure.s3.us-west-2.amazonaws.com/d9bf9533-96b2-4ccb-a3df-159d6be7dcba/6f4ba269-c63b-4ad0-9c68-23d53c88547e/3DGeometry.pdf"
+  },
+  {
+    "link": "https://arxiv.org/pdf/2105.00613.pdf",
+    "id": "98566ec5dd38de9ad3821a28b354b28a8babca44b8feb582e554e355ef245f51",
+    "filename": "98566ec5dd38de9ad3821a28b354b28a8babca44b8feb582e554e355ef245f51.pdf",
+    "status": "Success"
+  },
+  {
+    "link": "https://iopscience.iop.org/article/10.1088/1742-6596/659/1/012022/pdf#:~:text=Iterated%20extended%20Kalman%20filter%20The,update%20(see%20Algorithm%202",
+    "id": "8ce6c7b9bcf30cb5141a1854be312aeedb7640180888b9e349f4fa11701f80f5",
+    "filename": "8ce6c7b9bcf30cb5141a1854be312aeedb7640180888b9e349f4fa11701f80f5.pdf",
+    "status": "Success"
+  },
+  {
+    "link": "https://arxiv.org/abs/1010.2921",
+    "id": "7f93b65c0db8dfdf8411fb5169f42efbe7e7d6e4df60f2a6b6bede4c7a496a0a",
+    "filename": "7f93b65c0db8dfdf8411fb5169f42efbe7e7d6e4df60f2a6b6bede4c7a496a0a.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://research-repository.uwa.edu.au/files/3235501/Wedge_Daniel_John_2007.pdf",
+    "id": "9c05f11bd401e078194effa7f699aa305586115a369df26401e711c3b1a2ceb0",
+    "filename": null,
+    "status": "Failed: 403 Client Error: Forbidden for url: https://research-repository.uwa.edu.au/files/3235501/Wedge_Daniel_John_2007.pdf"
+  },
+  {
+    "link": "https://arxiv.org/abs/2105.14368",
+    "id": "c505c40309e6b207a88faf71a48439c93f3c62d3ca9bcc4dda640a763f30b5bb",
+    "filename": "c505c40309e6b207a88faf71a48439c93f3c62d3ca9bcc4dda640a763f30b5bb.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.youtube.com/watch?v=ZoMkfOK-xKM",
+    "id": "1f8b35b628dfabc9340a6a12e7909f88c0a301a9e48c662aab89a0ea4d443435",
+    "filename": "1f8b35b628dfabc9340a6a12e7909f88c0a301a9e48c662aab89a0ea4d443435.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://web.math.ucsb.edu/~ebrahim/liederivs_tame.pdf",
+    "id": "c46fba6958b887abb5bd808b8efa03e85413737cc92712617ee297a2500f34f0",
+    "filename": "c46fba6958b887abb5bd808b8efa03e85413737cc92712617ee297a2500f34f0.pdf",
+    "status": "Success"
+  },
+  {
+    "link": "https://arxiv.org/abs/2403.18103",
+    "id": "263eeeda127d4f76d82e620a34dac17157f52c3eaeabb13e8b09d1d0e43761bf",
+    "filename": "263eeeda127d4f76d82e620a34dac17157f52c3eaeabb13e8b09d1d0e43761bf.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/Dicklesworthstone/hoeffdings_d_explainer",
+    "id": "cb415b9105c0dd3d05c143c15a72565b6a4b835e32be62daf60a7338467f446b",
+    "filename": "cb415b9105c0dd3d05c143c15a72565b6a4b835e32be62daf60a7338467f446b.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/lightvector/KataGo/blob/master/docs/GraphSearch.md",
+    "id": "21a6c23cd3dca1ee40ccd7cc2bc75c089f9231f0c5ad54d02ad6af8d3af660a2",
+    "filename": "21a6c23cd3dca1ee40ccd7cc2bc75c089f9231f0c5ad54d02ad6af8d3af660a2.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://ww1.microchip.com/downloads/en/AppNotes/doc8003.pdf",
+    "id": "4dbdce2bf6ac9134460a97fe881431af9be1ca7cdcfa39d042a1226400b228c9",
+    "filename": "4dbdce2bf6ac9134460a97fe881431af9be1ca7cdcfa39d042a1226400b228c9.pdf",
+    "status": "Success"
+  },
+  {
+    "link": "https://vreco.fly.dev/blog/post/HTMX%20in%20Go",
+    "id": "3d873a6e69847f39ff0b4772bd27c799991ae9c3b656929f2bc8b49b155648b4",
+    "filename": "3d873a6e69847f39ff0b4772bd27c799991ae9c3b656929f2bc8b49b155648b4.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://casual-effects.com/markdeep/",
+    "id": "b9cbc0c5ef19c5882f9f806cbe73e7b60aa90a815d35845bb1adb5b63347164c",
+    "filename": "b9cbc0c5ef19c5882f9f806cbe73e7b60aa90a815d35845bb1adb5b63347164c.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/zk-Call/zkp-hmac-communication-cpp",
+    "id": "727aac36e8a003de7629ee8f5648727e5125560bb9289fbc22c854b012c75dab",
+    "filename": "727aac36e8a003de7629ee8f5648727e5125560bb9289fbc22c854b012c75dab.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://zhuanlan.zhihu.com/p/98820927",
+    "id": "ec20d1e1e697ccfd3a19cec9429c33f868aced8c5dc8fc2f1bc8a1c1638d178c",
+    "filename": "ec20d1e1e697ccfd3a19cec9429c33f868aced8c5dc8fc2f1bc8a1c1638d178c.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/yuesong-feng/30dayMakeCppServer",
+    "id": "da56a3cd50018cddbee839add34e3e3a728eebf0a209ab9897524a8d2ea29cdf",
+    "filename": "da56a3cd50018cddbee839add34e3e3a728eebf0a209ab9897524a8d2ea29cdf.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://christianjmills.com/series/notes/cuda-mode-notes.html?form=MG0AV3",
+    "id": "73780cc1631c4060c48526f35f815999269e82d14c123556b90abac6f6345f40",
+    "filename": "73780cc1631c4060c48526f35f815999269e82d14c123556b90abac6f6345f40.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://bytepointer.com/resources/pietrek_crash_course_depths_of_win32_seh.htm",
+    "id": "6225e8b9b76c4d06d7c4742f2ac59da2fb2b90ac0ea027493d04a923cca4cff0",
+    "filename": "6225e8b9b76c4d06d7c4742f2ac59da2fb2b90ac0ea027493d04a923cca4cff0.None",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.notion.so/Matrix-Lie-Groups-Lie-Algebra-for-Robotic-70ca0f4f21a940b396ea6b2870a0b144?pvs=21",
+    "id": "a8d37a966b71b40417c0cfffc6734e64e0dfb81924b01644a70c3ed228d94191",
+    "filename": "a8d37a966b71b40417c0cfffc6734e64e0dfb81924b01644a70c3ed228d94191.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.akamai.com/blog/security-research/critical-linux-backdoor-xz-utils-discovered-what-to-know",
+    "id": "fcc916a6ce478573fab3007143b3174e00b22abf17b891b999a2d463e3557482",
+    "filename": "fcc916a6ce478573fab3007143b3174e00b22abf17b891b999a2d463e3557482.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/microsoft/proxy?tab=readme-ov-file",
+    "id": "5e5df58d3ceb0dbd4cd7d9c0930dae4210d617232f1a51764c2f716afb2c0db0",
+    "filename": "5e5df58d3ceb0dbd4cd7d9c0930dae4210d617232f1a51764c2f716afb2c0db0.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://two-wrongs.com/statistical-process-control-a-practitioners-guide.html",
+    "id": "65d9912fe703feab59e422c13532ebc405e5ae20ee63385403a947f017c4c106",
+    "filename": "65d9912fe703feab59e422c13532ebc405e5ae20ee63385403a947f017c4c106.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://howqueryengineswork.com/00-acknowledgments.html",
+    "id": "7ec412477245c432ca0402e34d9b315661ae7c586e0ac2ab1780a1f0905b12fe",
+    "filename": "7ec412477245c432ca0402e34d9b315661ae7c586e0ac2ab1780a1f0905b12fe.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/NirDiamant/RAG_Techniques",
+    "id": "ac8d6f662f3744edaf150da35a514df8188c2f4cfbcd496e7352b884f8d394df",
+    "filename": "ac8d6f662f3744edaf150da35a514df8188c2f4cfbcd496e7352b884f8d394df.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.falkordb.com/blog/advanced-rag/",
+    "id": "2c768dfab88b9d23f806b6243b1153c31850222385b5cf11e75d13bbbbfbe14d",
+    "filename": "2c768dfab88b9d23f806b6243b1153c31850222385b5cf11e75d13bbbbfbe14d.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://thecoder08.github.io/hello-world.html",
+    "id": "f22989e50eb85904bd4b337ffe4e5370ab1a573ac412c521a0065657bf47fbb9",
+    "filename": "f22989e50eb85904bd4b337ffe4e5370ab1a573ac412c521a0065657bf47fbb9.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.youtube.com/watch?v=Q6ovtLdSbEA",
+    "id": "c57febff4e7c1360570247827281d8f2f8e1a92fd9cc0d4f033a698347f89c77",
+    "filename": "c57febff4e7c1360570247827281d8f2f8e1a92fd9cc0d4f033a698347f89c77.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.openwall.com/lists/oss-security/2024/03/29/4",
+    "id": "6d4d56fd1d94a925eb69cd215ea4bd94ec9bec87d6973b857a2c303f6f6a8a0b",
+    "filename": "6d4d56fd1d94a925eb69cd215ea4bd94ec9bec87d6973b857a2c303f6f6a8a0b.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.notion.so/Advent-202-50f6ddc4038f4df697f4f6c164e76168?pvs=21",
+    "id": "1db486c85dfca969e1e49be67c8814093199265ea3a3ca4fb2c82e774e8bfdda",
+    "filename": "1db486c85dfca969e1e49be67c8814093199265ea3a3ca4fb2c82e774e8bfdda.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.cs.rit.edu/%7Eats/books/ooc.pdf",
+    "id": "bd46fa78a3fb41e9b2dca8eadf3474f4aa06a5e115089962b119ad30bbec6e85",
+    "filename": "bd46fa78a3fb41e9b2dca8eadf3474f4aa06a5e115089962b119ad30bbec6e85.pdf",
+    "status": "Success"
+  },
+  {
+    "link": "https://mec560sbu.github.io/mec560-notes",
+    "id": "f01a32c04b1158ffdc17e6b17504758bd3ed9136c6b29c91574ad4bb957612f7",
+    "filename": "f01a32c04b1158ffdc17e6b17504758bd3ed9136c6b29c91574ad4bb957612f7.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://owen-liuyuxuan.github.io/papers_reading_sharing.github.io/",
+    "id": "3077baf3d564278071e721fdce8cf90285c75ad2a49346d450eed4c00255853d",
+    "filename": "3077baf3d564278071e721fdce8cf90285c75ad2a49346d450eed4c00255853d.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://stack-auth.com/blog/oauth-from-first-principles",
+    "id": "3b249ab0da7f0f029367c09d47438ba9db1bd38c38ce59ff7f8314871cd7b889",
+    "filename": "3b249ab0da7f0f029367c09d47438ba9db1bd38c38ce59ff7f8314871cd7b889.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.modernescpp.com/index.php/the-type-traits-library-std-is-base-of/#:~:text=In%20the%20implementation%2C%20a%20class,%3E%3A%3Avalue%20returns%20false%20",
+    "id": "b87921adbbedd346770f305faf7948f7d91da04c64f90dc6617bf4bb55dfd5a1",
+    "filename": "b87921adbbedd346770f305faf7948f7d91da04c64f90dc6617bf4bb55dfd5a1.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.physicalintelligence.company/download/pi0.pdfnews",
+    "id": "8c5afd73e652eb847af8a1db4f7d31718ff5764601453a6b8576ed4a4d9c7ac7",
+    "filename": null,
+    "status": "Failed: 404 Client Error: Not Found for url: https://www.physicalintelligence.company/download/pi0.pdfnews"
+  },
+  {
+    "link": "https://www.modernescpp.com/index.php/the-type-traits-library-std-is-base-of/#:~:text=In",
+    "id": "b515f32effa5472d52675ab4a9abeb84bae9f641af8f473435aa453c0adbecf5",
+    "filename": "b515f32effa5472d52675ab4a9abeb84bae9f641af8f473435aa453c0adbecf5.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.notion.so/AI-Compiler-Study-aaf4cff2c8734e50ad95ac6230dbd80b?pvs=21",
+    "id": "9e8dfaa53bfddd94464ef5d6bd9378d1765e0c3e33f4e6f7cfa33eec7f1a7693",
+    "filename": "9e8dfaa53bfddd94464ef5d6bd9378d1765e0c3e33f4e6f7cfa33eec7f1a7693.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://raymii.org/s/software/Logging_all_Cpp_destructors_poor_mans_run-time_tracing.html",
+    "id": "a3bfb4e53559f92cc5db1f84967b59bc9903dd5ce0d513d1e021e9aa242d6b07",
+    "filename": "a3bfb4e53559f92cc5db1f84967b59bc9903dd5ce0d513d1e021e9aa242d6b07.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://bernsteinbear.com/blog/type-inference/",
+    "id": "9c9442e21c432c99ff0308ebcdad328e4b96fa2fb62d041502e893b12faaaa14",
+    "filename": "9c9442e21c432c99ff0308ebcdad328e4b96fa2fb62d041502e893b12faaaa14.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://arc.net/folder/D0472A20-9C20-4D3F-B145-D2865C0A9FEE",
+    "id": "5c23ec69c7bf56ab183d27eb2b02144452516f38b766ca7bcae312ba2b447e5d",
+    "filename": "5c23ec69c7bf56ab183d27eb2b02144452516f38b766ca7bcae312ba2b447e5d.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://arxiv.org/pdf/2402.10200",
+    "id": "be1144c6c92c161e675fdef94da390e1da130b2420ccde4327d8a5b7a3d66ea1",
+    "filename": "be1144c6c92c161e675fdef94da390e1da130b2420ccde4327d8a5b7a3d66ea1.pdf",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.notion.so/Testing-C-Code-72709f28015e4c53808c51af7723822e?pvs=21",
+    "id": "e0933bf884c5d62540dac90be80eafc393e5116a8ab9a56cdcea7ca39958120b",
+    "filename": "e0933bf884c5d62540dac90be80eafc393e5116a8ab9a56cdcea7ca39958120b.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/yamadashy/repomix",
+    "id": "4a925ee01de978814da3eb548ecb1d9aca777d08682d96e9e61646de4c23c33e",
+    "filename": "4a925ee01de978814da3eb548ecb1d9aca777d08682d96e9e61646de4c23c33e.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.youtube.com/playlist?list=PLS01nW3RtgopsNLeM936V4TNSsvvVglLc",
+    "id": "22710ea362932c01a11f1b8bc0e1bd35bf4dd3ca833986642089e7ce9c4497d4",
+    "filename": "22710ea362932c01a11f1b8bc0e1bd35bf4dd3ca833986642089e7ce9c4497d4.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/UnrelatedString/a",
+    "id": "506769e1c4264076acfffd002914c3b6ec7f72383d854142b2234faac2d1bd42",
+    "filename": "506769e1c4264076acfffd002914c3b6ec7f72383d854142b2234faac2d1bd42.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.notion.so/Vivek-Review-266c4440e1b14453835edbdaa5a3a48a?pvs=21",
+    "id": "f7c47a231208bdf12bca195139c0b6c3675117ed5c87c93612d245ec44746682",
+    "filename": "f7c47a231208bdf12bca195139c0b6c3675117ed5c87c93612d245ec44746682.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.geoffreylitt.com/2023/03/25/llm-end-user-programmingtmot",
+    "id": "a443d162a734f3faed13b7e91e13ede70787826e9784d3f9d7e5be9b767c9ae5",
+    "filename": "a443d162a734f3faed13b7e91e13ede70787826e9784d3f9d7e5be9b767c9ae5.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.notion.so/Interview-Prep-5a65307bef5048469673dbae4369f60b?pvs=21",
+    "id": "b5c149f2d49dfa0288dbe0e5bcd09f7533a1258b5af495354fb998735efa8e20",
+    "filename": "b5c149f2d49dfa0288dbe0e5bcd09f7533a1258b5af495354fb998735efa8e20.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/diff-usion/Awesome-Diffusion-Models#introductory-posts",
+    "id": "cf9fbaeaff777209b7e46df84f2923c089613032682e792b47dc12c2d4e460ea",
+    "filename": "cf9fbaeaff777209b7e46df84f2923c089613032682e792b47dc12c2d4e460ea.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.leviathansecurity.com/blog/tunnelvision",
+    "id": "fb85b390085109c35371dbb7dede84aa2c9ff0fcac745da5807058ec857414f2",
+    "filename": "fb85b390085109c35371dbb7dede84aa2c9ff0fcac745da5807058ec857414f2.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://prod-files-secure.s3.us-west-2.amazonaws.com/d9bf9533-96b2-4ccb-a3df-159d6be7dcba/57d37ca0-de39-4678-a086-dcea47a980f1/ooc.pdf",
+    "id": "ed53f3cb5b932993ac7965d1d296f2d0f57da5ca0a602a1fe1b54b5e9f0569c2",
+    "filename": null,
+    "status": "Failed: 403 Client Error: Forbidden for url: https://prod-files-secure.s3.us-west-2.amazonaws.com/d9bf9533-96b2-4ccb-a3df-159d6be7dcba/57d37ca0-de39-4678-a086-dcea47a980f1/ooc.pdf"
+  },
+  {
+    "link": "https://bjlkeng.io/posts/an-introduction-to-stochastic-calculus/",
+    "id": "6fed1d1aa9b306ea65f10cae0464b8dc312350a3b9b27ed92c61a89e17ef86bc",
+    "filename": "6fed1d1aa9b306ea65f10cae0464b8dc312350a3b9b27ed92c61a89e17ef86bc.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://zhuanlan.zhihu.com/p/587500859",
+    "id": "f4978876d8b48ab8fe99b9b0b1076d7f3307217582ea2cd6478965e7f58e23c8",
+    "filename": "f4978876d8b48ab8fe99b9b0b1076d7f3307217582ea2cd6478965e7f58e23c8.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://wirelesspi.com/fmcw-radar-part-1-ranging/",
+    "id": "9959da8f93daa677847bcd8eb1ddb84c0ba6624b28a6eb1abaf16a060a21ed95",
+    "filename": "9959da8f93daa677847bcd8eb1ddb84c0ba6624b28a6eb1abaf16a060a21ed95.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/matthewp/views-the-hard-way",
+    "id": "182d63f823549f6d8283974f0f830195eb337252241d7f40651180bff7256908",
+    "filename": "182d63f823549f6d8283974f0f830195eb337252241d7f40651180bff7256908.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://jiha-kim.github.io/posts/introduction-to-stochastic-calculus/",
+    "id": "43552c04abefed723501d4dac0e49653d21745306db336781b849b45f8dd32e2",
+    "filename": "43552c04abefed723501d4dac0e49653d21745306db336781b849b45f8dd32e2.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/letthedataconfess/Data-Engineering-Books/blob/main/Book-7Nathan%20Marz%2C%20James%20Warren%20Big%20Data%20Principles%20and%20best%20practices%20of%20scalable%20realtime%20data%20systems.pdf",
+    "id": "2348f3341a1fe3f59a36e097403180a09cd84a709e9b3b2c96730fc3a56af13d",
+    "filename": "2348f3341a1fe3f59a36e097403180a09cd84a709e9b3b2c96730fc3a56af13d.pdf",
+    "status": "Success"
+  },
+  {
+    "link": "https://mattweidner.com/2024/06/04/server-architectures.html",
+    "id": "477e4415331b33baefa5afa3829ea6f10ad4040d68e012e809e9079fd1affe18",
+    "filename": "477e4415331b33baefa5afa3829ea6f10ad4040d68e012e809e9079fd1affe18.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://openreview.net/pdf?id=NhYAjAAdQT",
+    "id": "d8030e5933b221ae63a74d21d85df63a4623a6403e2c3d26b347f1094439600f",
+    "filename": "d8030e5933b221ae63a74d21d85df63a4623a6403e2c3d26b347f1094439600f.pdf",
+    "status": "Success"
+  },
+  {
+    "link": "https://ryanliu112.github.io/compute-optimal-tts/",
+    "id": "f15652ef8bc5f33cf3da57e834795f7a1cda3e8d7b684003ea09e43ff5fbe869",
+    "filename": "f15652ef8bc5f33cf3da57e834795f7a1cda3e8d7b684003ea09e43ff5fbe869.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.notion.so/Prompt-Optimization-1667d461a195802fafb0cd97e50b5978?pvs=21",
+    "id": "f9fa0a8ebcf03468566c7287806fd9fe3b12fb23d86b66c4a69a7c6265705974",
+    "filename": "f9fa0a8ebcf03468566c7287806fd9fe3b12fb23d86b66c4a69a7c6265705974.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://arxiv.org/pdf/1606.05285",
+    "id": "ecf00bbf9df54c865da80f16f49ae1070dc0017b53991b9c4bccedff9de86c74",
+    "filename": "ecf00bbf9df54c865da80f16f49ae1070dc0017b53991b9c4bccedff9de86c74.pdf",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.youtube.com/watch?v=pI-HRRh7-dU",
+    "id": "8b165a6e35ad304e67593e9dac7940b93b911266294d841ee6539f116ce5eff8",
+    "filename": "8b165a6e35ad304e67593e9dac7940b93b911266294d841ee6539f116ce5eff8.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://thechipletter.substack.com/p/demystifying-npus-questions-and-answers",
+    "id": "f0bca6a05bb389280a6c7e2e42d634445c7b7524b902fa41461d2e7e45e1f0e1",
+    "filename": "f0bca6a05bb389280a6c7e2e42d634445c7b7524b902fa41461d2e7e45e1f0e1.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://arxiv.org/pdf/2506.00202",
+    "id": "2acc285f7d664e0568606c81546de9b3225e34601f5e5ae0d6b17a048d745884",
+    "filename": "2acc285f7d664e0568606c81546de9b3225e34601f5e5ae0d6b17a048d745884.pdf",
+    "status": "Success"
+  },
+  {
+    "link": "https://blog.csdn.net/weixin_44923488/article/details/128103159",
+    "id": "ce411da2a3cb0f8f8ee5918182b2f522dae0fae933d0b3993ff1ecd071de3014",
+    "filename": "ce411da2a3cb0f8f8ee5918182b2f522dae0fae933d0b3993ff1ecd071de3014.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://codeberg.org/derat/advent-of-code/src/branch/main/lib",
+    "id": "cfadc6a521b0ac54d4fb8a42e6a06f8024295f22651b9cce9d5a776d21c87be6",
+    "filename": "cfadc6a521b0ac54d4fb8a42e6a06f8024295f22651b9cce9d5a776d21c87be6.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.researchgate.net/profile/Peter-Rousseeuw/publication/346630632_Robust_Statistics_The_Approach_Based_on_Influence_Functions/links/668bbb7bf3b61c4e2cb7d61e/Robust-Statistics-The-Approach-Based-on-Influence-Functions.pdf?origin=publication_detail&_tp=eyJjb250ZXh0Ijp7ImZpcnN0UGFnZSI6InB1YmxpY2F0aW9uRG93bmxvYWQiLCJwYWdlIjoicHVibGljYXRpb25Eb3dubG9hZCIsInByZXZpb3VzUGFnZSI6InB1YmxpY2F0aW9uIn19&__cf_chl_tk=SXVK_UFozS1D0Cjcacu6lseujAPrZEks6nByLtUEw2M-1750207077-1.0.1.1-g0X6irl.Bi.bGtk.6OrLsP4cZE0yr9ZXy_WyYfXO1Mw",
+    "id": "da94091b3a9cf9d85b4a76b3d95286dfa5f0efdbae01dee7a6490436f3cd1fa8",
+    "filename": null,
+    "status": "Failed: 403 Client Error: Forbidden for url: https://www.researchgate.net/profile/Peter-Rousseeuw/publication/346630632_Robust_Statistics_The_Approach_Based_on_Influence_Functions/links/668bbb7bf3b61c4e2cb7d61e/Robust-Statistics-The-Approach-Based-on-Influence-Functions.pdf?origin=publication_detail&_tp=eyJjb250ZXh0Ijp7ImZpcnN0UGFnZSI6InB1YmxpY2F0aW9uRG93bmxvYWQiLCJwYWdlIjoicHVibGljYXRpb25Eb3dubG9hZCIsInByZXZpb3VzUGFnZSI6InB1YmxpY2F0aW9uIn19&__cf_chl_tk=SXVK_UFozS1D0Cjcacu6lseujAPrZEks6nByLtUEw2M-1750207077-1.0.1.1-g0X6irl.Bi.bGtk.6OrLsP4cZE0yr9ZXy_WyYfXO1Mw"
+  },
+  {
+    "link": "https://applied-llms.org/",
+    "id": "9d13f17a21d2fd7e1321dbb362f42abadf5251eeeb1ced16c5b67649859f8fea",
+    "filename": "9d13f17a21d2fd7e1321dbb362f42abadf5251eeeb1ced16c5b67649859f8fea.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/karpathy/llm.c/discussions/481",
+    "id": "d22c890960dd8924a69cf9f09e72e45e2d9e407c8a3bd1b3ba6df410bbc5d959",
+    "filename": "d22c890960dd8924a69cf9f09e72e45e2d9e407c8a3bd1b3ba6df410bbc5d959.md",
+    "status": "Success"
+  },
+  {
+    "link": "http://perso.lcpc.fr/tarel.jean-philippe/publis/jpt-eccv02.pdf",
+    "id": "0c0cf46fcdd88d78937aa80b5e8af94d6dfd2b25db32171f64977828644c2e5e",
+    "filename": null,
+    "status": "Failed: HTTPConnectionPool(host='perso.lcpc.fr', port=80): Max retries exceeded with url: /tarel.jean-philippe/publis/jpt-eccv02.pdf (Caused by NameResolutionError(\"<urllib3.connection.HTTPConnection object at 0x0000024E3C015400>: Failed to resolve 'perso.lcpc.fr' ([Errno 11002] getaddrinfo failed)\"))"
+  },
+  {
+    "link": "https://www.notion.so/Google-AI-Studio-11th-Apr-1d27d461a19580f297c9e79eae037348?pvs=21",
+    "id": "a15e44c0ae11f883fa5232b8b8a29007f284e4977d53d14285c2518dfc21b323",
+    "filename": "a15e44c0ae11f883fa5232b8b8a29007f284e4977d53d14285c2518dfc21b323.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/srush/ProbTalk",
+    "id": "125f3eea9ab5a2bf94eb801fe1ebc4e1bc49173f475c6bc58d4d18e93061288a",
+    "filename": "125f3eea9ab5a2bf94eb801fe1ebc4e1bc49173f475c6bc58d4d18e93061288a.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://newsletter.techworld-with-milan.com/p/documenting-software-architectures",
+    "id": "f7fc09c8d388914a9d40c3bfa727e2252a94ec10a9263058e9da2011fbb960c8",
+    "filename": "f7fc09c8d388914a9d40c3bfa727e2252a94ec10a9263058e9da2011fbb960c8.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.embeddedrelated.com/showarticle/152.php",
+    "id": "89d3886ceb4d2f52e08e48493f44dc0d923f7f10e65106e0feb519a79a3431e6",
+    "filename": "89d3886ceb4d2f52e08e48493f44dc0d923f7f10e65106e0feb519a79a3431e6.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://arxiv.org/pdf/2312.02121",
+    "id": "14e9ab19ff65540db22aa18ae018fb9dd55141e2702129df0d3d7310d6e567e8",
+    "filename": "14e9ab19ff65540db22aa18ae018fb9dd55141e2702129df0d3d7310d6e567e8.pdf",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.youtube.com/watch?v=2SQUMYw0h0A",
+    "id": "88d997c54fc69b094b023dfecaa0b52dee6c9d813614bfba86bdaa355b90952b",
+    "filename": "88d997c54fc69b094b023dfecaa0b52dee6c9d813614bfba86bdaa355b90952b.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.youtube.com/watch?v=A9iefUXkvQU&t=1630s",
+    "id": "ecbaa5782ec284228380d1d8cd9c3b50b62faee90d98ffdea4238ece8ab08a8c",
+    "filename": "ecbaa5782ec284228380d1d8cd9c3b50b62faee90d98ffdea4238ece8ab08a8c.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://arxiv.org/pdf/2403.08551",
+    "id": "c4f96d25c79d6638d19e9c6640a31fdf81e3484d463b481f4b3d876249ebe4a2",
+    "filename": "c4f96d25c79d6638d19e9c6640a31fdf81e3484d463b481f4b3d876249ebe4a2.pdf",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.matthieulc.com/posts/shoggoth-mini",
+    "id": "94f9cc898c8cd224170602abe935efb949c32aeaac500856047a354341afaeba",
+    "filename": "94f9cc898c8cd224170602abe935efb949c32aeaac500856047a354341afaeba.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/kampelmuehler/2DGaussianSplatting",
+    "id": "aaafde698101807d29e651fced5c973a272f6cc9585ce866eee90c0ef0b4b171",
+    "filename": "aaafde698101807d29e651fced5c973a272f6cc9585ce866eee90c0ef0b4b171.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.youtube.com/@hu-po/videos",
+    "id": "8c58521f6a638c489acfbd7f4bafd6d376a18c91defcb6eb1768a5c22ab938e6",
+    "filename": "8c58521f6a638c489acfbd7f4bafd6d376a18c91defcb6eb1768a5c22ab938e6.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.thomasantony.com/posts/gaussian-splatting-renderer/",
+    "id": "54cdd0707893ca5693b323f0b98d8038394c57068ad0e2c1cc444db5ebf1ac0a",
+    "filename": "54cdd0707893ca5693b323f0b98d8038394c57068ad0e2c1cc444db5ebf1ac0a.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://cfsamson.gitbook.io/green-threads-explained-in-200-lines-of-rust/",
+    "id": "7d0ce12b87fe48a49c70f8b79dfd5261b595225cd47789087c53c5c6fffa9471",
+    "filename": "7d0ce12b87fe48a49c70f8b79dfd5261b595225cd47789087c53c5c6fffa9471.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://iximiuz.com/en/",
+    "id": "1f29a3c0a444fef5383fc1a65dd29104f2f8353a816dd9c6b7f4472ed6ac978d",
+    "filename": "1f29a3c0a444fef5383fc1a65dd29104f2f8353a816dd9c6b7f4472ed6ac978d.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.youtube.com/watch?v=PtA0lg_e5nA&list=PLn2-dEmQeTfQ8YVuHBOvAhUlnIPYxkeu3",
+    "id": "cd3f01852d5124bd571ee63cdbb8715af6bd5d93992c9ad569f312c96a78309b",
+    "filename": "cd3f01852d5124bd571ee63cdbb8715af6bd5d93992c9ad569f312c96a78309b.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://random-matrix-learning.github.io/",
+    "id": "57fe6e4e134829892b712077aef42ec7355cca878c5441cd033b6e1d188b8d73",
+    "filename": "57fe6e4e134829892b712077aef42ec7355cca878c5441cd033b6e1d188b8d73.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://minitorch.github.io/",
+    "id": "fe6e030192b2e9549934ca2830f030ebf4f3dec69bfc0604ed34eb90cd7e7bc0",
+    "filename": "fe6e030192b2e9549934ca2830f030ebf4f3dec69bfc0604ed34eb90cd7e7bc0.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.youtube.com/channel/UCyo9zNZTbdJKFog2q8f-cEw/videos",
+    "id": "e31b356b6d71a682965593659979482d86cd6e17db85a91fa2379a3c2adb96bf",
+    "filename": "e31b356b6d71a682965593659979482d86cd6e17db85a91fa2379a3c2adb96bf.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://desh2608.github.io/2021-07-11-linear-transformers/",
+    "id": "52acd61c239e74520184ec98a38d0906663c18f5da08d4b2e1cf751803087862",
+    "filename": "52acd61c239e74520184ec98a38d0906663c18f5da08d4b2e1cf751803087862.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/toymil/astrophotography_stack_align",
+    "id": "1d6176ff61f7b057fc911068ddf2d82e0a19346ec4e8f87f21080b33c1b78717",
+    "filename": "1d6176ff61f7b057fc911068ddf2d82e0a19346ec4e8f87f21080b33c1b78717.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/iwatake2222/play_with_tflite",
+    "id": "248a4f531b56f4d82e3b04c5c1a2aa51c0263a1117aca586e401f2ae24065524",
+    "filename": "248a4f531b56f4d82e3b04c5c1a2aa51c0263a1117aca586e401f2ae24065524.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://agustinus.kristia.de/techblog/2017/01/26/kl-mle/",
+    "id": "483ba2bc5ba7cdab0435ae2cb1c24d1e15d4149fbb0b73471629c3beefb79dca",
+    "filename": "483ba2bc5ba7cdab0435ae2cb1c24d1e15d4149fbb0b73471629c3beefb79dca.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://arnavdhamija.com/2022/01/08/intro-to-mpc/",
+    "id": "918d7bec8975cd43e10422366688d77cb11e142accc2beb3c3c2de6a28888910",
+    "filename": "918d7bec8975cd43e10422366688d77cb11e142accc2beb3c3c2de6a28888910.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://reasonableapproximation.net/2019/05/05/hindley-milner.html",
+    "id": "024fb7bcee29f5face141cf78f1fc407ae57224e6d38949eb8880018dcf1d5e3",
+    "filename": "024fb7bcee29f5face141cf78f1fc407ae57224e6d38949eb8880018dcf1d5e3.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://distributed-computing-musings.com/about-me/",
+    "id": "32242f58a0e5b98e1a7dcedb8aa71a20affc8c4e0281f7462a249dd898fb1c3e",
+    "filename": "32242f58a0e5b98e1a7dcedb8aa71a20affc8c4e0281f7462a249dd898fb1c3e.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://blog.withmantle.com/code-conversion-using-ai/",
+    "id": "63d4af6464785eb13d20ee6a9e3051be117d9bf2c8bf8ccc98f6caaab60acd9a",
+    "filename": "63d4af6464785eb13d20ee6a9e3051be117d9bf2c8bf8ccc98f6caaab60acd9a.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://home.ttic.edu/~madhurt/courses/toolkit2021/index.html",
+    "id": "2725198d901f6bac670538f3dd79561c9aee7e0fbe139b0c0146ca35ac4404f5",
+    "filename": "2725198d901f6bac670538f3dd79561c9aee7e0fbe139b0c0146ca35ac4404f5.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://scaomath.github.io/blog/galerkin-transformer/",
+    "id": "df8ae7bf3db84181feff1f8fc161c2baf226604a1267f5a0d82240ce760beaf3",
+    "filename": "df8ae7bf3db84181feff1f8fc161c2baf226604a1267f5a0d82240ce760beaf3.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://jalammar.github.io/illustrated-retrieval-transformer/",
+    "id": "113887240c9d03429e8cff31a23928b367e4b0506fb1be8b9cf1cab5ac095a4a",
+    "filename": "113887240c9d03429e8cff31a23928b367e4b0506fb1be8b9cf1cab5ac095a4a.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://pdos.csail.mit.edu/6.S081/2021/xv6/book-riscv-rev2.pdf",
+    "id": "232b87ff8f6d188d392c482301ab202512acf6104d532f60e6ac85d95db1dbc2",
+    "filename": "232b87ff8f6d188d392c482301ab202512acf6104d532f60e6ac85d95db1dbc2.pdf",
+    "status": "Success"
+  },
+  {
+    "link": "http://whiteboard.ping.se/SDR/IQ",
+    "id": "01ba556dba5748a36ebf9440b3e2cf0467adaa56fac9f32c744ffcd7e57a8709",
+    "filename": "01ba556dba5748a36ebf9440b3e2cf0467adaa56fac9f32c744ffcd7e57a8709.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.jiqizhixin.com/",
+    "id": "a7d08420c64aff92ffbe8ca5e23826e87a463748f47fbd6b9b5edd09ef57c7ef",
+    "filename": "a7d08420c64aff92ffbe8ca5e23826e87a463748f47fbd6b9b5edd09ef57c7ef.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://vettabase.com/blog/how-slow-is-select/",
+    "id": "41e0533f4469ff31b16e0a3fde4d85920dba57a3458397731f8a945d54a7f0e9",
+    "filename": "41e0533f4469ff31b16e0a3fde4d85920dba57a3458397731f8a945d54a7f0e9.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://msurtsukov.github.io/Neural-ODE/",
+    "id": "6e4ac27345c64e305575a017cf832d07a92ccf37b19a987fde5c0af2dd159812",
+    "filename": "6e4ac27345c64e305575a017cf832d07a92ccf37b19a987fde5c0af2dd159812.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://scontent.fsin14-2.fna.fbcdn.net/v/t39.2365-6/452387774_1036916434819166_4173978747091533306_n.pdf?_nc_cat=104&ccb=1-7&_nc_sid=3c67a6&_nc_ohc=t6egZJ8QdI4Q7kNvgH3pvM6&_nc_ht=scontent.fsin14-2.fna&oh=00_AYDsjcYHX_kytDno8sUntmlaALFOT0-yRbslJY4tR-_jLw&oe=66A7944D",
+    "id": "b76c7b6fec00babe98929b99e42aaff901f7ba55d72c1218bc1b55412072c23c",
+    "filename": null,
+    "status": "Failed: 403 Client Error: Forbidden for url: https://scontent.fsin14-2.fna.fbcdn.net/v/t39.2365-6/452387774_1036916434819166_4173978747091533306_n.pdf?_nc_cat=104&ccb=1-7&_nc_sid=3c67a6&_nc_ohc=t6egZJ8QdI4Q7kNvgH3pvM6&_nc_ht=scontent.fsin14-2.fna&oh=00_AYDsjcYHX_kytDno8sUntmlaALFOT0-yRbslJY4tR-_jLw&oe=66A7944D"
+  },
+  {
+    "link": "https://jax.readthedocs.io/en/latest/notebooks/autodiff_cookbook.html",
+    "id": "c30cd24ce2b48c689e50468f27833c1e976840e6a2c4e4dd575f6b6e7135c90f",
+    "filename": "c30cd24ce2b48c689e50468f27833c1e976840e6a2c4e4dd575f6b6e7135c90f.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.gwern.net/index",
+    "id": "902df85c6798b75bfb957cb7e43653a2e255cea626086305d29d7263b320a054",
+    "filename": "902df85c6798b75bfb957cb7e43653a2e255cea626086305d29d7263b320a054.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://ilya.schurov.com/post/adjoint-method/",
+    "id": "a9a78d3c645a36181cf7d252fd4b416a11c4eb01c47af28445307f8ec26193a5",
+    "filename": "a9a78d3c645a36181cf7d252fd4b416a11c4eb01c47af28445307f8ec26193a5.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://arxiv.org/abs/2202.02435",
+    "id": "1b7dfd810557f06ae50785f7c3608c957fb96634f6b46e801676574a115d81cf",
+    "filename": "1b7dfd810557f06ae50785f7c3608c957fb96634f6b46e801676574a115d81cf.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/tayiorbeii/egghead.io_redux_course_notes",
+    "id": "c65f643d2479425800ae0fb552529ca8154c646cdf5711ea2704d9f3849cdc4a",
+    "filename": "c65f643d2479425800ae0fb552529ca8154c646cdf5711ea2704d9f3849cdc4a.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/doocs/advanced-java",
+    "id": "78688885cbc59a3f39f7467f192c499e4b451e8e9475c1b10cf5d00281812ba5",
+    "filename": "78688885cbc59a3f39f7467f192c499e4b451e8e9475c1b10cf5d00281812ba5.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-quantization",
+    "id": "cfeeb7696e2916ef7842774eee916e3704f5c4b6a93a8fd1f891ad5f8694aea7",
+    "filename": "cfeeb7696e2916ef7842774eee916e3704f5c4b6a93a8fd1f891ad5f8694aea7.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://people.eecs.berkeley.edu/~satishr/cs270/sp17/#announce",
+    "id": "68a0804603738ea4f22d992156143eea6f70bda8d99fe46cbead8da734b7b629",
+    "filename": "68a0804603738ea4f22d992156143eea6f70bda8d99fe46cbead8da734b7b629.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://colab.research.google.com/github/deepmind/educational/blob/master/colabs/summer_schools/intro_to_graph_nets_tutorial_with_jraph.ipynb",
+    "id": "a71c744905e3514ca729bfb001a9e1213a35ebbf0abb790effee847deb955ee4",
+    "filename": "a71c744905e3514ca729bfb001a9e1213a35ebbf0abb790effee847deb955ee4.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://myhsu.xyz/llvm-sched-model-1/",
+    "id": "b1f646a3f92b7f2c76e7a78550e0b5ca445e451acd8e6a152a28f269c3118c67",
+    "filename": "b1f646a3f92b7f2c76e7a78550e0b5ca445e451acd8e6a152a28f269c3118c67.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://nn.labml.ai/",
+    "id": "888aa151f831a62ea043be28bfe185bc254038cdc8e88ac8fe95bdd5ac932bea",
+    "filename": "888aa151f831a62ea043be28bfe185bc254038cdc8e88ac8fe95bdd5ac932bea.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/jonkrohn",
+    "id": "7093da40a3852429cb36db0f8c7eef04e639495d1b9181c9f8aea7f9d5860c8f",
+    "filename": "7093da40a3852429cb36db0f8c7eef04e639495d1b9181c9f8aea7f9d5860c8f.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://blog.regehr.org/archives/2173",
+    "id": "022a91e54dd2dba629da8346a04f26e9f50ec3c2cb7fabe37c31959f82462ddb",
+    "filename": "022a91e54dd2dba629da8346a04f26e9f50ec3c2cb7fabe37c31959f82462ddb.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://blog.codingconfessions.com/p/simultaneous-multithreading",
+    "id": "6f00c04e58513a56fbd7885c355fdcb481bb9c5f12a739d55d102154d3686bcc",
+    "filename": "6f00c04e58513a56fbd7885c355fdcb481bb9c5f12a739d55d102154d3686bcc.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.deadf00d.com/post/how-i-hacked-sonos-and-youtube-the-same-day.html",
+    "id": "e6ee100256ae9f935bd76cfc8e6e7a17a3af6cbe3b27e0a03cb1c9f13e46ded7",
+    "filename": "e6ee100256ae9f935bd76cfc8e6e7a17a3af6cbe3b27e0a03cb1c9f13e46ded7.None",
+    "status": "Success"
+  },
+  {
+    "link": "https://ml.berkeley.edu/blog/page/1",
+    "id": "33b5179a4a56b8f6dad6d036145041837cffe752f4a4ca9fb3bfd6d09eb0bb28",
+    "filename": "33b5179a4a56b8f6dad6d036145041837cffe752f4a4ca9fb3bfd6d09eb0bb28.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/2Retr0/GodotOceanWaves",
+    "id": "fbcaaf216ab253eaf5ab8c11e634b41913d11c5107fe5a9ee07300fe0f699f14",
+    "filename": "fbcaaf216ab253eaf5ab8c11e634b41913d11c5107fe5a9ee07300fe0f699f14.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://waymo.com/research/block-nerf/",
+    "id": "0af35d2334581a64828f8e8c0f14739e87342d2a23298ded89a6319418954020",
+    "filename": "0af35d2334581a64828f8e8c0f14739e87342d2a23298ded89a6319418954020.md",
+    "status": "Success"
+  },
+  {
+    "link": "http://lists.landley.net/pipermail/toybox-landley.net/2024-January/029957.html",
+    "id": "95fbbb768bbd96aa9e07421128a38e88a0d4fe39dd957a3e6057d124f682de22",
+    "filename": "95fbbb768bbd96aa9e07421128a38e88a0d4fe39dd957a3e6057d124f682de22.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://proceedings.mlr.press/v48/guha16.pdf",
+    "id": "5d874ab7813653885fa0db332c0536aab6db6f13b7c390fb0f2e43e2a71905aa",
+    "filename": "5d874ab7813653885fa0db332c0536aab6db6f13b7c390fb0f2e43e2a71905aa.pdf",
+    "status": "Success"
+  },
+  {
+    "link": "https://hardness.mit.edu/",
+    "id": "a62c98b72c37674c723b3623c0887fa0568cd333d477dc8132e753f26cd32cd9",
+    "filename": "a62c98b72c37674c723b3623c0887fa0568cd333d477dc8132e753f26cd32cd9.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/charlax/professional-programming",
+    "id": "40cbca31f01e6a2c3d9678514cf3c77d2ccf1fa35d126f1bcbd5a2aee3658cef",
+    "filename": "40cbca31f01e6a2c3d9678514cf3c77d2ccf1fa35d126f1bcbd5a2aee3658cef.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://grantisom.com/2023/01/02/mustread-books-for.html",
+    "id": "18e190fd73387fce9adede2da777c638c9248e0bde605138202cbb59fee4179e",
+    "filename": "18e190fd73387fce9adede2da777c638c9248e0bde605138202cbb59fee4179e.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://en.algorithmica.org/hpc/data-structures/s-tree/",
+    "id": "518f33bd6915c631044343a0b1b0879006403129b2d549508285dc90e78e533b",
+    "filename": "518f33bd6915c631044343a0b1b0879006403129b2d549508285dc90e78e533b.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://paperswithcode.com/paper/how-do-vision-transformers-work-1",
+    "id": "4c4e437ee78c8b711f4de4ac342938048321e6f5fee3a79e53c35a356d635648",
+    "filename": "4c4e437ee78c8b711f4de4ac342938048321e6f5fee3a79e53c35a356d635648.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://nimrod.blog/posts/what-does-cpp-object-layout-look-like/",
+    "id": "06067a4c47d65e747257809a704cd5ff601d522a01f7067e2b23c288e634d9a0",
+    "filename": "06067a4c47d65e747257809a704cd5ff601d522a01f7067e2b23c288e634d9a0.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/krishauser/RoboticSystemsBook/blob/master/3DRotations.ipynb",
+    "id": "cbe865d0ba15092a6025912b10bf2a1d324e4ffbd18f010c01d92dd3c73c13a2",
+    "filename": "cbe865d0ba15092a6025912b10bf2a1d324e4ffbd18f010c01d92dd3c73c13a2.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://opensearch.org/blog/odfe-updates/2019/11/random-cut-forests/",
+    "id": "59697354b707f1821e61657869acf9c45d30069a86e2863568eeaefbbafd05da",
+    "filename": "59697354b707f1821e61657869acf9c45d30069a86e2863568eeaefbbafd05da.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://jcjc-dev.com/2023/03/19/reversing-domyos-el500-elliptical/",
+    "id": "9d833fb753579dac3160bdb5cd9a4c7dac1a9024897eabdb85b4d614d1fe9a3e",
+    "filename": "9d833fb753579dac3160bdb5cd9a4c7dac1a9024897eabdb85b4d614d1fe9a3e.md",
+    "status": "Success"
+  },
+  {
+    "link": "http://implicit-layers-tutorial.org/",
+    "id": "1c9b988d13da9228df7d6b59805212b606a4a18d242ff9fabba90f6e4405cdfb",
+    "filename": "1c9b988d13da9228df7d6b59805212b606a4a18d242ff9fabba90f6e4405cdfb.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://lisp-journey.gitlab.io/blog/these-years-in-common-lisp-2022-in-review/",
+    "id": "54969165cbba849b8be92b37723fbcb6195cee32dc07daafd8bc5ba5e0abdb7b",
+    "filename": "54969165cbba849b8be92b37723fbcb6195cee32dc07daafd8bc5ba5e0abdb7b.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.gamedeveloper.com/programming/how-strands-work-and-why-you-should-use-them",
+    "id": "74cbac8e548f723c1ffda6e32c4d5d3306de2a8b5e12a4aa997571c90f4a8c8c",
+    "filename": "74cbac8e548f723c1ffda6e32c4d5d3306de2a8b5e12a4aa997571c90f4a8c8c.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://thetechbuffet.substack.com/p/5-curated-rag-blog-posts",
+    "id": "b4025f4c86a73681b898f4c9c6614e4ac955aa322499873ecf1d1fb140c3e892",
+    "filename": "b4025f4c86a73681b898f4c9c6614e4ac955aa322499873ecf1d1fb140c3e892.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://blog.codingconfessions.com/p/gpu-computing",
+    "id": "61b34e675785873a3ee09b67829c6479b7cc667cf64254de59de4f6a46ca08b4",
+    "filename": "61b34e675785873a3ee09b67829c6479b7cc667cf64254de59de4f6a46ca08b4.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://cstack.github.io/db_tutorial/",
+    "id": "05a9ca46b466608d8879b13d986d37a86a29504e8cc0d3c527aff30351ece5b2",
+    "filename": "05a9ca46b466608d8879b13d986d37a86a29504e8cc0d3c527aff30351ece5b2.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://sidravi1.github.io/blog/2020/04/10/large-scale-hypothesis-testing",
+    "id": "43d9d71c4dd049cc071f8218b3aa8a121170e424ed5c7e2c0c35691a376acab9",
+    "filename": "43d9d71c4dd049cc071f8218b3aa8a121170e424ed5c7e2c0c35691a376acab9.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://s905060.gitbooks.io/site-reliability-engineer-handbook/",
+    "id": "c42aafbf03c21ba66a825e53d4f2359043b5bcbc4e35a5a1630ebd082b8a49ac",
+    "filename": "c42aafbf03c21ba66a825e53d4f2359043b5bcbc4e35a5a1630ebd082b8a49ac.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.leshenko.net/p/ugit/",
+    "id": "1951ccb00f7d7351d1383a3cf891d3276b152e64f156dc9037725e4e6f1e902a",
+    "filename": "1951ccb00f7d7351d1383a3cf891d3276b152e64f156dc9037725e4e6f1e902a.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.pixelstech.net/article/1727412048-Why-TCP-needs-3-handshakes",
+    "id": "709b645d763d3271202cf3ddf63def52149329ed606ae675e233f1fd108b058a",
+    "filename": "709b645d763d3271202cf3ddf63def52149329ed606ae675e233f1fd108b058a.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.notion.so/Scratch-Temp-2e83ebe79c03485ebd55bee40d320b7e?pvs=21",
+    "id": "2fb2d51e9ce9f54ab9734f93fef77525c1b32392ba4c7f9e89ae3964ecb36c86",
+    "filename": "2fb2d51e9ce9f54ab9734f93fef77525c1b32392ba4c7f9e89ae3964ecb36c86.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://lernapparat.de/statistics-deep-learning-nonparametric",
+    "id": "003c0891b8d5a8e00ad81c9b2b5c3be4c21663ba0fc53ccc4a90dcf23b2c141f",
+    "filename": "003c0891b8d5a8e00ad81c9b2b5c3be4c21663ba0fc53ccc4a90dcf23b2c141f.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.notion.so/4ddd98b2b0164d658da7df1b4d992101?pvs=21",
+    "id": "11c66b467a09fa44ad648d26662486ddeed46c38f81b2b4fb5b6053360ddf155",
+    "filename": "11c66b467a09fa44ad648d26662486ddeed46c38f81b2b4fb5b6053360ddf155.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://medium.com/@stevenyu530_73989/stacking-and-blending-intuitive-explanation-of-advanced-ensemble-methods-46b295da413c",
+    "id": "4a022327a1791a8c15f8350e4a9ff683f19b825f0779731dfedf1891783f05d8",
+    "filename": "4a022327a1791a8c15f8350e4a9ff683f19b825f0779731dfedf1891783f05d8.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://generallyintelligent.ai/open-source/2022-04-21-vicreg/",
+    "id": "c771ae99d95e8ccec1b8ceb857c3fdb2678a3958864dc87532ad76a5107b2129",
+    "filename": "c771ae99d95e8ccec1b8ceb857c3fdb2678a3958864dc87532ad76a5107b2129.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.thonking.ai/p/what-shapes-do-matrix-multiplications",
+    "id": "f59329f31ab3828c70e43670289f10fa415575d47721063091646487abd421f4",
+    "filename": "f59329f31ab3828c70e43670289f10fa415575d47721063091646487abd421f4.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/dataflowr/notebooks",
+    "id": "3ef1f65aec6c43a1c5eb6566b16b2116eed72b2208f83630d017520c64643184",
+    "filename": "3ef1f65aec6c43a1c5eb6566b16b2116eed72b2208f83630d017520c64643184.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://matthew-bird.com/blogs/Audio-Decomposition.html",
+    "id": "41223bc94017953fbaeef3ab23af0c811252b5e24fd2ef29d2469004754b4e1b",
+    "filename": "41223bc94017953fbaeef3ab23af0c811252b5e24fd2ef29d2469004754b4e1b.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.seangoedecke.com/how-to-ship/",
+    "id": "42b82daa23aeb790775a9428a7d9a6b077a0669f8a6ea8c99433deb61c7cb14b",
+    "filename": "42b82daa23aeb790775a9428a7d9a6b077a0669f8a6ea8c99433deb61c7cb14b.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://machinelearningmastery.com/stacking-ensemble-machine-learning-with-python/",
+    "id": "ad698f915b335a36395cffe73ee4c97bca4fe772b30d8f8deabc968380781aa4",
+    "filename": "ad698f915b335a36395cffe73ee4c97bca4fe772b30d8f8deabc968380781aa4.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://chipsandcheese.com/",
+    "id": "4f69e4061346cee3a5e970d91cc99a37b1fbeef1079a413171b8d7f0cbea7c75",
+    "filename": "4f69e4061346cee3a5e970d91cc99a37b1fbeef1079a413171b8d7f0cbea7c75.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://machinelearningmastery.com/out-of-fold-predictions-in-machine-learning/",
+    "id": "c0e1e0e4d61f11daca1b0e92b3ef1a71805fee367ece95d8ae529c18ff01c941",
+    "filename": "c0e1e0e4d61f11daca1b0e92b3ef1a71805fee367ece95d8ae529c18ff01c941.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://machinelearningmastery.com/blending-ensemble-machine-learning-with-python/",
+    "id": "ca301e989aae0acebd798317c0990b9385e14ec6a1a08fa4424471de87548ff7",
+    "filename": "ca301e989aae0acebd798317c0990b9385e14ec6a1a08fa4424471de87548ff7.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/Ameobea/web-synth",
+    "id": "32e9c645ec30770c974112ef727c03ca9cc8b1e6b1aa9db4bbd7cc0d73b83c50",
+    "filename": "32e9c645ec30770c974112ef727c03ca9cc8b1e6b1aa9db4bbd7cc0d73b83c50.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.notion.so/Coursera-07c27f59148a4422b5b8d1905c5114c1?pvs=21",
+    "id": "f001830f85d722b80a685b28af07a904e71ab47002e79f27f0fe9da180e87459",
+    "filename": "f001830f85d722b80a685b28af07a904e71ab47002e79f27f0fe9da180e87459.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://fab.cba.mit.edu/classes/862.22/index.html",
+    "id": "1422ddf6dd4536bc636532ec66e389a7c1d4189451ca6b52fb116848f2223177",
+    "filename": "1422ddf6dd4536bc636532ec66e389a7c1d4189451ca6b52fb116848f2223177.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://zanussbaum.substack.com/p/optimizing-a-webgpu-matmul-kernel",
+    "id": "41080e70863fc7fb417b5feb4ba7b25d6a6e88245c343227cbb9b9a4c49f0f62",
+    "filename": "41080e70863fc7fb417b5feb4ba7b25d6a6e88245c343227cbb9b9a4c49f0f62.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://fleetwood.dev/posts/you-could-have-designed-SOTA-positional-encoding",
+    "id": "832e76c2bbb2e279656628fa27eac0959e4e01adfbb354cac005c8c400f8837f",
+    "filename": "832e76c2bbb2e279656628fa27eac0959e4e01adfbb354cac005c8c400f8837f.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.notion.so/c2c32effdf404f5c8208ca4ace07958f?pvs=21",
+    "id": "bc657df75b48741d6252ea0521e41f77754d68bea2083f2ddeb32595437408f7",
+    "filename": "bc657df75b48741d6252ea0521e41f77754d68bea2083f2ddeb32595437408f7.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://transformer-circuits.pub/",
+    "id": "5083d746c2728ff241c50ea01de5664ecf56f96cd9d7d80a330624c4eabc3dec",
+    "filename": "5083d746c2728ff241c50ea01de5664ecf56f96cd9d7d80a330624c4eabc3dec.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://eugeneyan.com/writing/bandits/",
+    "id": "47b0d66db76616cf8d13a526292c7a84d99957d314956262baba227b9bb8e199",
+    "filename": "47b0d66db76616cf8d13a526292c7a84d99957d314956262baba227b9bb8e199.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.notion.so/bfb8667f36654270bb1750133c35fe27?pvs=21",
+    "id": "1b4a9c772c54904602cd30efad559321365dec2ea810f07c3a3a6100bc134fdc",
+    "filename": "1b4a9c772c54904602cd30efad559321365dec2ea810f07c3a3a6100bc134fdc.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://assets.bitbashing.io/papers/concurrency-primer.pdf",
+    "id": "b74261e0f15db048ca6e622b87037ac0a5c117380a883075676e85f384c11f84",
+    "filename": "b74261e0f15db048ca6e622b87037ac0a5c117380a883075676e85f384c11f84.pdf",
+    "status": "Success"
+  },
+  {
+    "link": "https://twitter.com/ylecun/status/1496705645172727808?lang=en",
+    "id": "5ab62c4ca4bd5a64464c6673dbcabe9f4229fcf850ff294f91639ac8e88e0fc8",
+    "filename": "5ab62c4ca4bd5a64464c6673dbcabe9f4229fcf850ff294f91639ac8e88e0fc8.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/stas00/ml-engineering",
+    "id": "b7864fcb39b684759f507a730d18470596897bb1b74a0d79c488ca3c14deb9a3",
+    "filename": "b7864fcb39b684759f507a730d18470596897bb1b74a0d79c488ca3c14deb9a3.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.souzatharsis.com/tamingLLMs/notebooks/structured_output.html#comparing-solutions",
+    "id": "bd12272dd8de4748e01fe740c53ae42a3a533b1125deb7ec0a27db99865fba1b",
+    "filename": "bd12272dd8de4748e01fe740c53ae42a3a533b1125deb7ec0a27db99865fba1b.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.alignmentforum.org/",
+    "id": "2e0c662574087c2a9b224df26cab54c155279cb141af40c3fa212e88d346b794",
+    "filename": "2e0c662574087c2a9b224df26cab54c155279cb141af40c3fa212e88d346b794.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.scaleyourapp.com/best-resources-to-learn-software-architecture-system-design/",
+    "id": "f8ce383820768ef000009e22b5d22e2c50fde02801be8a2bb11ead8a5c6f98cb",
+    "filename": "f8ce383820768ef000009e22b5d22e2c50fde02801be8a2bb11ead8a5c6f98cb.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://towardsdatascience.com/using-word2vec-for-music-recommendations-bb9649ac2484",
+    "id": "c2fed94aa9f378136edfd767f88a7a4a4faaa1201c3aad7633a2d22a61be85b5",
+    "filename": "c2fed94aa9f378136edfd767f88a7a4a4faaa1201c3aad7633a2d22a61be85b5.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://blogs.oracle.com/linux/",
+    "id": "79cb2963a69e89cc9b6edf8aeecc709f36fcc48e3ec6abe5ed7e784d25382e3a",
+    "filename": "79cb2963a69e89cc9b6edf8aeecc709f36fcc48e3ec6abe5ed7e784d25382e3a.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://architecturenotes.co/fallacies-of-distributed-systems/",
+    "id": "4d64a27d17ac1c906d5d8e443d94d3d2e359992348ed2ba0dc3f00f0ace5d322",
+    "filename": "4d64a27d17ac1c906d5d8e443d94d3d2e359992348ed2ba0dc3f00f0ace5d322.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.yuque.com/u1507140/vslam-hmh",
+    "id": "2c85403c03d15a70daec031aad72faa254c3fabb78e6cceb12c4f12c347a9063",
+    "filename": "2c85403c03d15a70daec031aad72faa254c3fabb78e6cceb12c4f12c347a9063.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://clehaxze.tw/gemlog/2024/03-01-optimizing-socs-for-llm-on-the-edge.gmi",
+    "id": "09c2abd0f35260b4bf27d98f23abda10715b057c1aa90934ba8e3cc791a1f73b",
+    "filename": "09c2abd0f35260b4bf27d98f23abda10715b057c1aa90934ba8e3cc791a1f73b.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/datawhalechina/smoothly-vslam?tab=readme-ov-file",
+    "id": "c732e93e9ece2245e403cadc47f8e2f5dcf0b971a82a50893e6b8699702a908b",
+    "filename": "c732e93e9ece2245e403cadc47f8e2f5dcf0b971a82a50893e6b8699702a908b.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/AllentDan/LibtorchTutorials",
+    "id": "43cb29c626c315058153e0bdb0aa072a15800ed753f6e5e2745f39466cee9225",
+    "filename": "43cb29c626c315058153e0bdb0aa072a15800ed753f6e5e2745f39466cee9225.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.answer.ai/posts/2024-07-11--gpu-cpp.html",
+    "id": "23182ef43b6e5cfa56b9a5b2374300cbfe152e8cf31c93c19fa921d0f3eed186",
+    "filename": "23182ef43b6e5cfa56b9a5b2374300cbfe152e8cf31c93c19fa921d0f3eed186.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.cs.toronto.edu/~duvenaud/distill_bayes_net/public/",
+    "id": "2f9c765671a6d9fe40bfdd4d95db912ee03a21f74afdb78a8c0608254077eeb6",
+    "filename": "2f9c765671a6d9fe40bfdd4d95db912ee03a21f74afdb78a8c0608254077eeb6.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://medium.com/coders-mojo/most-popular-system-design-questions-mega-compilation-45218129fe26",
+    "id": "2b92e01e4165122f5a262648e851bffa13c8b30cc7d9c66e69eb5e4977781325",
+    "filename": "2b92e01e4165122f5a262648e851bffa13c8b30cc7d9c66e69eb5e4977781325.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://damueller.com/#/blog-post/NNLLs",
+    "id": "6d7dd365099df7fa4d9a5b6d56a0e47f3983ef8de44a39c1af242c4b0360c3de",
+    "filename": "6d7dd365099df7fa4d9a5b6d56a0e47f3983ef8de44a39c1af242c4b0360c3de.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://gpupuzzles.answer.ai/",
+    "id": "a4af51880f120ed77e21ea3c2a742581e31b24852738000671fe4fc6f48e41fc",
+    "filename": "a4af51880f120ed77e21ea3c2a742581e31b24852738000671fe4fc6f48e41fc.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/serodriguez68/designing-ml-systems-summary",
+    "id": "c8a606c68495b18d053a3737cc2dc24d863e592c43245b690daa14d3840226d6",
+    "filename": "c8a606c68495b18d053a3737cc2dc24d863e592c43245b690daa14d3840226d6.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://open.oceanbase.com/activities/4921877?id=4921946",
+    "id": "463c3d1adde999a11f1e5f15abf6ca6ea35fcae9d3de0d2cfcd83f2f6ddf2469",
+    "filename": "463c3d1adde999a11f1e5f15abf6ca6ea35fcae9d3de0d2cfcd83f2f6ddf2469.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/oceanbase/miniob",
+    "id": "50aae347509893616aa0913438c3cc08949af899f7d5a89cc4d24c0f3080a3b4",
+    "filename": "50aae347509893616aa0913438c3cc08949af899f7d5a89cc4d24c0f3080a3b4.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://mathhints.com/conics/",
+    "id": "b29e19ee3063811be00e037431e3836039eca5d2f69717039d3dc748f77500e3",
+    "filename": "b29e19ee3063811be00e037431e3836039eca5d2f69717039d3dc748f77500e3.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://arxiv.org/pdf/2309.04259",
+    "id": "0dd06e6e98eadc8956729bb290ff77bafb6c7fcd910cedad98f1941d4f940f60",
+    "filename": "0dd06e6e98eadc8956729bb290ff77bafb6c7fcd910cedad98f1941d4f940f60.pdf",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.jordanwhited.com/posts/wireguard-endpoint-discovery-nat-traversal/",
+    "id": "50fff9d5d2a89437d46ad11c8927545522b193b6700e27e605f4d6494866b8fa",
+    "filename": "50fff9d5d2a89437d46ad11c8927545522b193b6700e27e605f4d6494866b8fa.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://udlbook.github.io/udlbook/",
+    "id": "944dee26310e147dbe4d9f8a3cdfa654a73c5ede9920f648f2654a46db08702e",
+    "filename": "944dee26310e147dbe4d9f8a3cdfa654a73c5ede9920f648f2654a46db08702e.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://blog.codingconfessions.com/p/linux-context-switching-internals",
+    "id": "bcdc6e1f0ce2cb54503c26214707da4ab66d94263f456478d0ef7e0b9e786bd7",
+    "filename": "bcdc6e1f0ce2cb54503c26214707da4ab66d94263f456478d0ef7e0b9e786bd7.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.youtube.com/watch?v=Utf-A4rODH8",
+    "id": "9fdb45ba62786a8e683f20de86583d4fb1a2c41770db5a0fe6c9d7b11e0c65ed",
+    "filename": "9fdb45ba62786a8e683f20de86583d4fb1a2c41770db5a0fe6c9d7b11e0c65ed.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.notion.so/COVID-Prediction-Models-74e68b82620844aa91c569314f9b10e7?pvs=21",
+    "id": "4bc6e5ce82e36b855f94b225794f1ade0572a77ea842591a22b0f29c6b85e263",
+    "filename": "4bc6e5ce82e36b855f94b225794f1ade0572a77ea842591a22b0f29c6b85e263.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://macoy.me/blog/programming/Sockets",
+    "id": "2e0a2079d0573aa7954a8583f7c47b67c6856bc0f7c21fdb417e34bf14b9a91f",
+    "filename": "2e0a2079d0573aa7954a8583f7c47b67c6856bc0f7c21fdb417e34bf14b9a91f.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://iximiuz.com/en/posts/kubernetes-vs-virtual-machines/",
+    "id": "89a5faba791a73f756ed140abf4253e07d9746355f41fd051b1d4ed4cec78c93",
+    "filename": "89a5faba791a73f756ed140abf4253e07d9746355f41fd051b1d4ed4cec78c93.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.saaspegasus.com/guides/modern-javascript-for-django-developers/",
+    "id": "17435aa52ffcf90545b48702a01f789824ccce84b9de54af806775e34eb03b5b",
+    "filename": "17435aa52ffcf90545b48702a01f789824ccce84b9de54af806775e34eb03b5b.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://orbital-mechanics.space/intro.html",
+    "id": "ead160a856fd2d2d54d72f8453e455d3020b22cfe96a94de57224801544e41ef",
+    "filename": "ead160a856fd2d2d54d72f8453e455d3020b22cfe96a94de57224801544e41ef.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://modal.com/gpu-glossary/device-hardware/streaming-multiprocessor",
+    "id": "04dc0a8941df75a147abdff0be0c5e221a7d6cadd3c086a0b3b01b1b4c353cde",
+    "filename": "04dc0a8941df75a147abdff0be0c5e221a7d6cadd3c086a0b3b01b1b4c353cde.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://thenumb.at/Autodiff/",
+    "id": "92ae1b0de9b6d70e6dcd607d962c9d5df90308571a7e6b5f0d6a434b5d88b0ce",
+    "filename": "92ae1b0de9b6d70e6dcd607d962c9d5df90308571a7e6b5f0d6a434b5d88b0ce.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://samueleresca.net/analysis-of-what-every-programmer-should-know-about-memory/",
+    "id": "675c63cb4e88f06a1f932e4ba61280b33c0df969d63211f186185fad3d4ce200",
+    "filename": "675c63cb4e88f06a1f932e4ba61280b33c0df969d63211f186185fad3d4ce200.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/roksenhorn/puzzle-bot",
+    "id": "5deb0d713331e34fffcbf6b4d8419a1e7fc577b9fd1dcec8b9f2f9f191cb0dda",
+    "filename": "5deb0d713331e34fffcbf6b4d8419a1e7fc577b9fd1dcec8b9f2f9f191cb0dda.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/AsahiLinux/docs/wiki/Introduction-to-Apple-Silicon",
+    "id": "b85b29fe6885e053bf81758fb6b3877c227638f6635ac313aed26b5369e7bc42",
+    "filename": "b85b29fe6885e053bf81758fb6b3877c227638f6635ac313aed26b5369e7bc42.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://0xinfection.github.io/reversing/",
+    "id": "497f5587b8fc41751f539565f9b7e6ab198bcadc916782bd539eae62c9764e5e",
+    "filename": "497f5587b8fc41751f539565f9b7e6ab198bcadc916782bd539eae62c9764e5e.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://physicsbaseddeeplearning.org/intro.html",
+    "id": "c07869d8431d7a769dcd5b7a03f56fe86732dd196434fd804860b3ead33d3b8a",
+    "filename": "c07869d8431d7a769dcd5b7a03f56fe86732dd196434fd804860b3ead33d3b8a.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://huyenchip.com/2023/04/11/llm-engineering.html",
+    "id": "122afe241066284db014687efab611bcdc758b632944bc143067c4baf3f4c411",
+    "filename": "122afe241066284db014687efab611bcdc758b632944bc143067c4baf3f4c411.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://blog.codingconfessions.com/p/groq-lpu-design",
+    "id": "dbc2a8daeb9077004232f2fd3b1999f12f558043423ada5dd1c95cbee3b5d6f4",
+    "filename": "dbc2a8daeb9077004232f2fd3b1999f12f558043423ada5dd1c95cbee3b5d6f4.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.youtube.com/watch?v=X5XE_2_A7gQ",
+    "id": "32ac6c99daf6e2bcd6bcc4d9dad040d1a8d29c9e54f47ab062f4d3d0e04c22f7",
+    "filename": "32ac6c99daf6e2bcd6bcc4d9dad040d1a8d29c9e54f47ab062f4d3d0e04c22f7.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://timkellogg.me/blog/2025/01/25/r1",
+    "id": "6862496ac776be1a883ff09dcbf1f92c8bf6cebe691ab29ab7cb2568d7e020c6",
+    "filename": "6862496ac776be1a883ff09dcbf1f92c8bf6cebe691ab29ab7cb2568d7e020c6.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://nirmata.com/2018/02/07/kubernetes-for-developers-pods-part-1/",
+    "id": "8e9232123230681f9de50bb27843e58489fb790ecdd5aa6accec49e862a075bb",
+    "filename": "8e9232123230681f9de50bb27843e58489fb790ecdd5aa6accec49e862a075bb.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://arxiv.org/abs/2210.02984",
+    "id": "e25c22d40f509e7923baa43db88b19d5d95364807ede8859c38dd13ec867c0e8",
+    "filename": "e25c22d40f509e7923baa43db88b19d5d95364807ede8859c38dd13ec867c0e8.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://christianjmills.com/index.html#category=notes",
+    "id": "93da02a765fadcd21da4e8c2e301997bd2cfccffcb3be364beda24e30966fad5",
+    "filename": "93da02a765fadcd21da4e8c2e301997bd2cfccffcb3be364beda24e30966fad5.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://datacolada.org/",
+    "id": "337b93ae71a90578872f6022fee54f0999bf49a18c16ec985a43dd2b400559de",
+    "filename": "337b93ae71a90578872f6022fee54f0999bf49a18c16ec985a43dd2b400559de.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://cameronrwolfe.substack.com/",
+    "id": "338efea0473cc9b4be5d21fa221551521661012b22fd38d656d1b1c38ab456f9",
+    "filename": "338efea0473cc9b4be5d21fa221551521661012b22fd38d656d1b1c38ab456f9.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://ppml.dev/index.html",
+    "id": "17c49751baf5d8a6ca43aa9b746cc799b03461267b83b639b7a84c8ff3b92a18",
+    "filename": "17c49751baf5d8a6ca43aa9b746cc799b03461267b83b639b7a84c8ff3b92a18.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://arxiv.org/abs/2208.11970",
+    "id": "282e83d29d28e3682af4d90d796207b161ad58ce66857e1e02c713f48b94985b",
+    "filename": "282e83d29d28e3682af4d90d796207b161ad58ce66857e1e02c713f48b94985b.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://simonwillison.net/",
+    "id": "8b0eaafedc559312fb655fc650829c4dbf3584f41bdd839cf9933237db3a7922",
+    "filename": "8b0eaafedc559312fb655fc650829c4dbf3584f41bdd839cf9933237db3a7922.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://abyteofcoding.com/blog/articles-on-c++/",
+    "id": "23831afc12c80c0fc3c1d8142d9b8a6ca7883015e4569624851d05f9a6cfe8a4",
+    "filename": "23831afc12c80c0fc3c1d8142d9b8a6ca7883015e4569624851d05f9a6cfe8a4.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://cloud.google.com/blog/products/api-management/understanding-grpc-openapi-and-rest-and-when-to-use-them",
+    "id": "5dd495e5516c3ef37063cb8ff09f5ae014c99fc33f9a83c3bff25b5e9a781387",
+    "filename": "5dd495e5516c3ef37063cb8ff09f5ae014c99fc33f9a83c3bff25b5e9a781387.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://zkintro.com/articles/programming-zkps-from-zero-to-hero",
+    "id": "71ceef32bb57ff5d5973ead83ed5eca18f7bef1869b70fbae55e6af591bc4d11",
+    "filename": "71ceef32bb57ff5d5973ead83ed5eca18f7bef1869b70fbae55e6af591bc4d11.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.infoq.com/articles/java-virtual-threads/",
+    "id": "af1bee9b6b7394683e546cd0cdd16df78fb9693fedb84b5929242a07026542ce",
+    "filename": "af1bee9b6b7394683e546cd0cdd16df78fb9693fedb84b5929242a07026542ce.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://penkovsky.com/neural-networks/",
+    "id": "4d7d67e4bc405a762a3fcc3489f78b772bf893a5e89a6560921e38ad5885a155",
+    "filename": "4d7d67e4bc405a762a3fcc3489f78b772bf893a5e89a6560921e38ad5885a155.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/BerriAI/litellm/blob/main/model_prices_and_context_window.json",
+    "id": "2aa2532535f389569f8df16fb3cbf531c99914a7554eaa8705bc30003a7ed6c5",
+    "filename": "2aa2532535f389569f8df16fb3cbf531c99914a7554eaa8705bc30003a7ed6c5.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.youtube.com/watch?v=m8XDoYkSJOU",
+    "id": "61a8d17147604fda76bfaacbf5687c0ff3b678e2fdd6fc7f4861a3382d758b69",
+    "filename": "61a8d17147604fda76bfaacbf5687c0ff3b678e2fdd6fc7f4861a3382d758b69.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://slatedb.io/docs/architecture",
+    "id": "4de01e185e6efb1456bc4b07de978251499380b7214e4db8051da0ac485350a8",
+    "filename": "4de01e185e6efb1456bc4b07de978251499380b7214e4db8051da0ac485350a8.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/dragonman225/notablog",
+    "id": "ecf0ab298249b2df6d2d128ad41e9f8e707455323fefb3907bd0ddcd1a63cd53",
+    "filename": "ecf0ab298249b2df6d2d128ad41e9f8e707455323fefb3907bd0ddcd1a63cd53.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://adriacabeza.github.io/2024/07/12/caffeine-cache.html",
+    "id": "1a94471fb7ec563503e85dbd7c90ae4599290ede7ee509d360136dfd38840e27",
+    "filename": "1a94471fb7ec563503e85dbd7c90ae4599290ede7ee509d360136dfd38840e27.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://boyter.org/posts/how-i-built-my-own-index-for-searchcode/",
+    "id": "63a27c560860e116b2ab1773eaea9af715ce0b37aae2447cd22c97b286db145d",
+    "filename": "63a27c560860e116b2ab1773eaea9af715ce0b37aae2447cd22c97b286db145d.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://carpedm30.notion.site/AI-Compiler-Study-aaf4cff2c8734e50ad95ac6230dbd80b](https://www.notion.so/AI-Compiler-Study-aaf4cff2c8734e50ad95ac6230dbd80b?pvs=21",
+    "id": "7057e27f18a4d51cf0a0b29b3b029224599c7022b4c1aae297b95badc85135d8",
+    "filename": "7057e27f18a4d51cf0a0b29b3b029224599c7022b4c1aae297b95badc85135d8.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://yosefk.com/blog/cxx-thread-local-storage-performance.html",
+    "id": "e1b3b947802890cff823d175894831704c66eedb1c1f864c5b0d913dfd8b44d3",
+    "filename": "e1b3b947802890cff823d175894831704c66eedb1c1f864c5b0d913dfd8b44d3.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://hforsten.com/",
+    "id": "3206dc36030c2db040b8b3ac5629eaa408907f8721cb625077c2fe825c545db0",
+    "filename": "3206dc36030c2db040b8b3ac5629eaa408907f8721cb625077c2fe825c545db0.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://tonygo.netlify.app/",
+    "id": "87402536620af3fa8bbcf41277a92dab72fdf3793c4d0378de6f7c3ba39167f4",
+    "filename": "87402536620af3fa8bbcf41277a92dab72fdf3793c4d0378de6f7c3ba39167f4.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://lordarkam.wordpress.com/2022/08/28/quaternions-a-geometrical-interpretation/",
+    "id": "242f374650e8ce0d0f517d6bf374d60134ab2ed0f5c61d68c0d627a5568b8d14",
+    "filename": "242f374650e8ce0d0f517d6bf374d60134ab2ed0f5c61d68c0d627a5568b8d14.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.pyspur.dev/blog/multi-head-latent-attention-kv-cache-paper-list",
+    "id": "dea720c14947badb2c5c550dc053d9c09b4c630ecd2f911ab56ca421c1474b84",
+    "filename": "dea720c14947badb2c5c550dc053d9c09b4c630ecd2f911ab56ca421c1474b84.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.stat.cmu.edu/~larry/=sml/Bayes.pdf",
+    "id": "fdee3012a09cfc428585a072a6482ad3247d5f1e361d5363af2fde848f2c8131",
+    "filename": "fdee3012a09cfc428585a072a6482ad3247d5f1e361d5363af2fde848f2c8131.pdf",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.jordanwhited.com/posts/wireguard-endpoint-discovery-nat-trrg",
+    "id": "7342bad4415bbc174bb93655034113adcb7828b0ff877d245a9d3b9c1f6d19c4",
+    "filename": "7342bad4415bbc174bb93655034113adcb7828b0ff877d245a9d3b9c1f6d19c4.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/adalkiran/llama-nuts-and-bolts/tree/main",
+    "id": "f128aaa63b4bc224db9e5393e25ea5fea92565d3e56d2a64c3abf488da59f554",
+    "filename": "f128aaa63b4bc224db9e5393e25ea5fea92565d3e56d2a64c3abf488da59f554.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://bootlin.com/docs/",
+    "id": "7689ecb5412ebd57085b9ca9f6b847b2a845311e1f6333a6732b5d17786a272c",
+    "filename": "7689ecb5412ebd57085b9ca9f6b847b2a845311e1f6333a6732b5d17786a272c.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://seb-v.github.io/optimization/update/2025/01/20/Fast-GPU-Matrix-multiplication.html",
+    "id": "40a443f3007fcffd87e6d03b5214a82606bd61c15fc521da56564d148b0ea9fc",
+    "filename": "40a443f3007fcffd87e6d03b5214a82606bd61c15fc521da56564d148b0ea9fc.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://math.nyu.edu/~tabak/PDEs/Traffic_flow.pdf",
+    "id": "a98916f7f8e3265c8de6c8de640369e28128be1c21c8ea0c89bc5b43687c6b9e",
+    "filename": "a98916f7f8e3265c8de6c8de640369e28128be1c21c8ea0c89bc5b43687c6b9e.pdf",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/ArthurBrussee/brush",
+    "id": "e95b7f03c333954b4aa0e571c1ae3a1974249f412fed71d5b479028f91a33d68",
+    "filename": "e95b7f03c333954b4aa0e571c1ae3a1974249f412fed71d5b479028f91a33d68.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://jacquesheunis.com/post/rotors/",
+    "id": "5b442061d8dcca7b58b6b88170b82759b964c722d91c9b031cc7f31fbe8d5d32",
+    "filename": "5b442061d8dcca7b58b6b88170b82759b964c722d91c9b031cc7f31fbe8d5d32.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.linuxjournal.com/article/6345",
+    "id": "b1f3690c15baacee28d8b4c75daa28fd2329aaae39f059a8b0ccad6c41eb61c8",
+    "filename": "b1f3690c15baacee28d8b4c75daa28fd2329aaae39f059a8b0ccad6c41eb61c8.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://hplgit.github.io/",
+    "id": "04968afcb625ce182d372d8a9070f086e97f870b5e3bc4ceeca0a1b2c76f6352",
+    "filename": "04968afcb625ce182d372d8a9070f086e97f870b5e3bc4ceeca0a1b2c76f6352.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://arxiv.org/pdf/2503.02113",
+    "id": "799bab3e7e8ecc47a0dfc8eac0aced1c514d78e04e351a7bb05dd8900eaf5f95",
+    "filename": "799bab3e7e8ecc47a0dfc8eac0aced1c514d78e04e351a7bb05dd8900eaf5f95.pdf",
+    "status": "Success"
+  },
+  {
+    "link": "https://ericmjl.github.io/blog/2023/9/23/how-to-automatically-write-git-commit-messages/",
+    "id": "40fae525592c74307c940c972f2e8f471cea67cc39563144ce409fcb05e1d5ec",
+    "filename": "40fae525592c74307c940c972f2e8f471cea67cc39563144ce409fcb05e1d5ec.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://cseweb.ucsd.edu/~gbournou/CSE131/the_inside_story_on_shared_libraries_and_dynamic_loading.pdf",
+    "id": "8fe02514f57a41808e4de304f7e12f78480e8eb66d12ca350baa204ff566b6df",
+    "filename": "8fe02514f57a41808e4de304f7e12f78480e8eb66d12ca350baa204ff566b6df.pdf",
+    "status": "Success"
+  },
+  {
+    "link": "https://normaldeviate.wordpress.com/2012/06/14/freedmans-neglected-theorem/",
+    "id": "543deac84da6fb855117dd5119b25b2e09e1f12de9a8b21cd806e0a517465b25",
+    "filename": "543deac84da6fb855117dd5119b25b2e09e1f12de9a8b21cd806e0a517465b25.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://uvadlc-notebooks.readthedocs.io/en/latest/index.html",
+    "id": "b39e6ccb0d3b92793a8f4aa4de67b76b36d4acb0d5aa2e26df4869b3ace727ac",
+    "filename": "b39e6ccb0d3b92793a8f4aa4de67b76b36d4acb0d5aa2e26df4869b3ace727ac.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://harper.blog/2024/03/11/use-an-llm-to-automagically-generate-meaningful-git-commit-messages/",
+    "id": "104c7b7512a5ac6d9886e01936f0cf3e94a5b905570d77d70954b0aa877ddf51",
+    "filename": "104c7b7512a5ac6d9886e01936f0cf3e94a5b905570d77d70954b0aa877ddf51.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://shader-slang.org/",
+    "id": "1a22edf1f8ed05fc76999894e7c5f7de72219b3dca937481c471d9d90d6a8bb5",
+    "filename": "1a22edf1f8ed05fc76999894e7c5f7de72219b3dca937481c471d9d90d6a8bb5.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.gamedeveloper.com/programming/1500-archers-on-a-28-8-network-programming-in-age-of-empires-and-beyond",
+    "id": "b899787ea48d8c82e22322de3f3fb347aa1502caba5b62a6edaa0249276073f1",
+    "filename": "b899787ea48d8c82e22322de3f3fb347aa1502caba5b62a6edaa0249276073f1.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/Praveen76/LLMs-Interview-Prep-Guide",
+    "id": "9a0ae1f97931489da01384ad21e760ce3217fcdc4484950f894de4fcaa5caf84",
+    "filename": "9a0ae1f97931489da01384ad21e760ce3217fcdc4484950f894de4fcaa5caf84.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://apenwarr.ca/log/20181113\\",
+    "id": "dbb0dfaa7bd13fe5786a4685cd51df73c44197a0f32e0eaa1aea5158e0caf3a8",
+    "filename": "dbb0dfaa7bd13fe5786a4685cd51df73c44197a0f32e0eaa1aea5158e0caf3a8.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.feabhas.com/sites/default/files/2016-06/Rule",
+    "id": "c97938ccef1af2f566cdc6f924c4370790ef8e1351a272b7deab9748d06c207a",
+    "filename": "c97938ccef1af2f566cdc6f924c4370790ef8e1351a272b7deab9748d06c207a.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://operating-system-in-1000-lines.vercel.app/en",
+    "id": "04b564c0fa600449be3ecb92eb034d3162e68127fbd8525439883b62add834f3",
+    "filename": "04b564c0fa600449be3ecb92eb034d3162e68127fbd8525439883b62add834f3.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/zahaby/intro-llm-rag",
+    "id": "13e1ff252221f364ca4917bad001aba9fe5b2842081de5cec2b9e9c44e731388",
+    "filename": "13e1ff252221f364ca4917bad001aba9fe5b2842081de5cec2b9e9c44e731388.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/tpn/pdfs/tree/master",
+    "id": "171171340986a594dde1e44efe766622f2a699ca2198a5d67463898da84c94a6",
+    "filename": "171171340986a594dde1e44efe766622f2a699ca2198a5d67463898da84c94a6.pdf",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.zbeegnew.dev/tech/build_your_own_ai_coding_assistant_a_cost-effective_alternative_to_cursor/",
+    "id": "7fea20f317513bca7d5f3aae259caa682c1d1ee1525cb004c13b5002a14fa844",
+    "filename": "7fea20f317513bca7d5f3aae259caa682c1d1ee1525cb004c13b5002a14fa844.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://build-your-own.org/",
+    "id": "f2f804479f0ae3b88ba66d5edf42ba9120b7fada498e0bcd6bdc255555b4cab3",
+    "filename": "f2f804479f0ae3b88ba66d5edf42ba9120b7fada498e0bcd6bdc255555b4cab3.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://8dcc.github.io/",
+    "id": "58bb46add500866a7e414395afe7fbcd3eae4df5b800258b41d7140a21ad6edb",
+    "filename": "58bb46add500866a7e414395afe7fbcd3eae4df5b800258b41d7140a21ad6edb.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://marabos.nl/atomics/",
+    "id": "8c3ce99c22833de2828f9f4523095cb89cb29c69192cf1993e7ef5f8ff11fec7",
+    "filename": "8c3ce99c22833de2828f9f4523095cb89cb29c69192cf1993e7ef5f8ff11fec7.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://refactoringenglish.com/tools/hn-popularity/",
+    "id": "4b8c68ad0077d6b1effa0f6d36e0549194cad28a4b6a51346bb7f41f60688801",
+    "filename": "4b8c68ad0077d6b1effa0f6d36e0549194cad28a4b6a51346bb7f41f60688801.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://vickiboykis.com/2024/02/28/gguf-the-long-way-around/",
+    "id": "28f1fa5918331165ce9bf35ea10c692c51abfdc802226646fe2292c587044da3",
+    "filename": "28f1fa5918331165ce9bf35ea10c692c51abfdc802226646fe2292c587044da3.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://arxiv.org/abs/1705.05937",
+    "id": "d1e412649ebfe69a2b217b36d61f5b4ac3a03f91760529269f8f3aff028dc689",
+    "filename": "d1e412649ebfe69a2b217b36d61f5b4ac3a03f91760529269f8f3aff028dc689.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://retr0.blog/blog/llama-rpc-rce",
+    "id": "d11e459a156fda1cf3ffce21b24ac37eeab75680d7d841a5c091350397019194",
+    "filename": "d11e459a156fda1cf3ffce21b24ac37eeab75680d7d841a5c091350397019194.md",
+    "status": "Success"
+  },
+  {
+    "link": "http://alhassy.com/TypedLisp",
+    "id": "7a83fd9ae811a629d118c5ce1c7f6a34b66136e0d9308e7c2b647be96624b85e",
+    "filename": "7a83fd9ae811a629d118c5ce1c7f6a34b66136e0d9308e7c2b647be96624b85e.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.youtube.com/@roboticexplorationlab3724/videos",
+    "id": "133b20e95b0f48283e678d45c18d3464883fe07bf68dc9d9400792814562d3bd",
+    "filename": "133b20e95b0f48283e678d45c18d3464883fe07bf68dc9d9400792814562d3bd.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://devblogs.microsoft.com/oldnewthing/20150220-00/?p=44623",
+    "id": "b456556e7b78570915ef3328b10859344f210a9c9bdc28057d172086d98695cf",
+    "filename": "b456556e7b78570915ef3328b10859344f210a9c9bdc28057d172086d98695cf.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://leetarxiv.substack.com/",
+    "id": "1f4303ab9921b37ac701954783a6f16c8086176108c5cf10db36eb8c1173c032",
+    "filename": "1f4303ab9921b37ac701954783a6f16c8086176108c5cf10db36eb8c1173c032.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://rancheng.github.io/Sparse-Convolution-Explained/",
+    "id": "22f514aff10fdf8834faf540a0efc091f00ef9208d481d44efd991122739f0fa",
+    "filename": "22f514aff10fdf8834faf540a0efc091f00ef9208d481d44efd991122739f0fa.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/rerun-io/rerun",
+    "id": "0efcad0e0c95a31307d92980f8b40317478a35ae6ce3224ad20d8b72dea0edaf",
+    "filename": "0efcad0e0c95a31307d92980f8b40317478a35ae6ce3224ad20d8b72dea0edaf.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://siboehm.com/articles/22/CUDA-MMM",
+    "id": "988231e71c960d2a7c730181b7160ea5b1770eed0ae5f3b3d10328b1aacb63f5",
+    "filename": "988231e71c960d2a7c730181b7160ea5b1770eed0ae5f3b3d10328b1aacb63f5.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://arxiv.org/abs/2402.01030",
+    "id": "1b716912396dc989a26003754727de5356039ce3dd269a7f60eae28592149881",
+    "filename": "1b716912396dc989a26003754727de5356039ce3dd269a7f60eae28592149881.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://alexarmbr.github.io/2024/08/10/How-To-Write-A-Fast-Matrix-Multiplication-From-Scratch-With-Tensor-Cores.html",
+    "id": "8bb7a7edab36dd04382fe72962c51813e6069aa678d52bad49ccd731b09ce1e4",
+    "filename": "8bb7a7edab36dd04382fe72962c51813e6069aa678d52bad49ccd731b09ce1e4.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://diffusion.csail.mit.edu/",
+    "id": "fae1ccda99ee2f932219e14fe8a97462abc07bb06074317c6c990dc3fafe33a2",
+    "filename": "fae1ccda99ee2f932219e14fe8a97462abc07bb06074317c6c990dc3fafe33a2.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://drubinstein.github.io/pokerl/",
+    "id": "5d8840294ac8f1f65061e3605da572132707e8ad15a1e12b0bc6c24e466bd0c8",
+    "filename": "5d8840294ac8f1f65061e3605da572132707e8ad15a1e12b0bc6c24e466bd0c8.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://codeforces.com/blog/entry/110801",
+    "id": "7032530d44ba917bafbe795d88eaa1c7ad2bbf1c88ac1524502d9e31afad438e",
+    "filename": "7032530d44ba917bafbe795d88eaa1c7ad2bbf1c88ac1524502d9e31afad438e.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://leehanchung.github.io/blogs/",
+    "id": "3def6a1ddf34417f7501b179497ecb7820dcbc5144769176a7ef6eec96144852",
+    "filename": "3def6a1ddf34417f7501b179497ecb7820dcbc5144769176a7ef6eec96144852.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/cloneofsimo/minRF/tree/main",
+    "id": "0c196815989675919276fcd8cbcd2a1f601f95b1583eb6a127346a1113ac187e",
+    "filename": "0c196815989675919276fcd8cbcd2a1f601f95b1583eb6a127346a1113ac187e.md",
+    "status": "Success"
+  },
+  {
+    "link": "http://coliru.stacked-crooked.com/a/0f98350719456d66",
+    "id": "cddca9f31bcb8bf2f8167e892d5eb29084cd32b5ea17d9543fb49e18ad60b970",
+    "filename": "cddca9f31bcb8bf2f8167e892d5eb29084cd32b5ea17d9543fb49e18ad60b970.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/hamzafarooq/building-llm-applications-from-scratch",
+    "id": "35081482938666c004e8ab639d3e581d6815fe53065341e1a858047301b2fb6e",
+    "filename": "35081482938666c004e8ab639d3e581d6815fe53065341e1a858047301b2fb6e.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/mlabonne/llm-course",
+    "id": "0abcb8d6878db0f0e92da53e6699c272c1d1e1717aa18c7b3bbcd6737aa388c2",
+    "filename": "0abcb8d6878db0f0e92da53e6699c272c1d1e1717aa18c7b3bbcd6737aa388c2.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://vreco.fly.dev/blog/post/HTMX",
+    "id": "f184533a1cf5659ea5472a5d8899ad28c93583b23549ee7e77796263ee990e51",
+    "filename": "f184533a1cf5659ea5472a5d8899ad28c93583b23549ee7e77796263ee990e51.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/MrNeRF/awesome-3D-gaussian-splatting?tab=readme-ov-file",
+    "id": "8ccaaa67de9da05153333147aef7373644eefb22baf0c8582fc3177a22b0a5c2",
+    "filename": "8ccaaa67de9da05153333147aef7373644eefb22baf0c8582fc3177a22b0a5c2.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.math.brown.edu/cdaly2/Notes/Lie_Derivative.pdf",
+    "id": "472f692dc400ebfdcb2f95eb3745cfbfadf0222d711a4b16267503e58ca4a420",
+    "filename": "472f692dc400ebfdcb2f95eb3745cfbfadf0222d711a4b16267503e58ca4a420.pdf",
+    "status": "Success"
+  },
+  {
+    "link": "https://abuseofnotation.github.io/category-theory-illustrated/",
+    "id": "559b0ec4bbbfd80cbdbfed4185b54ceddd030ac45bda2e888c9a02cfcdac7151",
+    "filename": "559b0ec4bbbfd80cbdbfed4185b54ceddd030ac45bda2e888c9a02cfcdac7151.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://arxiv.org/pdf/2304.12210",
+    "id": "fde439889f1548bf3410cd1614316cff030d824907f621217129c9199c75f139",
+    "filename": "fde439889f1548bf3410cd1614316cff030d824907f621217129c9199c75f139.pdf",
+    "status": "Success"
+  },
+  {
+    "link": "https://jamesbornholt.com/blog/memory-models/",
+    "id": "823f14e7e457dacbdd61f25f9111c5104874223b71d647f02717271622b08770",
+    "filename": "823f14e7e457dacbdd61f25f9111c5104874223b71d647f02717271622b08770.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.cosmicpython.com/book/preface.html",
+    "id": "dfb7a7470477f131ca473c3bb4266390069b61e3bd2f781779195b3917377646",
+    "filename": "dfb7a7470477f131ca473c3bb4266390069b61e3bd2f781779195b3917377646.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://blog.briankitano.com/llama-from-scratch/",
+    "id": "9d229bace9569af809fbee313d56464b61f4f61bd091c888a0f44203a4ca4566",
+    "filename": "9d229bace9569af809fbee313d56464b61f4f61bd091c888a0f44203a4ca4566.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.scs.stanford.edu/~dm/blog/param-pack.html",
+    "id": "2772f1e669e7394be0dfa06385e1495023e0e42f6cdc6c9c99bdff04b494c10b",
+    "filename": "2772f1e669e7394be0dfa06385e1495023e0e42f6cdc6c9c99bdff04b494c10b.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://mostly-adequate.gitbook.io/mostly-adequate-guide/",
+    "id": "9ddbfa50efd5d32c971f7e4e1e5d0c106e51332416d4c887609be75c8e6b360b",
+    "filename": "9ddbfa50efd5d32c971f7e4e1e5d0c106e51332416d4c887609be75c8e6b360b.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/junfanz1/MiniGPT-and-DeepSeek-MLA-Multi-Head-Latent-Attention",
+    "id": "d1a40801d2907028df41bc615d6a29ae0da1a972aee42802a2d9298833069207",
+    "filename": "d1a40801d2907028df41bc615d6a29ae0da1a972aee42802a2d9298833069207.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://sander.ai/",
+    "id": "31045697f60300bb33fd5adeb529fd017df57916572e38cf3bd2de8ed0e4e121",
+    "filename": "31045697f60300bb33fd5adeb529fd017df57916572e38cf3bd2de8ed0e4e121.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.roboticsproceedings.org/rss08/p34.pdf",
+    "id": "419e7b1b3d77ab8337e54acd307c8084f8b21f5fe144c67f3e97b4b18250ccbe",
+    "filename": "419e7b1b3d77ab8337e54acd307c8084f8b21f5fe144c67f3e97b4b18250ccbe.pdf",
+    "status": "Success"
+  },
+  {
+    "link": "https://drive.google.com/file/d/1BU5bV3X5w65DwSMapKcsr0ZvrMRU_Nbi/view",
+    "id": "e02d7ab4006873818defdddc7696fcd734d345fdd6793618c9f12062eda8aad0",
+    "filename": "e02d7ab4006873818defdddc7696fcd734d345fdd6793618c9f12062eda8aad0.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://scarlet-exhaust-e5c.notion.site/Matrix-Lie-Groups-Lie-Algebra-for-Robotic-70ca0f4f21a940b396ea6b2870a0b144](https://www.notion.so/Matrix-Lie-Groups-Lie-Algebra-for-Robotic-70ca0f4f21a940b396ea6b2870a0b144?pvs=21",
+    "id": "0fcd78c463984c6ea91acacb6116ed9878cd2ff72133e8ceb12ab4344af1b42b",
+    "filename": "0fcd78c463984c6ea91acacb6116ed9878cd2ff72133e8ceb12ab4344af1b42b.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://sascha-kirch.github.io/blog.html",
+    "id": "ad02975f2acfdaac9829d56231d0d1c8aba2dd926b29c231261ac79fc7ddf488",
+    "filename": "ad02975f2acfdaac9829d56231d0d1c8aba2dd926b29c231261ac79fc7ddf488.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.seeedstudio.com/blog/2022/01/03/mmwave-radar-sensing-fmcw-radar/",
+    "id": "db1080c7e61a4c9f7c88a9b386e9047ca0749e3573e219e37d237d5a72e23914",
+    "filename": "db1080c7e61a4c9f7c88a9b386e9047ca0749e3573e219e37d237d5a72e23914.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.stephendiehl.com/posts/mlir_transformers/",
+    "id": "14d659ac805664bffae5199c39b9ccd8a7ccc0886ffb7e2e2460f81a9405ca9d",
+    "filename": "14d659ac805664bffae5199c39b9ccd8a7ccc0886ffb7e2e2460f81a9405ca9d.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://gist.github.com/rain-1/eebd5e5eb2784feecf450324e3341c8d",
+    "id": "a580dd554fae43f25d2174a7075b42e95cf00e80417884b8ca7f27601974740c",
+    "filename": "a580dd554fae43f25d2174a7075b42e95cf00e80417884b8ca7f27601974740c.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/skyzh/tiny-llm",
+    "id": "c050e190dad5877116fb73b3475571dc779200c8c9c78317dbb85b70304f4e4b",
+    "filename": "c050e190dad5877116fb73b3475571dc779200c8c9c78317dbb85b70304f4e4b.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.notion.so/Side-Excursions-To-Write-9f098980a4154dbcb2adf866ec6fec21?pvs=21",
+    "id": "91d07ed273c39ef9e9b2531ccb54ef026eb77e9c31d085ad9e5952a5ce6e7bb8",
+    "filename": "91d07ed273c39ef9e9b2531ccb54ef026eb77e9c31d085ad9e5952a5ce6e7bb8.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/qiaoxu123/Self-Driving-Cars/",
+    "id": "60fe08aae09018c37669be03bf9fb6dff82f1a0680916b4ede4b38f0f85615d5",
+    "filename": "60fe08aae09018c37669be03bf9fb6dff82f1a0680916b4ede4b38f0f85615d5.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://cthiriet.com/articles/scaling-laws",
+    "id": "988b3a14984dc02409fe20fa89cab9e2f3cc28db054808f14d8155d466a34bf8",
+    "filename": "988b3a14984dc02409fe20fa89cab9e2f3cc28db054808f14d8155d466a34bf8.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://southbridge-research.notion.site/",
+    "id": "aeba35c6b7203a1aea8e0aed4eb100f197663918d15abb07c1cf9d29f1e90eb3",
+    "filename": "aeba35c6b7203a1aea8e0aed4eb100f197663918d15abb07c1cf9d29f1e90eb3.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/MathFoundationRL/Book-Mathematical-Foundation-of-Reinforcement-Learning",
+    "id": "e7fca69113c695b3266fc6836365e2e03cace5e5d4504bcd90db57b455dd1715",
+    "filename": "e7fca69113c695b3266fc6836365e2e03cace5e5d4504bcd90db57b455dd1715.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://rentry.co/samplers",
+    "id": "cd73823966faf0ae821098e9a364947f720426b4c4409292774e16b849c32068",
+    "filename": "cd73823966faf0ae821098e9a364947f720426b4c4409292774e16b849c32068.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.kdnuggets.com/10-github-repositories-to-master-large-language-models",
+    "id": "a40fdce47e476216b5819ce5b51f6c9793a054121e5e2b127de9ecb693286007",
+    "filename": "a40fdce47e476216b5819ce5b51f6c9793a054121e5e2b127de9ecb693286007.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://twitter.com/hippopedoid/status/1641432291149848576?t=A-My3hI8ahtDxLPcRggVbQ&s=19",
+    "id": "66b388bc3164a40f64ba7e75a18b88603b417fa69458bb0dddd1817b679bff06",
+    "filename": "66b388bc3164a40f64ba7e75a18b88603b417fa69458bb0dddd1817b679bff06.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://twitter.com/cwolferesearch/status/1641932082283700226?t=DY-4sz8GEsG58rjSJGt0BA&s=19",
+    "id": "d5b83cfdc1b19ab94ddde1e95e02d61483edfe0e256045e6281918f9ef4acaa9",
+    "filename": "d5b83cfdc1b19ab94ddde1e95e02d61483edfe0e256045e6281918f9ef4acaa9.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://blog.adamchalmers.com/multipart/",
+    "id": "fe3f1376e2a8cb79d2bf5c87ef277c5d4eccaad164346abf8ededd8cf63edf11",
+    "filename": "fe3f1376e2a8cb79d2bf5c87ef277c5d4eccaad164346abf8ededd8cf63edf11.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://crawshaw.io/blog/programming-with-agents",
+    "id": "ac7c5de589333923f4d5a752aa660b7797e0bfa2bbe99c124d293bbb0c20d94b",
+    "filename": "ac7c5de589333923f4d5a752aa660b7797e0bfa2bbe99c124d293bbb0c20d94b.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://tunahansalih.github.io/blog/autoregressive-vision-generation-part-1/",
+    "id": "c2a9052ff49d474cbbe6f8aa33422cbced2b91134c89d86f66fb24b9437e1556",
+    "filename": "c2a9052ff49d474cbbe6f8aa33422cbced2b91134c89d86f66fb24b9437e1556.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://henryhmko.github.io/posts/tpu/tpu.html",
+    "id": "4081068eab295be59a3bc14e89fa1ae4c3fa59659be7cb775c7b7781e9956b8e",
+    "filename": "4081068eab295be59a3bc14e89fa1ae4c3fa59659be7cb775c7b7781e9956b8e.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://meetingcpp.com/mcpp/slides/2021/MeetingCpp_2021_Lock_Free7814.pdf",
+    "id": "87097654b641feccd88823e01855795424ca6781367b207c0b87b40961305f18",
+    "filename": "87097654b641feccd88823e01855795424ca6781367b207c0b87b40961305f18.pdf",
+    "status": "Success"
+  },
+  {
+    "link": "https://monroeclinton.com/counting-all-yurts-in-mongolia/",
+    "id": "54c7bf76fd17d3aa28cf964e7dbf4acdb75884af31b2bd88a44257ef7743a214",
+    "filename": "54c7bf76fd17d3aa28cf964e7dbf4acdb75884af31b2bd88a44257ef7743a214.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://gist.github.com/VictorTaelin/5776ede998d0039ad1cc9b12fd96811c",
+    "id": "4877d0ab5814120626edbc9b97e661a7c00303966d184dd02528636778ffeda8",
+    "filename": "4877d0ab5814120626edbc9b97e661a7c00303966d184dd02528636778ffeda8.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://efficientdlbook.com/",
+    "id": "1275b006479a5dff70619855a4c1d36d8f8307d7cd3d5b10dfbe4b30f296b2c4",
+    "filename": "1275b006479a5dff70619855a4c1d36d8f8307d7cd3d5b10dfbe4b30f296b2c4.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://fairmlbook.org/",
+    "id": "dc21d62a503641e21813e356a7cd6604e91073e87a1dc1c8bd8c824d631535ad",
+    "filename": "dc21d62a503641e21813e356a7cd6604e91073e87a1dc1c8bd8c824d631535ad.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.cs.utexas.edu/~lqiang/PDF/flow_book.pdf",
+    "id": "07e0675eb2149ffbb11254b021302322dbd9bfd9a2220b2f238c7ad48e1399c6",
+    "filename": "07e0675eb2149ffbb11254b021302322dbd9bfd9a2220b2f238c7ad48e1399c6.pdf",
+    "status": "Success"
+  },
+  {
+    "link": "https://sketch.dev/blog",
+    "id": "aa1d15f4c445221ea997a9e99e80720eb1487dca63897dff4bc01b27ef1ef0cf",
+    "filename": "aa1d15f4c445221ea997a9e99e80720eb1487dca63897dff4bc01b27ef1ef0cf.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.sebastiansylvan.com/post/robustestimation/",
+    "id": "861f3b74473b3aead1ae0abcfadc21769e3640762fabbb187e7e4131ccca90b4",
+    "filename": "861f3b74473b3aead1ae0abcfadc21769e3640762fabbb187e7e4131ccca90b4.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.lesswrong.com/posts/JQefBJDHG6Wgffw6T/a-straightforward-explanation-of-the-good-regulator-theorem",
+    "id": "3b6f2081d29d8e3ca6eb4781fd8e5dd0692fbf2c3d45b7cec0190ffbb1abb995",
+    "filename": "3b6f2081d29d8e3ca6eb4781fd8e5dd0692fbf2c3d45b7cec0190ffbb1abb995.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://damek.github.io/random/basic-facts-about-gpus/",
+    "id": "9c9b9b39504e123d43041379b13201b92775f0712f87b6bc4e7606b4fc81a6c6",
+    "filename": "9c9b9b39504e123d43041379b13201b92775f0712f87b6bc4e7606b4fc81a6c6.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://goperf.dev/",
+    "id": "d4293ebca56ee1f1924a9e0be3ea93d7e4acb9ec16b9fae942a4d9760f0304d9",
+    "filename": "d4293ebca56ee1f1924a9e0be3ea93d7e4acb9ec16b9fae942a4d9760f0304d9.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://thephd.dev/to-save-c-we-must-save-abi-fixing-c-function-abi",
+    "id": "bcb0e7ce6923b8bbae3dd560e51d3c0f123ebddf6c94e208c55868222caffee9",
+    "filename": "bcb0e7ce6923b8bbae3dd560e51d3c0f123ebddf6c94e208c55868222caffee9.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://crescentro.se/posts/writing-drivers/",
+    "id": "a3434a746f0d99a9c16d45218833403900cb3a3dee20f8a8c0d180d6c301617c",
+    "filename": "a3434a746f0d99a9c16d45218833403900cb3a3dee20f8a8c0d180d6c301617c.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://arxiv.org/pdf/2505.21411",
+    "id": "8882203faf1572f92e1aa45a9b91bc1064c9b726d8c79219e264a05fa61b997d",
+    "filename": "8882203faf1572f92e1aa45a9b91bc1064c9b726d8c79219e264a05fa61b997d.pdf",
+    "status": "Success"
+  },
+  {
+    "link": "https://andrewlock.net/working-with-stacked-branches-in-git-part-1/",
+    "id": "e5f32c7a10de5f66abcda18cead8976138f7c66c5208778910d55b4a082d908e",
+    "filename": "e5f32c7a10de5f66abcda18cead8976138f7c66c5208778910d55b4a082d908e.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://andrewlock.net/working-with-stacked-branches-in-git-part-2/",
+    "id": "4969b7b1f5ba1cf228a0943792743fff42afa072bc215541277d4fcd4fb9dc62",
+    "filename": "4969b7b1f5ba1cf228a0943792743fff42afa072bc215541277d4fcd4fb9dc62.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://decodingml.substack.com/",
+    "id": "42825f2f7a0df6984462118c869c669704b5dc37c68bcbab46ea8f1b194eaa97",
+    "filename": "42825f2f7a0df6984462118c869c669704b5dc37c68bcbab46ea8f1b194eaa97.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://go.googlesource.com/proposal/+/ac09a140c3d26f8bb62cbad8969c8b154f93ead6/design/60773-execution-tracer-overhaul.md",
+    "id": "57b0508080d5da98f655cee44c16d8d64bc807bb63c3210cf47c50aef8ec4d15",
+    "filename": "57b0508080d5da98f655cee44c16d8d64bc807bb63c3210cf47c50aef8ec4d15.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.understandingai.org/",
+    "id": "041d094e1515f2818b2f0ef253c4c0675466deeb851edff4c595e1c7be482646",
+    "filename": "041d094e1515f2818b2f0ef253c4c0675466deeb851edff4c595e1c7be482646.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://yexijiang.substack.com/",
+    "id": "841d25f766805fed14e77cc5aa2b2e660aa59ad72a4f32aae7912e62834e7a71",
+    "filename": "841d25f766805fed14e77cc5aa2b2e660aa59ad72a4f32aae7912e62834e7a71.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://blog.jxmo.io/",
+    "id": "fe3a07b0318610e685087147e7ab3123834f69588d46cf6208d87f96ca30aa40",
+    "filename": "fe3a07b0318610e685087147e7ab3123834f69588d46cf6208d87f96ca30aa40.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://fabiensanglard.net/cuda/index.html",
+    "id": "437335be7bcabb51488a58a3efdc0c83350bd8feabcf48b709a5a75bc6af6628",
+    "filename": "437335be7bcabb51488a58a3efdc0c83350bd8feabcf48b709a5a75bc6af6628.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://danielmangum.com/posts/ai-microcontrollers-operators-kernels/",
+    "id": "1b972ecae7b19ae50cf5216849ae24c3f672af3c85742d994b8a752c68ba2efe",
+    "filename": "1b972ecae7b19ae50cf5216849ae24c3f672af3c85742d994b8a752c68ba2efe.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://blog.yoshuawuyts.com/tree-structured-concurrency/",
+    "id": "7e1d94bc891e7521fd3e9905e5eb97c84b00acef3a42e42857d3ed80c73b4ecd",
+    "filename": "7e1d94bc891e7521fd3e9905e5eb97c84b00acef3a42e42857d3ed80c73b4ecd.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://rajan-chari.medium.com/flatbuffer-memory-layout-6abdd51f3258",
+    "id": "961877c626606aa3be386b9c84f592f540ae60a8b31cb940102c359de38d7c59",
+    "filename": "961877c626606aa3be386b9c84f592f540ae60a8b31cb940102c359de38d7c59.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://rlancemartin.github.io/2025/06/23/context_engineering/",
+    "id": "496bd747518e438982434996acab0d29bf822375a5d5f53947b828eeb3d21949",
+    "filename": "496bd747518e438982434996acab0d29bf822375a5d5f53947b828eeb3d21949.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://mrereports.substack.com/p/your-wifi-can-see-you",
+    "id": "6e9e95d2cc0564e87a720b5651cf9071f838e48cb1328f477bed2b00a4361c7c",
+    "filename": "6e9e95d2cc0564e87a720b5651cf9071f838e48cb1328f477bed2b00a4361c7c.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://blog.oliverjumpertz.dev/11-best-github-repositories-that-help-you-become-a-better-software-developer",
+    "id": "fb7589c8d4fab3cdd3ba8db4aafae5af7c4002b49ed05a481fc0cd832db1ca6e",
+    "filename": "fb7589c8d4fab3cdd3ba8db4aafae5af7c4002b49ed05a481fc0cd832db1ca6e.None",
+    "status": "Success"
+  },
+  {
+    "link": "https://royeisen.github.io/OverclockingLLMReasoning-paper/",
+    "id": "9605e072022aea47e4c72f34dca86606d042debe4e2bf654c64f6a20823a0f23",
+    "filename": "9605e072022aea47e4c72f34dca86606d042debe4e2bf654c64f6a20823a0f23.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://thenumb.at/Functions-are-Vectors/",
+    "id": "c24b2554af3e2b6641e7761d2e92b329e8e97dc2d2f63ef6902f1339236e2ccb",
+    "filename": "c24b2554af3e2b6641e7761d2e92b329e8e97dc2d2f63ef6902f1339236e2ccb.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://goombalab.github.io/blog/",
+    "id": "38816ec2a7754727a91550b0d02235ccebec4dc60f031e2efc18bb22eea9383b",
+    "filename": "38816ec2a7754727a91550b0d02235ccebec4dc60f031e2efc18bb22eea9383b.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://osanseviero.github.io/hackerllama/blog/posts/random_transformer/",
+    "id": "5df5411228bace275e7d25dd0cf2e6f9e5b133d7c7cdbcf5ae0f4ef94c5565ba",
+    "filename": "5df5411228bace275e7d25dd0cf2e6f9e5b133d7c7cdbcf5ae0f4ef94c5565ba.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.amazon.com/Wanting-Power-Mimetic-Desire-Everyday/dp/1250262488",
+    "id": "ff18b01ca83eccf4980b33a98a654451120f965cda7a5477924917c59ca6c38d",
+    "filename": "ff18b01ca83eccf4980b33a98a654451120f965cda7a5477924917c59ca6c38d.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://opt-models.org/",
+    "id": "d5b7b33dbf6048fd209bc19314338eb99a07c530934aeaeacf6bd96889d992c3",
+    "filename": "d5b7b33dbf6048fd209bc19314338eb99a07c530934aeaeacf6bd96889d992c3.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.amazon.com/Changing-World-Order-Nations-Succeed/dp/1982160276/ref=pd_sbs_1/146-4134145-3281564?pd_rd_w=fkK7l&pf_rd_p=3676f086-9496-4fd7-8490-77cf7f43f846&pf_rd_r=5H4W1F6S4KQPZJHZXHDS&pd_rd_r=d1bf9e92-0077-4383-b273-b3f1e8a71de5&pd_rd_wg=LxYbY&pd_rd_i=1982160276&psc=1",
+    "id": "cf80c6f3f4abe41b5174f8a0b88844a99e1c01ab77ad89dc7ae37aa6d09e56c0",
+    "filename": "cf80c6f3f4abe41b5174f8a0b88844a99e1c01ab77ad89dc7ae37aa6d09e56c0.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://threejs-journey.com/#presentation",
+    "id": "4f66606364e5b3ed32737505df021330b1c19876abc0a02f34cc56e96f9f73c9",
+    "filename": "4f66606364e5b3ed32737505df021330b1c19876abc0a02f34cc56e96f9f73c9.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://graphite.dev/blog/stacked-prs",
+    "id": "14b009a8c1db0fc204e31522a5a73ff84312770234b8280f04deb7df3239a621",
+    "filename": "14b009a8c1db0fc204e31522a5a73ff84312770234b8280f04deb7df3239a621.None",
+    "status": "Success"
+  },
+  {
+    "link": "https://medium.com/@wrong.about/deep-dive-into-tcp-connection-establishment-process-f6cfb7b4e8e1",
+    "id": "ffdaa3fd6b778dfb81760c62de1c3b8a2768c32a4a1c8f20dc6f628e2a4b5922",
+    "filename": "ffdaa3fd6b778dfb81760c62de1c3b8a2768c32a4a1c8f20dc6f628e2a4b5922.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/zakirullin/cognitive-load",
+    "id": "0b453f490d8d2c4ad01e3af9ac4ca1261653446c6d2ffc9aa833ef888b7d8b26",
+    "filename": "0b453f490d8d2c4ad01e3af9ac4ca1261653446c6d2ffc9aa833ef888b7d8b26.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://intra.ece.ucr.edu/~mourikis/papers/Li2013IJRR.pdf",
+    "id": "c759da927b376753ea97bb2e9ed0e1110bf0234d57742dafe957606ac4a3d061",
+    "filename": "c759da927b376753ea97bb2e9ed0e1110bf0234d57742dafe957606ac4a3d061.pdf",
+    "status": "Success"
+  },
+  {
+    "link": "https://chrisfeilbach.com/2025/07/05/understand-cpu-branch-instructions-better/",
+    "id": "e9dd208393da40d95d010fa420623f6c0cf82d414be1efdf5d9a33f9dcf150bd",
+    "filename": "e9dd208393da40d95d010fa420623f6c0cf82d414be1efdf5d9a33f9dcf150bd.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://ocw.mit.edu/courses/6-172-performance-engineering-of-software-systems-fall-2018/download/",
+    "id": "b63c0bc97f36dc5f0803c8df2dc65f97e12a4d0e35182ad93c3f5a0469388c46",
+    "filename": "b63c0bc97f36dc5f0803c8df2dc65f97e12a4d0e35182ad93c3f5a0469388c46.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://iopscience.iop.org/article/10.1088/1742-6596/659/1/012022/pdf#:~:text=Iterated",
+    "id": "75e77a00b5b5c3c021a71625c08249ba505775fe955fccfe13ed64a73a0c8d50",
+    "filename": "75e77a00b5b5c3c021a71625c08249ba505775fe955fccfe13ed64a73a0c8d50.pdf",
+    "status": "Success"
+  },
+  {
+    "link": "https://tridao.me/",
+    "id": "aa06900c1d56b64a47b0422758862e2f5ab07f6e68f6a67d503a859fc72d8513",
+    "filename": "aa06900c1d56b64a47b0422758862e2f5ab07f6e68f6a67d503a859fc72d8513.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://mattblackwell.github.io/gov2002-book/",
+    "id": "428260e187208d9c6d8c4f80a3fcbe32ccf106534939705a116d71cbe2d2c3b9",
+    "filename": "428260e187208d9c6d8c4f80a3fcbe32ccf106534939705a116d71cbe2d2c3b9.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://jax-ml.github.io/scaling-book/",
+    "id": "0243b22b5c5d53af5307f4212ecbc9ed05961fad0d91e9cf25cf7fb9852c9e8a",
+    "filename": "0243b22b5c5d53af5307f4212ecbc9ed05961fad0d91e9cf25cf7fb9852c9e8a.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://kellerjordan.github.io/posts/muon/",
+    "id": "f399a5fb20423170af4d59ad2d0b11fe4b821b79fb2afd7e5330bce48773e906",
+    "filename": "f399a5fb20423170af4d59ad2d0b11fe4b821b79fb2afd7e5330bce48773e906.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/DataExpert-io/data-engineer-handbook",
+    "id": "8c6647a97e383df160f23fcc812cee502af2641974ef443501602a8e4171e138",
+    "filename": "8c6647a97e383df160f23fcc812cee502af2641974ef443501602a8e4171e138.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/neobundy/Deep-Dive-Into-AI-With-MLX-PyTorch?tab=readme-ov-file",
+    "id": "3282ab49c744df967e7618fa45f2c3355dd393745b691c62ce514dc72bc26532",
+    "filename": "3282ab49c744df967e7618fa45f2c3355dd393745b691c62ce514dc72bc26532.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://arxiv.org/abs/2502.05244",
+    "id": "e85a30063f83bfc0d89bcdaf87e2a1b8cc47d4530ead47ede59f82af441ba41a",
+    "filename": "e85a30063f83bfc0d89bcdaf87e2a1b8cc47d4530ead47ede59f82af441ba41a.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://blog.jxmo.io/p/there-are-no-new-ideas-in-ai-only",
+    "id": "68f7ebb30bce124f9ab82496b48651be511b816d7768aa0b615af424106905d8",
+    "filename": "68f7ebb30bce124f9ab82496b48651be511b816d7768aa0b615af424106905d8.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://huggingface.co/spaces/hesamation/primer-llm-embedding?section=what_are_embeddings%3F",
+    "id": "1865cc258d77c5028c0792cc951b2cac1b27b388e5260bcf0717bf16bcdc4162",
+    "filename": "1865cc258d77c5028c0792cc951b2cac1b27b388e5260bcf0717bf16bcdc4162.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://huggingface.co/spaces/nanotron/ultrascale-playbook",
+    "id": "5b020b97c2d18c807bf41229a60a298965044faa4429961ef029aca883725ac5",
+    "filename": "5b020b97c2d18c807bf41229a60a298965044faa4429961ef029aca883725ac5.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/UnrelatedString/](https://github.com/UnrelatedString/a",
+    "id": "f9d17a6688fd348a9f0283857a9bdc5215a98a50cd433d50e5b8dafe8b108c2c",
+    "filename": "f9d17a6688fd348a9f0283857a9bdc5215a98a50cd433d50e5b8dafe8b108c2c.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://jeremybernste.in/writing/deriving-muon",
+    "id": "360488ef4285d40a2da10728a7c67a36f573542c4ac8aa611cd1cbfd8153ebb2",
+    "filename": "360488ef4285d40a2da10728a7c67a36f573542c4ac8aa611cd1cbfd8153ebb2.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://brilliantsugar.github.io/posts/how-i-learned-to-stop-worrying-and-love-juggling-c++-atomics/",
+    "id": "8dc0f932f0d1502f9f56258a36e1dba8165557ede58dc2bfa51a8f21c8ff1046",
+    "filename": "8dc0f932f0d1502f9f56258a36e1dba8165557ede58dc2bfa51a8f21c8ff1046.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/jkoppel/jj-workshop",
+    "id": "9635c32f2fcc4d295ec26cdb3e412e26e89f6361ae5cb131b8d721218ee5b308",
+    "filename": "9635c32f2fcc4d295ec26cdb3e412e26e89f6361ae5cb131b8d721218ee5b308.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://amritkwatra.com/experiments/3d-line-drawings",
+    "id": "2848552807a42b0b8022e3169d6917bb024dd33325d70461f74f95254ef1162e",
+    "filename": "2848552807a42b0b8022e3169d6917bb024dd33325d70461f74f95254ef1162e.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/letthedataconfess/Data-Engineering-Books/blob/main/Book-7Nathan",
+    "id": "be6fdd5c6a2ad8dac256a8fe28c7705d5a705909bdb717b6a37319ff47fbf8f5",
+    "filename": "be6fdd5c6a2ad8dac256a8fe28c7705d5a705909bdb717b6a37319ff47fbf8f5.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/MCGallaspy/dr_strangetemplate",
+    "id": "e4232375bbe69b4fd5ead4bf9b91271bc50e12d23c9742cd0cfae51ed015a978",
+    "filename": "e4232375bbe69b4fd5ead4bf9b91271bc50e12d23c9742cd0cfae51ed015a978.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://thenumb.at/QMC/",
+    "id": "92f1d1fc5d03aeb8e3504931f5b34b054eeb738f4af8358da4448e90fa989f1a",
+    "filename": "92f1d1fc5d03aeb8e3504931f5b34b054eeb738f4af8358da4448e90fa989f1a.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://github.com/srush/LLM-Training-Puzzles",
+    "id": "f39ac0c1952f411d90592f097253ba27c177d98f60a1da4c8664a138bba10be3",
+    "filename": "f39ac0c1952f411d90592f097253ba27c177d98f60a1da4c8664a138bba10be3.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://blog.wilsonl.in/",
+    "id": "fd21cbb72f800d8bf2530bb3fd7520cdc3716ef980dd4f270a0b0f025d153bcd",
+    "filename": "fd21cbb72f800d8bf2530bb3fd7520cdc3716ef980dd4f270a0b0f025d153bcd.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.michelecoscia.com/?p=2311",
+    "id": "bad2248ad9c2ce81d664ce4c88ac1b8304e0cfcc1c76a6ce4cd6f02ba17d27c7",
+    "filename": "bad2248ad9c2ce81d664ce4c88ac1b8304e0cfcc1c76a6ce4cd6f02ba17d27c7.md",
+    "status": "Success"
+  },
+  {
+    "link": "https://www.ddmckinnon.com/2024/01/25/on-climbing-the-stat-arb-cex-dex-leaderboard-comparative-advantage-and-careers-and-my-future-in-crypto/",
+    "id": "ae9bcc6037ebcf7e14d9b3c75783cac0d53531c5e1237b6e2adcdf94921a4346",
+    "filename": "ae9bcc6037ebcf7e14d9b3c75783cac0d53531c5e1237b6e2adcdf94921a4346.md",
+    "status": "Success"
+  }
+]

@@ -6,7 +6,10 @@ import asyncio
 import json
 from pathlib import Path
 from unittest.mock import AsyncMock, MagicMock, patch
-from link_classifier import LinkClassifier, ClassificationResult
+import pytest
+from link_classifier import LinkClassifier
+from src.models import ClassificationResult
+from src.content_processor import ContentProcessor
 from src.llm.base import LLMResponse
 from src.llm.litellm_provider import LiteLLMProvider
 from src.llm.openrouter_provider import OpenRouterProvider
@@ -186,10 +189,7 @@ class TestLinkClassifier:
 
     @patch('builtins.open')
     def test_extract_pdf_text(self, mock_open):
-        """Test PDF text extraction"""
-        with patch('src.llm.factory.LLMProviderFactory.from_env'):
-            classifier = LinkClassifier()
-
+        """Test PDF text extraction via ContentProcessor"""
         # Mock PDF reader
         mock_pdf = MagicMock()
         mock_page = MagicMock()
@@ -197,58 +197,52 @@ class TestLinkClassifier:
         mock_pdf.pages = [mock_page]
 
         with patch('PyPDF2.PdfReader', return_value=mock_pdf):
-            result = classifier.extract_pdf_text(Path("test.pdf"))
+            result = ContentProcessor.extract_pdf_text(Path("test.pdf"))
 
         assert result == "PDF content\n"
 
     def test_extract_content_from_markdown(self, tmp_path):
-        """Test markdown content extraction"""
-        with patch('src.llm.factory.LLMProviderFactory.from_env'):
-            classifier = LinkClassifier()
-
+        """Test markdown content extraction via ContentProcessor"""
         # Create a temporary markdown file
         md_file = tmp_path / "test.md"
         md_file.write_text("# Test Content\nThis is markdown content.")
 
-        result = classifier.extract_content_from_file(md_file)
+        result = ContentProcessor.extract_content_from_file(md_file)
 
         assert "# Test Content" in result
         assert "This is markdown content." in result
 
     def test_extract_content_from_unsupported_file(self, tmp_path):
-        """Test handling of unsupported file types"""
-        with patch('src.llm.factory.LLMProviderFactory.from_env'):
-            classifier = LinkClassifier()
-
+        """Test handling of unsupported file types via ContentProcessor"""
         txt_file = tmp_path / "test.txt"
         txt_file.write_text("Text content")
 
-        result = classifier.extract_content_from_file(txt_file)
+        result = ContentProcessor.extract_content_from_file(txt_file)
 
         assert "Unsupported file type: .txt" in result
 
     def test_hash_link(self):
-        """Test link hashing"""
-        with patch('src.llm.factory.LLMProviderFactory.from_env'):
-            classifier = LinkClassifier()
-
-        hash1 = classifier.hash_link("https://example.com")
-        hash2 = classifier.hash_link("https://example.com")
-        hash3 = classifier.hash_link("https://different.com")
+        """Test link hashing via ContentProcessor"""
+        hash1 = ContentProcessor.hash_link("https://example.com")
+        hash2 = ContentProcessor.hash_link("https://example.com")
+        hash3 = ContentProcessor.hash_link("https://different.com")
 
         assert hash1 == hash2  # Same input should give same hash
         assert hash1 != hash3  # Different input should give different hash
         assert len(hash1) == 64  # SHA256 hex length
 
+    @pytest.mark.asyncio
     async def test_classify_content_success(self):
         """Test successful content classification"""
-        # Mock provider
+        # Mock provider with async context manager support
         mock_provider = MagicMock()
         mock_response = LLMResponse(
             content='{"category": "Technology", "subcategory": "AI/ML", "tags": ["python"], "summary": "Test", "confidence": 0.9, "content_type": "tutorial", "difficulty": "intermediate", "quality_score": 8, "key_topics": ["ml"], "target_audience": "developers"}',
             model="test-model"
         )
         mock_provider.generate = AsyncMock(return_value=mock_response)
+        mock_provider.__aenter__ = AsyncMock(return_value=mock_provider)
+        mock_provider.__aexit__ = AsyncMock(return_value=None)
 
         classifier = LinkClassifier(llm_provider=mock_provider)
 
@@ -263,11 +257,14 @@ class TestLinkClassifier:
         assert result.subcategory == "AI/ML"
         assert result.tags == ["python"]
 
+    @pytest.mark.asyncio
     async def test_classify_content_failure(self):
         """Test content classification failure with fallback"""
-        # Mock provider that raises an exception
+        # Mock provider that raises an exception with async context manager support
         mock_provider = MagicMock()
         mock_provider.generate = AsyncMock(side_effect=Exception("API Error"))
+        mock_provider.__aenter__ = AsyncMock(return_value=mock_provider)
+        mock_provider.__aexit__ = AsyncMock(return_value=None)
 
         classifier = LinkClassifier(llm_provider=mock_provider)
 
@@ -337,6 +334,7 @@ class TestLinkClassifier:
 class TestLinkClassifierIntegration:
     """Integration tests for LinkClassifier with different providers"""
 
+    @pytest.mark.asyncio
     async def test_with_litellm_provider(self):
         """Test LinkClassifier with LiteLLM provider"""
         mock_provider = LiteLLMProvider("test_key", "gpt-4")
@@ -360,6 +358,7 @@ class TestLinkClassifierIntegration:
             assert result.subcategory == "Programming"
             mock_generate.assert_called_once()
 
+    @pytest.mark.asyncio
     async def test_with_openrouter_provider(self):
         """Test LinkClassifier with OpenRouter provider"""
         mock_provider = OpenRouterProvider("test_key", "gpt-4")
