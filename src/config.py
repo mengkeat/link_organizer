@@ -35,10 +35,20 @@ class CrawlerConfigSettings:
 
 
 @dataclass
+class MemoryConfig:
+    """Memory system configuration"""
+    output_dir: str = "memory"
+    topics_subdir: str = "topics"
+    similarity_threshold: float = 0.75
+    embedding_model: str = "openrouter/openai/text-embedding-3-small"
+
+
+@dataclass
 class Config:
     """Main configuration class for link organizer"""
     classification: ClassificationConfig = field(default_factory=ClassificationConfig)
     crawler: CrawlerConfigSettings = field(default_factory=CrawlerConfigSettings)
+    memory: MemoryConfig = field(default_factory=MemoryConfig)
     default_input_file: str = "links.md"
     
     _instance: Optional["Config"] = field(default=None, init=False, repr=False)
@@ -83,6 +93,12 @@ class Config:
                         "request_delay", "enable_tui"]:
                 if key in crawler_data:
                     setattr(config.crawler, key, crawler_data[key])
+        
+        if "memory" in data:
+            mem_data = data["memory"]
+            for key in ["output_dir", "topics_subdir", "similarity_threshold", "embedding_model"]:
+                if key in mem_data:
+                    setattr(config.memory, key, mem_data[key])
         
         if "default_input_file" in data:
             config.default_input_file = data["default_input_file"]
