@@ -300,6 +300,57 @@ def cmd_import(args):
     print(f"Run 'link crawl' to fetch and classify them.")
 
 
+def cmd_memory_add(args):
+    """Add a link to the memory system via the router."""
+    load_dotenv()
+
+    from src.config import get_config
+    from src.memory.embedding_client import LiteLLMEmbeddingClient
+    from src.memory.markdown_writer import MarkdownWriter
+    from src.memory.memory_router import MemoryRouter
+    from src.memory.models import MemoryLinkEntry
+    from src.memory.topic_index_manager import TopicIndexManager
+
+    config = get_config()
+    memory_dir = Path(config.memory.output_dir)
+    topics_dir = memory_dir / config.memory.topics_subdir
+
+    embedding_client = LiteLLMEmbeddingClient(model=config.memory.embedding_model)
+    index_manager = TopicIndexManager(memory_dir / "topic_index.db")
+    writer = MarkdownWriter(topics_dir)
+    router = MemoryRouter(
+        embedding_client=embedding_client,
+        index_manager=index_manager,
+        writer=writer,
+        similarity_threshold=config.memory.similarity_threshold,
+    )
+
+    for url in args.urls:
+        entry = MemoryLinkEntry(url=url, title=args.title or "")
+        topic_id = asyncio.run(router.route_link(entry))
+        topic = index_manager.get_topic(topic_id)
+        print(f"Routed {url} -> {topic.filename}")
+
+
+def cmd_memory_topics(args):
+    """List memory topics."""
+    from src.config import get_config
+    from src.memory.topic_index_manager import TopicIndexManager
+
+    config = get_config()
+    memory_dir = Path(config.memory.output_dir)
+    index_manager = TopicIndexManager(memory_dir / "topic_index.db")
+
+    topics = index_manager.list_topics()
+    if not topics:
+        print("No topics yet. Run migration or add links.")
+        return
+
+    for t in topics:
+        print(f"  {t.filename:40s}  links: {t.link_count:3d}  {t.title[:50]}")
+    print(f"\nTotal: {len(topics)} topics")
+
+
 def cmd_remove(args):
     """Remove a link from the collection."""
     index = get_index()
@@ -385,6 +436,16 @@ def main():
     remove_parser = subparsers.add_parser("remove", help="Remove a link")
     remove_parser.add_argument("url", help="URL to remove")
     remove_parser.set_defaults(func=cmd_remove)
+
+    # memory-add command
+    mem_add_parser = subparsers.add_parser("memory-add", help="Add links to memory via router")
+    mem_add_parser.add_argument("urls", nargs="+", help="URLs to route into memory")
+    mem_add_parser.add_argument("-t", "--title", help="Title for the link")
+    mem_add_parser.set_defaults(func=cmd_memory_add)
+
+    # memory-topics command
+    mem_topics_parser = subparsers.add_parser("memory-topics", help="List memory topics")
+    mem_topics_parser.set_defaults(func=cmd_memory_topics)
     
     args = parser.parse_args()
     
