@@ -9,9 +9,8 @@ suitable for client-side search in the browser.
 import json
 import sys
 from pathlib import Path
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 from urllib.parse import urlparse
-import hashlib
 
 
 def load_json_file(filepath: Path) -> Any:

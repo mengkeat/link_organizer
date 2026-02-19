@@ -39,6 +39,8 @@ class MemoryConfig:
     """Memory system configuration"""
     output_dir: str = "memory"
     topics_subdir: str = "topics"
+    links_subdir: str = "links"
+    link_note_max_chars: int = 120000
     similarity_threshold: float = 0.75
     embedding_model: str = "openrouter/openai/text-embedding-3-small"
 
@@ -96,7 +98,14 @@ class Config:
         
         if "memory" in data:
             mem_data = data["memory"]
-            for key in ["output_dir", "topics_subdir", "similarity_threshold", "embedding_model"]:
+            for key in [
+                "output_dir",
+                "topics_subdir",
+                "links_subdir",
+                "link_note_max_chars",
+                "similarity_threshold",
+                "embedding_model",
+            ]:
                 if key in mem_data:
                     setattr(config.memory, key, mem_data[key])
         

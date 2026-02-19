@@ -70,6 +70,8 @@ class MarkdownWriter:
 
         block = f"\n## [[{date_str}]] {title_display}\n"
         block += f"- **URL:** {entry.url}\n"
+        if entry.link_note_path:
+            block += f"- **Link Note:** [{title_display}]({entry.link_note_path})\n"
         if tags_str:
             block += f"- **Tags:** {tags_str}\n"
         if entry.summary:

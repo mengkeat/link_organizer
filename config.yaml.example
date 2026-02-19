@@ -43,7 +43,7 @@ crawler:
   # Index file for tracking link status and metadata
   index_file: index.json
 
-  # Legacy classifications file (for backwards compatibility)
+  # Standalone classifications export file
   classifications_file: classifications.json
 
   # Maximum retry attempts for failed requests
@@ -60,6 +60,26 @@ crawler:
 
   # Enable Terminal User Interface during crawling
   enable_tui: false
+
+# Memory system settings (topic routing + canonical per-link markdown notes)
+memory:
+  # Root output directory for memory artifacts
+  output_dir: memory
+
+  # Topic markdown notes subdirectory
+  topics_subdir: topics
+
+  # Per-link canonical markdown notes subdirectory
+  links_subdir: links
+
+  # Max characters to persist in each per-link note content section
+  link_note_max_chars: 120000
+
+  # Topic routing similarity threshold
+  similarity_threshold: 0.75
+
+  # Embedding model used for routing
+  embedding_model: openrouter/openai/text-embedding-3-small
 
 # Default input file containing links to process
 default_input_file: links.md

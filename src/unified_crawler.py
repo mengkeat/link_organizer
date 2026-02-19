@@ -1,11 +1,5 @@
 """
 Unified crawler module that combines all crawling functionality.
-
-This module consolidates the following legacy crawlers:
-- crawl_links.py - basic crawler
-- enhanced_crawler.py - crawler with classification
-- enhanced_crawler_tui.py - crawler with TUI
-- incremental_crawler.py - incremental crawler with readable filenames
 """
 import os
 import json
@@ -25,6 +19,13 @@ from .classification_service import ClassificationService
 from .crawler_utils import CrawlerUtils
 from .status_tracker import get_status_tracker
 from .tui import CrawlerTUI
+from .config import get_config
+from .memory.embedding_client import LiteLLMEmbeddingClient
+from .memory.link_writer import LinkMarkdownWriter
+from .memory.markdown_writer import MarkdownWriter
+from .memory.memory_router import MemoryRouter
+from .memory.models import MemoryLinkEntry
+from .memory.topic_index_manager import TopicIndexManager
 
 
 class UnifiedCrawler:
@@ -80,6 +81,12 @@ class UnifiedCrawler:
 
         self._classification_service: Optional[ClassificationService] = None
         self._index: Optional[LinkIndex] = None
+        self._memory_router: Optional[MemoryRouter] = None
+        self._memory_writer: Optional[MarkdownWriter] = None
+        self._memory_index_manager: Optional[TopicIndexManager] = None
+        self._link_writer: Optional[LinkMarkdownWriter] = None
+        self._memory_init_error: Optional[str] = None
+        self._memory_link_note_max_chars: int = 120000
 
     @property
     def classification_service(self) -> ClassificationService:
@@ -110,6 +117,7 @@ class UnifiedCrawler:
             Dictionary with crawl statistics
         """
         load_dotenv()
+        self._setup_memory_pipeline()
 
         if index is not None:
             self._index = index
@@ -174,7 +182,7 @@ class UnifiedCrawler:
         # Save index
         idx.save()
 
-        # Save classifications separately for backwards compatibility
+        # Save classifications to a standalone file for downstream tooling
         if self.enable_classification:
             self._save_classifications(results)
 
@@ -197,6 +205,45 @@ class UnifiedCrawler:
             "success": success_count,
             "failed": failed_count,
         }
+
+    def _setup_memory_pipeline(self) -> None:
+        """Initialize memory routing + markdown writers (best-effort)."""
+        try:
+            config = get_config()
+            memory_dir = Path(config.memory.output_dir)
+            topics_dir = memory_dir / config.memory.topics_subdir
+            links_dir = memory_dir / config.memory.links_subdir
+            self._memory_link_note_max_chars = config.memory.link_note_max_chars
+
+            embedding_client = LiteLLMEmbeddingClient(
+                model=config.memory.embedding_model
+            )
+            index_manager = TopicIndexManager(memory_dir / "topic_index.db")
+            if not index_manager.embedding_model:
+                index_manager.embedding_model = config.memory.embedding_model
+                index_manager.save()
+
+            writer = MarkdownWriter(topics_dir)
+            router = MemoryRouter(
+                embedding_client=embedding_client,
+                index_manager=index_manager,
+                writer=writer,
+                similarity_threshold=config.memory.similarity_threshold,
+            )
+            link_writer = LinkMarkdownWriter(links_dir)
+
+            self._memory_router = router
+            self._memory_writer = writer
+            self._memory_index_manager = index_manager
+            self._link_writer = link_writer
+            self._memory_init_error = None
+        except Exception as e:
+            self._memory_router = None
+            self._memory_writer = None
+            self._memory_index_manager = None
+            self._link_writer = None
+            self._memory_init_error = str(e)
+            print(f"Warning: memory pipeline disabled: {e}")
 
     async def _run_workers(
         self,
@@ -300,7 +347,7 @@ class UnifiedCrawler:
                 if status_tracker:
                     status_tracker.update_worker_status(worker_name, "idle")
 
-                item = await asyncio.wait_for(fetch_queue.get(), timeout=2.0)
+                item = await fetch_queue.get()
                 i, link = item
                 if i is None:
                     fetch_queue.task_done()
@@ -341,9 +388,6 @@ class UnifiedCrawler:
                     )
                     existing_filenames.add(readable_name)
 
-                    # Also keep hash-based filename for backwards compatibility
-                    hash_filename = f"{link_id}.{typ}"
-
                     # Save content with readable filename
                     filepath = os.path.join(self.config.data_dir, readable_name)
                     mode = "wb" if typ == "pdf" else "w"
@@ -374,20 +418,21 @@ class UnifiedCrawler:
                         link_data = LinkData(
                             link=link,
                             id=link_id,
-                            filename=hash_filename,
+                            filename=readable_name,
                             content=content_str,
                             screenshot_filename=screenshot_filename,
                             status="fetching",
+                            readable_filename=readable_name,
+                            content_type=typ,
+                            source_file_path=filepath,
                         )
-                        # Store readable filename as attribute
-                        link_data.readable_filename = readable_name
                         await classification_queue.put(link_data)
                     else:
                         # No classification - mark as success immediately
                         entry = IndexEntry(
                             link=link,
                             id=link_id,
-                            filename=hash_filename,
+                            filename=readable_name,
                             readable_filename=readable_name,
                             status="Success",
                             crawled_at=datetime.now().isoformat(),
@@ -414,9 +459,6 @@ class UnifiedCrawler:
 
                 fetch_queue.task_done()
 
-            except asyncio.TimeoutError:
-                if fetch_queue.empty():
-                    break
             except asyncio.CancelledError:
                 break
 
@@ -442,10 +484,9 @@ class UnifiedCrawler:
                 if status_tracker:
                     status_tracker.update_worker_status(worker_name, "idle")
 
-                link_data = await asyncio.wait_for(
-                    classification_queue.get(), timeout=2.0
-                )
+                link_data = await classification_queue.get()
                 if link_data is None:
+                    classification_queue.task_done()
                     break
 
                 if status_tracker:
@@ -469,7 +510,7 @@ class UnifiedCrawler:
                         link=link_data.link,
                         id=link_data.id,
                         filename=link_data.filename,
-                        readable_filename=getattr(link_data, "readable_filename", None),
+                        readable_filename=link_data.readable_filename,
                         status="Success",
                         crawled_at=datetime.now().isoformat(),
                         classification={
@@ -486,6 +527,75 @@ class UnifiedCrawler:
                         },
                         screenshot_filename=link_data.screenshot_filename,
                     )
+
+                    if self._memory_router and self._memory_writer and self._link_writer and self._memory_index_manager:
+                        try:
+                            link_content_markdown = ""
+                            if link_data.content_type == "md":
+                                link_content_markdown = link_data.content or ""
+                            elif link_data.source_file_path:
+                                link_content_markdown = ContentProcessor.extract_content_from_file(
+                                    Path(link_data.source_file_path)
+                                )
+
+                            max_content_len = self._memory_link_note_max_chars
+                            content_truncated = len(link_content_markdown) > max_content_len
+                            content_for_note = link_content_markdown[:max_content_len]
+
+                            topic_hints = [
+                                classification.category,
+                                classification.subcategory,
+                                *classification.tags,
+                                *classification.key_topics,
+                            ]
+                            topic_hints = [h for h in topic_hints if h]
+
+                            topic_title = (
+                                classification.subcategory
+                                or classification.category
+                                or title
+                            )
+
+                            memory_entry = MemoryLinkEntry(
+                                url=link_data.link,
+                                title=title,
+                                tags=classification.tags,
+                                summary=classification.summary,
+                                key_insight=", ".join(classification.key_topics),
+                                raw_snippet=(link_content_markdown or "")[:300],
+                                key_topics=classification.key_topics,
+                                content_markdown=content_for_note,
+                                source_filename=link_data.readable_filename or "",
+                                content_type=link_data.content_type or "",
+                                content_truncated=content_truncated,
+                            )
+
+                            topic_id = await self._memory_router.route_link(
+                                entry=memory_entry,
+                                content=link_content_markdown,
+                                title_for_new_topic=topic_title,
+                                topic_hints=topic_hints,
+                                append_to_topic=False,
+                            )
+                            topic_filename = self._memory_index_manager.get_filename(topic_id) or ""
+
+                            link_note_path = self._link_writer.write_link_note(
+                                entry=memory_entry,
+                                topic_id=topic_id,
+                                topic_filename=topic_filename,
+                            )
+                            memory_entry.link_note_path = link_note_path
+                            if topic_filename:
+                                self._memory_writer.append_link(topic_filename, memory_entry)
+
+                            entry.memory_topic_id = topic_id
+                            entry.memory_topic_file = topic_filename
+                            entry.memory_link_file = link_note_path
+                        except Exception as mem_err:
+                            entry.memory_error = str(mem_err)
+                    elif self._memory_init_error:
+                        entry.memory_error = self._memory_init_error
+
                     idx.add(entry)
                     results.append(entry)
 
@@ -505,7 +615,7 @@ class UnifiedCrawler:
                         link=link_data.link,
                         id=link_data.id,
                         filename=link_data.filename,
-                        readable_filename=getattr(link_data, "readable_filename", None),
+                        readable_filename=link_data.readable_filename,
                         status=f"Failed: Classification error - {e}",
                         crawled_at=datetime.now().isoformat(),
                         screenshot_filename=link_data.screenshot_filename,
@@ -521,9 +631,6 @@ class UnifiedCrawler:
                 classification_queue.task_done()
                 await asyncio.sleep(self.config.request_delay)
 
-            except asyncio.TimeoutError:
-                if classification_queue.empty():
-                    break
             except asyncio.CancelledError:
                 break
 
@@ -552,7 +659,7 @@ class UnifiedCrawler:
                 break
 
     def _save_classifications(self, results: List[IndexEntry]):
-        """Save classifications to separate file for backwards compatibility."""
+        """Save classifications to a standalone JSON file."""
         classifications = {}
         for entry in results:
             if entry.classification:
@@ -561,10 +668,16 @@ class UnifiedCrawler:
         classifications_file = Path(self.config.classifications_file)
         existing_classifications = {}
         if classifications_file.exists():
-            existing_classifications = json.loads(classifications_file.read_text())
+            try:
+                existing_classifications = json.loads(
+                    classifications_file.read_text(encoding="utf-8")
+                )
+            except (json.JSONDecodeError, UnicodeDecodeError):
+                existing_classifications = {}
         existing_classifications.update(classifications)
         classifications_file.write_text(
-            json.dumps(existing_classifications, indent=2, ensure_ascii=False)
+            json.dumps(existing_classifications, indent=2, ensure_ascii=False),
+            encoding="utf-8",
         )
 
 

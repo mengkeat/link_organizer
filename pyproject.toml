@@ -39,4 +39,4 @@ dev-dependencies = [
 packages = ["src"]
 
 [tool.hatch.build.targets.sdist]
-include = ["src/", "cli.py", "get_count_links.py"]
+include = ["src/", "cli.py"]

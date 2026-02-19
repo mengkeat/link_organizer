@@ -32,7 +32,7 @@ class ClassificationResult(BaseModel):
         return v
 
     def to_dict(self) -> Dict[str, Any]:
-        """Convert to dictionary format for JSON serialization (backwards compatibility)."""
+        """Convert to dictionary format for JSON serialization."""
         return self.model_dump()
 
 
@@ -46,6 +46,9 @@ class LinkData(BaseModel):
     content: Optional[str] = None
     classification: Optional[ClassificationResult] = None
     screenshot_filename: Optional[str] = None
+    readable_filename: Optional[str] = None
+    content_type: Optional[str] = None
+    source_file_path: Optional[str] = None
 
     model_config = {"validate_assignment": True}
 
@@ -79,8 +82,11 @@ class LinkData(BaseModel):
             "link": self.link,
             "id": self.id,
             "filename": self.filename,
+            "readable_filename": self.readable_filename,
             "status": self.status,
             "screenshot_filename": self.screenshot_filename,
+            "content_type": self.content_type,
+            "source_file_path": self.source_file_path,
         }
 
         if include_content and self.content:

@@ -13,7 +13,7 @@ from src.classification_service import ClassificationService
 load_dotenv()
 
 class LinkClassifier(ClassificationService):
-    """Main classifier - now a thin wrapper around ClassificationService for backwards compatibility"""
+    """Main classifier class."""
     pass
 
 async def main():

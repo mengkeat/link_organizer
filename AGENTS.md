@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This is a Python-based link organizer tool that extracts links from a markdown file and crawls/downloads their content for offline storage and organization. The project helps organize links that were lazily pasted into Notion.
+This is a Python-based link organizer that extracts links from markdown, crawls/downloads content for offline storage, classifies it with an LLM, and routes successful items into a topic memory system.
 
 ## Architecture
 
@@ -14,8 +14,11 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for detailed architecture documentation, 
 |----------------|-------------|
 | `links.md` | Input file with URLs to process |
 | `index.json` | Master index with links, status, classifications |
-| `classifications.json` | Classification results (backwards compat) |
+| `classifications.json` | Standalone classification export |
 | `dat/` | Downloaded content (readable filenames) |
+| `memory/topic_index.db` | SQLite topic index with centroid vectors |
+| `memory/topics/` | Topic markdown files with grouped link entries |
+| `memory/links/` | Canonical per-link markdown notes |
 | `public/` | Generated static HTML site |
 
 ## Dependencies
@@ -25,14 +28,18 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for detailed architecture documentation, 
 - `litellm` - LLM provider abstraction
 - `python-dotenv` - Environment config
 - `rich` - Terminal UI
+- `aiohttp` - OpenRouter direct API transport
 - `PyPDF2` - PDF text extraction
 - `Pillow` - Screenshot processing
 - `pydantic` - Data validation
+- `numpy` - Embedding vector math
+- `PyYAML` - Config loading
 - `pytest` - Testing
 
 ## Python Environment
 
 This project uses **uv** as the package manager with a local virtual environment in `.venv/`.
+Python version requirement: **3.13+**.
 
 ```bash
 # Install dependencies (creates .venv if needed)
@@ -43,6 +50,9 @@ uv run python <script.py>
 
 # Add new packages
 uv pip install <package>
+
+# Run tests
+uv run pytest
 ```
 
 ## CLI Commands
@@ -90,6 +100,17 @@ uv run python cli.py crawl --tui
 uv run python cli.py crawl -f my-links.md --workers 10
 ```
 
+### Memory Commands
+
+```bash
+# Route one or more URLs directly into memory
+uv run python cli.py memory-add https://example.com/article
+uv run python cli.py memory-add https://example.com/a https://example.com/b -t "Optional title"
+
+# List current memory topics
+uv run python cli.py memory-topics
+```
+
 ### Viewing Collection
 
 ```bash
@@ -129,14 +150,6 @@ uv run python cli.py generate
 uv run python cli.py generate -o docs -t "My Reading List" -d "Curated articles"
 ```
 
-## Legacy Scripts
-
-```bash
-uv run python get_count_links.py       # Extract links from links.md
-uv run python enhanced_crawler.py      # Original crawler with classification
-uv run python enhanced_crawler_tui.py  # Crawler with TUI
-```
-
 ## Testing
 
 ```bash
@@ -144,6 +157,10 @@ uv run pytest                    # All tests
 uv run pytest -m unit            # Unit tests only
 uv run pytest -m integration     # Integration tests
 uv run pytest -m "not slow"      # Skip slow tests
+
+# Useful sanity checks used in this workspace
+uv run python cli.py crawl --workers 1
+uv run python cli.py crawl --all --workers 1
 ```
 
 ## Key Features
@@ -151,6 +168,8 @@ uv run pytest -m "not slow"      # Skip slow tests
 - **Incremental Sync**: Only processes new/failed links
 - **Readable Filenames**: `arxiv-2105-00613.pdf` instead of SHA256 hashes
 - **AI Classification**: Category, tags, summary, difficulty, quality score
+- **Memory Routing**: Topic-based memory sync using embedding similarity
+- **Canonical Notes**: One markdown note per link under `memory/links/`
 - **Static Site**: Browsable HTML with categories and search
 - **Multiple Export Formats**: JSON, Markdown, URL list
 - **TUI Progress**: Real-time crawl monitoring
@@ -162,5 +181,6 @@ uv run pytest -m "not slow"      # Skip slow tests
 3. **Fetch** - Download content (HTML→markdown, PDF)
 4. **Save** - Store with readable filename
 5. **Classify** - AI categorization via LLM
-6. **Index** - Update index.json with metadata
-7. **Generate** - Create static HTML site (on demand)
+6. **Memory** - Route to topics and write canonical per-link note
+7. **Index** - Update `index.json` with crawl/classification/memory metadata
+8. **Generate** - Create static HTML site (on demand)

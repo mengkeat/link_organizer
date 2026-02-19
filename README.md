@@ -12,6 +12,8 @@ A powerful tool for organizing, crawling, and classifying web links. Extract lin
 - **Static Site Generation**: Generate a browsable HTML site from your collection
 - **CLI Interface**: Full command-line interface for all operations
 - **TUI Progress**: Optional terminal UI for monitoring crawl progress
+- **Topic Memory Sync**: After classification, links are routed into topic memory using tags/key topics
+- **Canonical Link Notes**: Each crawled link gets a markdown note with full converted content
 
 ## Installation
 
@@ -20,16 +22,13 @@ A powerful tool for organizing, crawling, and classifying web links. Extract lin
 git clone https://github.com/mengkeat/link_organizer.git
 cd link_organizer
 
-# Create virtual environment
-python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-
-# Install dependencies with uv
+# Install dependencies with uv (creates/uses .venv)
 uv pip install -e .
-
-# Or with pip
-pip install -e .
 ```
+
+Requirements:
+- Python 3.13+
+- `uv`
 
 ## Quick Start
 
@@ -49,6 +48,15 @@ uv run python cli.py generate
 ## CLI Commands
 
 All commands are run with `uv run python cli.py <command>`. After installing with `uv pip install -e .`, you can use `link <command>` directly.
+
+```bash
+# Show all commands
+uv run python cli.py --help
+
+# Show help for memory commands
+uv run python cli.py memory-add --help
+uv run python cli.py memory-topics --help
+```
 
 ### Managing Links
 
@@ -92,6 +100,26 @@ uv run python cli.py crawl --tui
 # Adjust worker count
 uv run python cli.py crawl --workers 10
 ```
+
+### Memory (Topics + Link Notes)
+
+```bash
+# Recommended: crawl first (this now auto-routes to memory)
+uv run python cli.py crawl
+
+# Add one or more URLs directly into memory router
+uv run python cli.py memory-add https://example.com/article
+uv run python cli.py memory-add https://example.com/a https://example.com/b -t "Optional Title"
+
+# List current memory topics
+uv run python cli.py memory-topics
+```
+
+Memory behavior after crawl:
+- Successful classification automatically routes links into topic memory.
+- Topic notes are written to `memory/topics/`.
+- Canonical per-link markdown notes (with converted content) are written to `memory/links/`.
+- Memory linkage metadata is stored in `index.json` (`memory_topic_id`, `memory_topic_file`, `memory_link_file`, `memory_error`).
 
 ### Viewing Collection
 
@@ -137,52 +165,21 @@ uv run python cli.py generate -o docs -t "My Reading List" -d "Curated tech arti
 Create a `.env` file with your LLM provider settings:
 
 ```env
-# For LiteLLM (default)
-LITELLM_API_KEY=your-api-key
-LITELLM_MODEL=gpt-4o-mini
+# Required by current provider factory
+OPENROUTER_API_KEY=your-api-key
 
-# For OpenRouter
-OPENROUTER_API_KEY=your-openrouter-key
-LLM_PROVIDER=openrouter
+# Optional provider selection (defaults to litellm)
+LLM_PROVIDER=litellm
+
+# Optional model override (used by classification provider)
+LITELLM_MODEL=openrouter/openai/gpt-4
+
+# Optional OpenRouter metadata (when provider=openrouter)
+OPENROUTER_REFERER=https://github.com/your-app
+OPENROUTER_TITLE=Link Organizer
 ```
 
-## Project Structure
-
-```
-link_organizer/
-├── cli.py                     # CLI entry point
-├── get_count_links.py         # Link extraction from markdown
-├── enhanced_crawler.py        # Original enhanced crawler
-├── enhanced_crawler_tui.py    # Crawler with TUI
-├── src/
-│   ├── __init__.py
-│   ├── models.py              # Data models (LinkData, ClassificationResult, etc.)
-│   ├── link_index.py          # Index management with incremental sync
-│   ├── filename_generator.py  # Human-readable filename generation
-│   ├── content_processor.py   # Content extraction (PDF, markdown)
-│   ├── classification_service.py  # AI classification
-│   ├── crawler_utils.py       # Crawling utilities
-│   ├── incremental_crawler.py # Incremental crawl implementation
-│   ├── static_site_generator.py   # HTML site generation
-│   ├── workers.py             # Async worker implementations
-│   ├── status_tracker.py      # Progress tracking
-│   ├── tui.py                 # Terminal UI components
-│   └── llm/                   # LLM provider abstraction
-│       ├── __init__.py
-│       ├── base.py
-│       ├── litellm_provider.py
-│       └── openrouter_provider.py
-├── tests/
-│   ├── test_classification.py
-│   ├── test_link_classifier.py
-│   ├── test_llm_providers.py
-│   └── test_tui.py
-├── dat/                       # Downloaded content storage
-├── public/                    # Generated static site
-├── links.md                   # Input links file
-├── index.json                 # Link index with metadata
-└── classifications.json       # Classification results
-```
+You can also copy `config.yaml.example` to `config.yaml` to customize crawler/memory defaults.
 
 ## Data Files
 
@@ -190,38 +187,23 @@ link_organizer/
 |------|-------------|
 | `links.md` | Input file containing URLs to process |
 | `index.json` | Index of all links with status and classifications |
-| `classifications.json` | Classification results for each link |
+| `classifications.json` | Standalone classification export used by search/build tooling |
 | `dat/` | Directory containing downloaded content |
+| `memory/topic_index.db` | Topic centroid index used for semantic routing |
+| `memory/topics/` | Topic hub markdown files with grouped references |
+| `memory/links/` | Per-link canonical markdown notes containing converted content |
 | `public/` | Generated static site |
 
 ## Running Tests
 
 ```bash
 # Run all tests
-pytest
+uv run pytest
 
 # Run specific test categories
-pytest -m unit
-pytest -m integration
-pytest -m "not slow"
-```
-
-## Legacy Scripts
-
-The original scripts are still available for backwards compatibility:
-
-```bash
-# Extract and count links
-uv run python get_count_links.py
-
-# Basic crawler
-uv run python crawl_links.py
-
-# Enhanced crawler with AI classification
-uv run python enhanced_crawler.py
-
-# Enhanced crawler with TUI
-uv run python enhanced_crawler_tui.py
+uv run pytest -m unit
+uv run pytest -m integration
+uv run pytest -m "not slow"
 ```
 
 ## License

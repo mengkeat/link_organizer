@@ -14,6 +14,7 @@ import numpy as np
 from pathlib import Path
 
 from src.memory.topic_index_manager import TopicIndexManager
+from src.memory.link_writer import LinkMarkdownWriter
 from src.memory.markdown_writer import MarkdownWriter, slugify
 from src.memory.memory_router import MemoryRouter, cosine_similarity
 from src.memory.models import MemoryLinkEntry, TopicEntry, TopicIndex
@@ -159,6 +160,51 @@ class TestMarkdownWriter:
         assert f1 != f2
         assert (tmp_path / f1).exists()
         assert (tmp_path / f2).exists()
+
+    def test_append_link_with_link_note(self, tmp_path):
+        writer = MarkdownWriter(topics_dir=tmp_path)
+        filename = writer.create_topic_file("abc123", "Topic")
+
+        entry = MemoryLinkEntry(
+            url="https://example.com/page",
+            title="Page",
+            link_note_path="memory/links/2026/page.md",
+        )
+        writer.append_link(filename, entry)
+
+        content = (tmp_path / filename).read_text(encoding="utf-8")
+        assert "Link Note" in content
+        assert "memory/links/2026/page.md" in content
+
+
+class TestLinkMarkdownWriter:
+    def test_write_link_note_contains_converted_content(self, tmp_path):
+        writer = LinkMarkdownWriter(links_dir=tmp_path / "links")
+        entry = MemoryLinkEntry(
+            url="https://example.com/article",
+            title="Example Article",
+            tags=["ai", "ml"],
+            key_topics=["embeddings"],
+            summary="A summary",
+            content_markdown="# Heading\n\nConverted markdown body.",
+            source_filename="example-article.md",
+            content_type="md",
+        )
+
+        note_path = writer.write_link_note(
+            entry=entry,
+            topic_id="topic123",
+            topic_filename="machine_learning.md",
+        )
+
+        file_path = Path(note_path)
+        assert file_path.exists()
+
+        content = file_path.read_text(encoding="utf-8")
+        assert "url: https://example.com/article" in content
+        assert "topic_id: topic123" in content
+        assert "## Content" in content
+        assert "Converted markdown body." in content
 
 
 class TestMemoryRouterImmutability:

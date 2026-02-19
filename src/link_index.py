@@ -4,8 +4,7 @@ Link index management with incremental sync support
 import json
 from pathlib import Path
 from typing import Dict, List, Optional, Set, Any
-from datetime import datetime
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 
 @dataclass
@@ -19,6 +18,10 @@ class IndexEntry:
     crawled_at: Optional[str] = None
     classification: Optional[Dict[str, Any]] = None
     screenshot_filename: Optional[str] = None
+    memory_topic_id: Optional[str] = None
+    memory_topic_file: Optional[str] = None
+    memory_link_file: Optional[str] = None
+    memory_error: Optional[str] = None
     
     def to_dict(self) -> Dict[str, Any]:
         result = {
@@ -28,7 +31,11 @@ class IndexEntry:
             "readable_filename": self.readable_filename,
             "status": self.status,
             "crawled_at": self.crawled_at,
-            "screenshot_filename": self.screenshot_filename
+            "screenshot_filename": self.screenshot_filename,
+            "memory_topic_id": self.memory_topic_id,
+            "memory_topic_file": self.memory_topic_file,
+            "memory_link_file": self.memory_link_file,
+            "memory_error": self.memory_error,
         }
         if self.classification:
             result["classification"] = self.classification
@@ -44,7 +51,11 @@ class IndexEntry:
             status=data.get("status", "pending"),
             crawled_at=data.get("crawled_at"),
             classification=data.get("classification"),
-            screenshot_filename=data.get("screenshot_filename")
+            screenshot_filename=data.get("screenshot_filename"),
+            memory_topic_id=data.get("memory_topic_id"),
+            memory_topic_file=data.get("memory_topic_file"),
+            memory_link_file=data.get("memory_link_file"),
+            memory_error=data.get("memory_error"),
         )
 
 

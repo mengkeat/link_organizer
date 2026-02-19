@@ -3,7 +3,6 @@ Filename generation utilities for creating readable filenames from URLs
 """
 import re
 from urllib.parse import urlparse, unquote
-from typing import Optional
 from datetime import datetime
 
 

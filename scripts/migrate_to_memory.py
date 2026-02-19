@@ -13,7 +13,6 @@ Usage:
 
 import argparse
 import asyncio
-import json
 import sys
 from pathlib import Path
 
@@ -25,6 +24,7 @@ from dotenv import load_dotenv
 from src.content_processor import ContentProcessor
 from src.link_index import LinkIndex
 from src.memory.embedding_client import LiteLLMEmbeddingClient
+from src.memory.link_writer import LinkMarkdownWriter
 from src.memory.markdown_writer import MarkdownWriter
 from src.memory.memory_router import MemoryRouter
 from src.memory.models import MemoryLinkEntry
@@ -53,12 +53,14 @@ async def migrate(
     # Initialize components
     memory_path = Path(memory_dir)
     topics_dir = memory_path / "topics"
+    links_dir = memory_path / "links"
     index_path = memory_path / "topic_index.db"
 
     embedding_client = LiteLLMEmbeddingClient(model=embedding_model)
     index_manager = TopicIndexManager(db_path=index_path)
     index_manager.embedding_model = embedding_model
     writer = MarkdownWriter(topics_dir=topics_dir)
+    link_writer = LinkMarkdownWriter(links_dir=links_dir)
     router = MemoryRouter(
         embedding_client=embedding_client,
         index_manager=index_manager,
@@ -94,6 +96,13 @@ async def migrate(
             summary = entry.classification.get("summary", "")
             tags = entry.classification.get("tags", [])
             key_insight = ", ".join(entry.classification.get("key_topics", []))
+            key_topics = entry.classification.get("key_topics", [])
+            category = entry.classification.get("category", "")
+            subcategory = entry.classification.get("subcategory", "")
+        else:
+            key_topics = []
+            category = ""
+            subcategory = ""
 
         if not title:
             title = ContentProcessor.generate_title_from_url(entry.link)
@@ -105,6 +114,10 @@ async def migrate(
             summary=summary,
             key_insight=key_insight,
             raw_snippet=content[:200] if content else "",
+            key_topics=key_topics,
+            content_markdown=content,
+            source_filename=entry.readable_filename or entry.filename or "",
+            content_type=(Path(entry.readable_filename or entry.filename or "").suffix or "").replace(".", ""),
         )
 
         if dry_run:
@@ -117,9 +130,20 @@ async def migrate(
                 entry=link_entry,
                 content=content,
                 title_for_new_topic=title,
+                topic_hints=[category, subcategory, *tags, *key_topics],
+                append_to_topic=False,
             )
             processed += 1
             topic = index_manager.get_topic(topic_id)
+            topic_filename = topic.filename if topic else ""
+            link_note_path = link_writer.write_link_note(
+                entry=link_entry,
+                topic_id=topic_id,
+                topic_filename=topic_filename,
+            )
+            link_entry.link_note_path = link_note_path
+            if topic_filename:
+                writer.append_link(topic_filename, link_entry)
             print(f"  [{processed}/{len(successful)}] -> {topic.filename} ({topic.title[:40]})")
         except Exception as e:
             errors += 1

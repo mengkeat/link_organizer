@@ -3,7 +3,7 @@ Pydantic models for the topic-based memory system
 """
 
 from datetime import datetime
-from typing import List, Optional
+from typing import List
 
 from pydantic import BaseModel, Field
 
@@ -34,4 +34,10 @@ class MemoryLinkEntry(BaseModel):
     summary: str = ""
     key_insight: str = ""
     raw_snippet: str = ""
+    key_topics: List[str] = Field(default_factory=list)
+    content_markdown: str = ""
+    source_filename: str = ""
+    content_type: str = ""
+    link_note_path: str = ""
+    content_truncated: bool = False
     added_at: str = Field(default_factory=lambda: datetime.now().isoformat())

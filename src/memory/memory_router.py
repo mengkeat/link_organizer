@@ -43,19 +43,27 @@ class MemoryRouter:
         entry: MemoryLinkEntry,
         content: str = "",
         title_for_new_topic: str = "",
+        topic_hints: Optional[list[str]] = None,
+        append_to_topic: bool = True,
     ) -> str:
         """Route a link to an existing or new topic. Returns topic_id."""
         # Build embedding input from URL + content
         embed_text = f"{entry.url}\n\n{content[:4000]}" if content else entry.url
+        if topic_hints:
+            embed_text = f"{embed_text}\n\nHints: {' | '.join(topic_hints)}"
         embedding = await self.embedding_client.embed(embed_text)
 
         # Find best matching topic
-        best_topic_id, best_sim = self._find_best_topic(embedding)
+        best_topic_id, best_sim = self._find_best_topic(
+            embedding,
+            hints=topic_hints or entry.tags,
+        )
 
         if best_topic_id and best_sim >= self.similarity_threshold:
             # Append to existing topic
             filename = self.index_manager.get_filename(best_topic_id)
-            self.writer.append_link(filename, entry)
+            if append_to_topic and filename:
+                self.writer.append_link(filename, entry)
             self.index_manager.update_centroid(best_topic_id, embedding)
             self.index_manager.save()
             return best_topic_id
@@ -73,25 +81,36 @@ class MemoryRouter:
             # Rewrite frontmatter with real topic_id
             self._fix_topic_id_in_file(filename, topic_entry.topic_id)
             # Append the first link entry
-            self.writer.append_link(filename, entry)
+            if append_to_topic:
+                self.writer.append_link(filename, entry)
             self.index_manager.save()
             return topic_entry.topic_id
 
     def _find_best_topic(
-        self, embedding: np.ndarray
+        self,
+        embedding: np.ndarray,
+        hints: Optional[list[str]] = None,
     ) -> tuple[Optional[str], float]:
         """Find the topic with highest cosine similarity to embedding."""
-        centroids = self.index_manager.get_centroids()
-        if not centroids:
+        topics = self.index_manager.list_topics()
+        if not topics:
             return None, 0.0
 
+        normalized_hints = [h.lower() for h in (hints or []) if h]
         best_id = None
         best_sim = -1.0
-        for topic_id, centroid in centroids.items():
+        for topic in topics:
+            centroid = np.array(topic.centroid_vector, dtype=np.float64)
             sim = cosine_similarity(embedding, centroid)
+            if normalized_hints:
+                topic_text = f"{topic.title} {Path(topic.filename).stem}".lower()
+                overlap_count = sum(
+                    1 for hint in normalized_hints if hint in topic_text
+                )
+                sim += min(0.12, overlap_count * 0.04)
             if sim > best_sim:
                 best_sim = sim
-                best_id = topic_id
+                best_id = topic.topic_id
 
         return best_id, best_sim
 
