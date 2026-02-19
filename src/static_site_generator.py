@@ -64,6 +64,15 @@ class StaticSiteGenerator:
             categories[category].append(item)
         return categories
     
+    @staticmethod
+    def _safe_category_slug(category: str) -> str:
+        """Convert category name to a filesystem-safe slug."""
+        import re
+        slug = category.replace(' ', '-').replace('/', '-').lower()
+        slug = re.sub(r'[^a-z0-9\-]', '', slug)
+        slug = re.sub(r'-+', '-', slug).strip('-')
+        return slug or 'uncategorized'
+
     def _generate_index_page(self, output_dir: Path, categories: Dict, all_links: List[Dict]):
         """Generate main index.html page."""
         total_links = len(all_links)
@@ -71,7 +80,7 @@ class StaticSiteGenerator:
         
         categories_html = ""
         for category, links in sorted(categories.items()):
-            safe_category = category.replace(' ', '-').lower()
+            safe_category = self._safe_category_slug(category)
             categories_html += f'''
             <div class="category-card">
                 <h3><a href="category-{safe_category}.html">{category}</a></h3>
@@ -134,7 +143,7 @@ class StaticSiteGenerator:
     def _generate_category_pages(self, output_dir: Path, categories: Dict):
         """Generate individual category pages."""
         for category, links in categories.items():
-            safe_category = category.replace(' ', '-').lower()
+            safe_category = self._safe_category_slug(category)
             links_html = self._render_link_list(links)
             
             html = f'''<!DOCTYPE html>
