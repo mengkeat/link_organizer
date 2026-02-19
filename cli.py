@@ -11,6 +11,10 @@ from typing import Optional
 
 from dotenv import load_dotenv
 
+from src.logging_config import setup_logging, get_logger
+
+logger = get_logger("cli")
+
 
 def get_index():
     """Get LinkIndex instance."""
@@ -28,6 +32,7 @@ def cmd_add(args):
     
     for url in args.urls:
         if index.get(url):
+            logger.warning("Duplicate link, already exists in index: %s", url)
             print(f"Already exists: {url}")
             continue
         
@@ -157,6 +162,37 @@ def cmd_tags(args):
     print(", ".join(tags))
 
 
+def _detect_duplicates(links: list[str]) -> list[str]:
+    """Detect and log duplicate links. Returns deduplicated list."""
+    seen = {}
+    unique = []
+    for link in links:
+        if link in seen:
+            seen[link] += 1
+        else:
+            seen[link] = 1
+            unique.append(link)
+    duplicates = {url: count for url, count in seen.items() if count > 1}
+    if duplicates:
+        for url, count in duplicates.items():
+            logger.warning("Duplicate link found (%d occurrences): %s", count, url)
+        logger.warning("Total duplicate links: %d", len(duplicates))
+    return unique
+
+
+def _run_crawl_and_route(links: list[str], index, *, incremental: bool = True,
+                         use_tui: bool = False, workers: int = 5):
+    """Shared crawl+classify+memory-route pipeline used by both crawl and memory-add."""
+    from src.unified_crawler import UnifiedCrawler
+    crawler = UnifiedCrawler(
+        incremental=incremental,
+        use_tui=use_tui,
+        enable_classification=True,
+        workers=workers,
+    )
+    asyncio.run(crawler.run(links, index))
+
+
 def cmd_crawl(args):
     """Crawl and classify links."""
     load_dotenv()
@@ -172,33 +208,33 @@ def cmd_crawl(args):
     else:
         all_links = extract_links_from_file("links.md")
     
+    # Deduplicate extracted links
+    all_links = _detect_duplicates(all_links)
+
     if args.retry:
         # Retry failed links
         links_to_process = list(index.get_failed_links())
-        print(f"Retrying {len(links_to_process)} failed links...")
+        logger.info("Retrying %d failed links...", len(links_to_process))
     elif args.all:
         # Process all links
         links_to_process = all_links
-        print(f"Processing all {len(links_to_process)} links...")
+        logger.info("Processing all %d links...", len(links_to_process))
     else:
         # Incremental: only new links
         existing = index.get_successful_links()
         links_to_process = [l for l in all_links if l not in existing]
-        print(f"Found {len(all_links)} total links, {len(links_to_process)} new to process.")
+        logger.info("Found %d total links, %d new to process.", len(all_links), len(links_to_process))
     
     if not links_to_process:
-        print("Nothing to process. Use --all to reprocess everything.")
+        logger.info("Nothing to process. Use --all to reprocess everything.")
         return
     
-    # Run the crawler
-    from src.unified_crawler import UnifiedCrawler
-    crawler = UnifiedCrawler(
+    _run_crawl_and_route(
+        links_to_process, index,
         incremental=not args.all,
         use_tui=args.tui,
-        enable_classification=True,
         workers=args.workers,
     )
-    asyncio.run(crawler.run(links_to_process, index))
 
 
 def cmd_generate(args):
@@ -301,11 +337,38 @@ def cmd_import(args):
 
 
 def cmd_memory_add(args):
-    """Add a link to the memory system via the router."""
+    """Crawl specific URLs and route them into the memory system."""
     load_dotenv()
 
+    from src.link_index import LinkIndex
+
+    urls = _detect_duplicates(args.urls)
+    index = LinkIndex(Path("index.json"))
+
+    # Check which URLs are already successfully indexed
+    existing = index.get_successful_links()
+    new_urls = [u for u in urls if u not in existing]
+    already_done = [u for u in urls if u in existing]
+    for url in already_done:
+        logger.info("Already indexed, re-routing to memory: %s", url)
+
+    logger.info("memory-add: %d URL(s) to crawl, %d already indexed", len(new_urls), len(already_done))
+
+    # Crawl new URLs through the full pipeline (fetch + classify + memory route)
+    if new_urls:
+        _run_crawl_and_route(new_urls, index, incremental=False, workers=1)
+
+    # For already-indexed URLs, re-route them through memory in case they weren't routed before
+    if already_done:
+        _reroute_existing_to_memory(already_done, index)
+
+
+def _reroute_existing_to_memory(urls: list[str], index):
+    """Re-route already-indexed URLs into the memory system."""
     from src.config import get_config
+    from src.content_processor import ContentProcessor
     from src.memory.embedding_client import LiteLLMEmbeddingClient
+    from src.memory.link_writer import LinkMarkdownWriter
     from src.memory.markdown_writer import MarkdownWriter
     from src.memory.memory_router import MemoryRouter
     from src.memory.models import MemoryLinkEntry
@@ -314,6 +377,7 @@ def cmd_memory_add(args):
     config = get_config()
     memory_dir = Path(config.memory.output_dir)
     topics_dir = memory_dir / config.memory.topics_subdir
+    links_dir = memory_dir / config.memory.links_subdir
 
     embedding_client = LiteLLMEmbeddingClient(model=config.memory.embedding_model)
     index_manager = TopicIndexManager(memory_dir / "topic_index.db")
@@ -324,12 +388,80 @@ def cmd_memory_add(args):
         writer=writer,
         similarity_threshold=config.memory.similarity_threshold,
     )
+    link_writer = LinkMarkdownWriter(links_dir)
 
-    for url in args.urls:
-        entry = MemoryLinkEntry(url=url, title=args.title or "")
-        topic_id = asyncio.run(router.route_link(entry))
-        topic = index_manager.get_topic(topic_id)
-        print(f"Routed {url} -> {topic.filename}")
+    for url in urls:
+        entry = index.get(url)
+        if not entry or not entry.classification:
+            logger.warning("Skipping %s: no classification data available", url)
+            continue
+
+        classification = entry.classification
+        title = ContentProcessor.generate_title_from_url(url)
+
+        # Read content from saved file if available
+        content_markdown = ""
+        if entry.readable_filename:
+            filepath = Path("dat") / entry.readable_filename
+            if filepath.exists():
+                content_markdown = ContentProcessor.extract_content_from_file(filepath)
+
+        max_chars = config.memory.link_note_max_chars
+        content_truncated = len(content_markdown) > max_chars
+
+        topic_hints = [
+            classification.get("category", ""),
+            classification.get("subcategory", ""),
+            *classification.get("tags", []),
+            *classification.get("key_topics", []),
+        ]
+        topic_hints = [h for h in topic_hints if h]
+
+        topic_title = (
+            classification.get("subcategory")
+            or classification.get("category")
+            or title
+        )
+
+        memory_entry = MemoryLinkEntry(
+            url=url,
+            title=title,
+            tags=classification.get("tags", []),
+            summary=classification.get("summary", ""),
+            key_insight=", ".join(classification.get("key_topics", [])),
+            raw_snippet=content_markdown[:300],
+            key_topics=classification.get("key_topics", []),
+            content_markdown=content_markdown[:max_chars],
+            source_filename=entry.readable_filename or "",
+            content_type="md",
+            content_truncated=content_truncated,
+        )
+
+        topic_id = asyncio.run(router.route_link(
+            entry=memory_entry,
+            content=content_markdown,
+            title_for_new_topic=topic_title,
+            topic_hints=topic_hints,
+            append_to_topic=False,
+        ))
+        topic_filename = index_manager.get_filename(topic_id) or ""
+
+        link_note_path = link_writer.write_link_note(
+            entry=memory_entry,
+            topic_id=topic_id,
+            topic_filename=topic_filename,
+        )
+        memory_entry.link_note_path = link_note_path
+        if topic_filename:
+            writer.append_link(topic_filename, memory_entry)
+
+        entry.memory_topic_id = topic_id
+        entry.memory_topic_file = topic_filename
+        entry.memory_link_file = link_note_path
+        index.add(entry)
+        logger.info("Re-routed %s -> topic %s", url, topic_filename)
+
+    index.save()
 
 
 def cmd_memory_topics(args):
@@ -438,9 +570,8 @@ def main():
     remove_parser.set_defaults(func=cmd_remove)
 
     # memory-add command
-    mem_add_parser = subparsers.add_parser("memory-add", help="Add links to memory via router")
-    mem_add_parser.add_argument("urls", nargs="+", help="URLs to route into memory")
-    mem_add_parser.add_argument("-t", "--title", help="Title for the link")
+    mem_add_parser = subparsers.add_parser("memory-add", help="Crawl URLs and route into memory")
+    mem_add_parser.add_argument("urls", nargs="+", help="URLs to crawl and route into memory")
     mem_add_parser.set_defaults(func=cmd_memory_add)
 
     # memory-topics command
@@ -453,6 +584,7 @@ def main():
         parser.print_help()
         sys.exit(1)
     
+    setup_logging()
     args.func(args)
 
 

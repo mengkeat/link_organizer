@@ -12,6 +12,9 @@ from io import BytesIO
 
 from .models import LinkData
 from .content_processor import ContentProcessor
+from .logging_config import get_logger
+
+logger = get_logger("crawler")
 
 
 class CrawlerUtils:
@@ -20,7 +23,9 @@ class CrawlerUtils:
     @staticmethod
     def is_pdf(url: str) -> bool:
         """Check if URL points to a PDF file based on extension or path."""
-        return url.lower().endswith(".pdf") or "pdf" in urlparse(url).path.lower()
+        result = url.lower().endswith(".pdf") or "pdf" in urlparse(url).path.lower()
+        logger.debug("PDF detection for %s: %s", url, result)
+        return result
 
     @staticmethod
     async def fetch_and_convert(crawler, url: str) -> Tuple[Optional[str], Optional[str], Optional[str]]:
@@ -34,12 +39,14 @@ class CrawlerUtils:
     @staticmethod
     def _download_pdf(url: str) -> Tuple[Optional[bytes], Optional[str]]:
         """Download PDF content directly from URL."""
+        logger.info("Downloading PDF from %s", url)
         try:
             resp = requests.get(url, timeout=15)
             resp.raise_for_status()
+            logger.info("PDF downloaded successfully from %s (%d bytes)", url, len(resp.content))
             return resp.content, "pdf"
         except Exception as e:
-            print(f"Failed to download PDF from {url}: {e}")
+            logger.error("Failed to download PDF from %s: %s", url, e)
             return None, None
 
     @staticmethod
@@ -61,16 +68,18 @@ class CrawlerUtils:
             screenshot=True, 
         )
         
+        logger.info("Fetching HTML content from %s", url)
         try:
             result = await crawler.arun(url=url, config=config)
             if result.success:
                 screenshot_base64 = result.screenshot if hasattr(result, 'screenshot') and result.screenshot else None
+                logger.info("HTML fetch successful for %s", url)
                 return result.markdown, "md", screenshot_base64
             else:
-                print(f"Crawling failed for {url}")
+                logger.error("Crawling failed for %s", url)
                 return None, None, None
         except Exception as e:
-            print(f"Error fetching HTML content from {url}: {e}")
+            logger.error("Error fetching HTML content from %s: %s", url, e)
             return None, None, None
 
     @staticmethod
@@ -88,17 +97,18 @@ class CrawlerUtils:
             screenshot_path = os.path.join(data_dir, screenshot_filename)
             
             image.save(screenshot_path, 'JPEG', quality=85)
+            logger.debug("Screenshot saved: %s", screenshot_filename)
             return screenshot_filename
             
         except Exception as e:
-            print(f"Failed to save screenshot: {e}")
+            logger.warning("Failed to save screenshot: %s", e)
             return None
 
     @staticmethod
     async def fetch_link_content(crawler, link: str, idx: int, total: int, data_dir: str = "dat") -> LinkData:
         """Fetch content for a link and prepare LinkData object with status."""
         link_id = ContentProcessor.hash_link(link)
-        print(f"[{idx+1}/{total}] Fetching: {link}")
+        logger.info("[%d/%d] Fetching: %s", idx + 1, total, link)
         
         try:
             content, typ, screenshot_base64 = await CrawlerUtils.fetch_and_convert(crawler, link)
@@ -124,6 +134,7 @@ class CrawlerUtils:
                 screenshot_filename = CrawlerUtils._save_screenshot(screenshot_base64, link_id, data_dir)
 
             content_str = content if typ != "pdf" else f"PDF content ({len(content)} bytes)"
+            logger.info("[%d/%d] Fetched successfully: %s (type=%s)", idx + 1, total, link, typ)
             return LinkData(
                 link=link,
                 id=link_id,
@@ -134,7 +145,7 @@ class CrawlerUtils:
             )
             
         except Exception as e:
-            print(f"[{idx+1}/{total}] Failed to fetch {link}: {e}")
+            logger.error("[%d/%d] Failed to fetch %s: %s", idx + 1, total, link, e)
             return LinkData(
                 link=link,
                 id=link_id,

@@ -20,12 +20,15 @@ from .crawler_utils import CrawlerUtils
 from .status_tracker import get_status_tracker
 from .tui import CrawlerTUI
 from .config import get_config
+from .logging_config import get_logger
 from .memory.embedding_client import LiteLLMEmbeddingClient
 from .memory.link_writer import LinkMarkdownWriter
 from .memory.markdown_writer import MarkdownWriter
 from .memory.memory_router import MemoryRouter
 from .memory.models import MemoryLinkEntry
 from .memory.topic_index_manager import TopicIndexManager
+
+logger = get_logger("unified_crawler")
 
 
 class UnifiedCrawler:
@@ -126,10 +129,10 @@ class UnifiedCrawler:
 
         total = len(links)
         if total == 0:
-            print("No links to process.")
+            logger.info("No links to process.")
             return {"total": 0, "success": 0, "failed": 0}
 
-        print(f"Processing {total} links...")
+        logger.info("Processing %d links...", total)
 
         # Initialize status tracker for TUI
         status_tracker = get_status_tracker() if self.use_tui else None
@@ -193,12 +196,10 @@ class UnifiedCrawler:
         if tui:
             tui.print_summary()
         else:
-            print("\n" + "=" * 50)
-            print("Crawling complete!")
-            print(f"Processed: {success_count} successful, {failed_count} failed")
-            print(f"Index saved to {self.config.index_file}")
+            logger.info("Crawling complete! Processed: %d successful, %d failed", success_count, failed_count)
+            logger.info("Index saved to %s", self.config.index_file)
             if self.enable_classification:
-                print(f"Classifications saved to {self.config.classifications_file}")
+                logger.info("Classifications saved to %s", self.config.classifications_file)
 
         return {
             "total": total,
@@ -243,7 +244,7 @@ class UnifiedCrawler:
             self._memory_index_manager = None
             self._link_writer = None
             self._memory_init_error = str(e)
-            print(f"Warning: memory pipeline disabled: {e}")
+            logger.warning("Memory pipeline disabled: %s", e)
 
     async def _run_workers(
         self,
@@ -357,7 +358,7 @@ class UnifiedCrawler:
                     status_tracker.update_worker_status(worker_name, "working", link)
                     status_tracker.update_link_stage(link, ProcessingStage.FETCHING)
 
-                print(f"[{i + 1}/{total}] Fetching: {link}")
+                logger.info("[%d/%d] Fetching: %s", i + 1, total, link)
                 link_id = ContentProcessor.hash_link(link)
 
                 try:
@@ -442,10 +443,10 @@ class UnifiedCrawler:
                         results.append(entry)
                         if status_tracker:
                             status_tracker.update_link_stage(link, ProcessingStage.SUCCESS)
-                        print(f"[{i + 1}/{total}] Success: {link} -> {readable_name}")
+                        logger.info("[%d/%d] Success: %s -> %s", i + 1, total, link, readable_name)
 
                 except Exception as e:
-                    print(f"[{i + 1}/{total}] Failed: {link} - {e}")
+                    logger.error("[%d/%d] Failed: %s - %s", i + 1, total, link, e)
                     entry = IndexEntry(
                         link=link,
                         id=link_id,
@@ -497,7 +498,7 @@ class UnifiedCrawler:
                         link_data.link, ProcessingStage.CLASSIFYING
                     )
 
-                print(f"Classifying: {link_data.link}")
+                logger.info("Classifying: %s", link_data.link)
 
                 try:
                     title = ContentProcessor.generate_title_from_url(link_data.link)
@@ -530,6 +531,7 @@ class UnifiedCrawler:
 
                     if self._memory_router and self._memory_writer and self._link_writer and self._memory_index_manager:
                         try:
+                            logger.debug("Routing %s to memory system", link_data.link)
                             link_content_markdown = ""
                             if link_data.content_type == "md":
                                 link_content_markdown = link_data.content or ""
@@ -591,7 +593,9 @@ class UnifiedCrawler:
                             entry.memory_topic_id = topic_id
                             entry.memory_topic_file = topic_filename
                             entry.memory_link_file = link_note_path
+                            logger.info("Memory routed %s -> topic %s", link_data.link, topic_filename)
                         except Exception as mem_err:
+                            logger.error("Memory routing failed for %s: %s", link_data.link, mem_err)
                             entry.memory_error = str(mem_err)
                     elif self._memory_init_error:
                         entry.memory_error = self._memory_init_error
@@ -605,12 +609,12 @@ class UnifiedCrawler:
                         )
                         status_tracker.update_queue_stats(completed_count=len(results))
 
-                    print(
-                        f"Success: {link_data.link} -> {entry.readable_filename} ({classification.category})"
+                    logger.info(
+                        "Success: %s -> %s (%s)", link_data.link, entry.readable_filename, classification.category
                     )
 
                 except Exception as e:
-                    print(f"Classification failed for {link_data.link}: {e}")
+                    logger.error("Classification failed for %s: %s", link_data.link, e)
                     entry = IndexEntry(
                         link=link_data.link,
                         id=link_data.id,

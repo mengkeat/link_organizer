@@ -4,6 +4,9 @@ LiteLLM provider implementation
 
 import litellm
 from .base import LLMProvider, LLMResponse
+from ..logging_config import get_logger
+
+logger = get_logger("llm.litellm")
 
 
 class LiteLLMProvider(LLMProvider):
@@ -44,6 +47,7 @@ class LiteLLMProvider(LLMProvider):
         }
 
         try:
+            logger.debug("LiteLLM API call: model=%s, prompt_length=%d", self.model, len(prompt))
             response = await litellm.acompletion(
                 model=self.model,
                 messages=[{"role": "user", "content": prompt}],
@@ -60,6 +64,8 @@ class LiteLLMProvider(LLMProvider):
                     "total_tokens": getattr(response.usage, 'total_tokens', 0)
                 }
 
+            logger.debug("LiteLLM API response: model=%s, usage=%s", self.model, usage)
+
             return LLMResponse(
                 content=choice.message.content,
                 model=self.model,
@@ -68,4 +74,5 @@ class LiteLLMProvider(LLMProvider):
             )
 
         except Exception as e:
+            logger.error("LiteLLM API error: %s", e)
             raise RuntimeError(f"LiteLLM generation failed: {e}") from e

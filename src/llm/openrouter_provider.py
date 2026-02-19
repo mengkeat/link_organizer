@@ -4,6 +4,9 @@ OpenRouter direct provider implementation
 
 import aiohttp
 from .base import LLMProvider, LLMResponse
+from ..logging_config import get_logger
+
+logger = get_logger("llm.openrouter")
 
 
 class OpenRouterProvider(LLMProvider):
@@ -71,8 +74,10 @@ class OpenRouterProvider(LLMProvider):
         }
 
         try:
+            endpoint = f"{self.BASE_URL}/chat/completions"
+            logger.debug("OpenRouter API request: model=%s, endpoint=%s, prompt_length=%d", self.model, endpoint, len(prompt))
             async with self.session.post(
-                f"{self.BASE_URL}/chat/completions",
+                endpoint,
                 headers=headers,
                 json=payload
             ) as response:
@@ -82,6 +87,8 @@ class OpenRouterProvider(LLMProvider):
                 choice = data["choices"][0]
                 usage = data.get("usage")
 
+                logger.debug("OpenRouter API response: model=%s, usage=%s", self.model, usage)
+
                 return LLMResponse(
                     content=choice["message"]["content"],
                     model=data.get("model", self.model),
@@ -90,6 +97,8 @@ class OpenRouterProvider(LLMProvider):
                 )
 
         except aiohttp.ClientError as e:
+            logger.error("OpenRouter API request error: %s", e)
             raise RuntimeError(f"OpenRouter API request failed: {e}") from e
         except Exception as e:
+            logger.error("OpenRouter generation error: %s", e)
             raise RuntimeError(f"OpenRouter generation failed: {e}") from e

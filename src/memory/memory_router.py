@@ -8,10 +8,13 @@ from typing import Optional
 
 import numpy as np
 
+from ..logging_config import get_logger
 from .embedding_client import EmbeddingProvider
 from .markdown_writer import MarkdownWriter
 from .models import MemoryLinkEntry
 from .topic_index_manager import TopicIndexManager
+
+logger = get_logger("memory_router")
 
 
 def cosine_similarity(a: np.ndarray, b: np.ndarray) -> float:
@@ -51,6 +54,7 @@ class MemoryRouter:
         embed_text = f"{entry.url}\n\n{content[:4000]}" if content else entry.url
         if topic_hints:
             embed_text = f"{embed_text}\n\nHints: {' | '.join(topic_hints)}"
+        logger.debug("Computing embedding for text of length %d", len(embed_text))
         embedding = await self.embedding_client.embed(embed_text)
 
         # Find best matching topic
@@ -59,17 +63,23 @@ class MemoryRouter:
             hints=topic_hints or entry.tags,
         )
 
+        if best_topic_id:
+            logger.info("Best topic match: %s (similarity=%.4f)", best_topic_id, best_sim)
+
         if best_topic_id and best_sim >= self.similarity_threshold:
             # Append to existing topic
+            logger.info("Appending to existing topic %s", best_topic_id)
             filename = self.index_manager.get_filename(best_topic_id)
             if append_to_topic and filename:
                 self.writer.append_link(filename, entry)
             self.index_manager.update_centroid(best_topic_id, embedding)
+            logger.debug("Updated centroid for topic %s", best_topic_id)
             self.index_manager.save()
             return best_topic_id
         else:
             # Create new topic
             topic_title = title_for_new_topic or entry.title or entry.url
+            logger.info("Creating new topic: %s", topic_title)
             filename = self.writer.create_topic_file(
                 topic_id="placeholder", title=topic_title, tags=entry.tags
             )

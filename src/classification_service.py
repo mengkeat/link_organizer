@@ -9,6 +9,9 @@ from pathlib import Path
 from .models import ClassificationResult
 from .content_processor import ContentProcessor
 from .llm import LLMProviderFactory
+from .logging_config import get_logger
+
+logger = get_logger("classification")
 
 
 class ClassificationService:
@@ -63,7 +66,7 @@ Be precise and objective in your analysis.
         prompt = self.get_classification_prompt(url, title, content)
 
         try:
-            print(f"Using LLM provider: {type(self.llm_provider).__name__}")
+            logger.debug("Using LLM provider: %s", type(self.llm_provider).__name__)
             async with self.llm_provider as provider:
                 response = await provider.generate(
                     prompt,
@@ -74,10 +77,12 @@ Be precise and objective in your analysis.
             result_text = response.content
             result_json = self.parse_llm_response(result_text)
 
-            return ClassificationResult(**result_json)
+            result = ClassificationResult(**result_json)
+            logger.info("Classification success for %s: category=%s", url, result.category)
+            return result
 
         except Exception as e:
-            print(f"Classification failed for {url}: {e}")
+            logger.error("Classification failed for %s: %s", url, e)
             return self.get_fallback_classification(url, title, content)
 
     def parse_llm_response(self, response_text: str) -> Dict[str, Any]:
@@ -91,9 +96,11 @@ Be precise and objective in your analysis.
                 result = json.loads(json_str)
                 return result
             else:
+                logger.warning("No JSON object found in LLM response, using text fallback")
                 return self.parse_text_response(response_text)
 
-        except json.JSONDecodeError:
+        except json.JSONDecodeError as e:
+            logger.warning("JSON parse error in LLM response: %s", e)
             return self.parse_text_response(response_text)
 
     def parse_text_response(self, text: str) -> Dict[str, Any]:
@@ -113,6 +120,7 @@ Be precise and objective in your analysis.
 
     def get_fallback_classification(self, url: str, title: str, content: str) -> ClassificationResult:
         """Provide default classification when LLM classification fails."""
+        logger.warning("Using fallback classification for %s", url)
         return ClassificationResult(
             category="Technology",
             subcategory="General",
@@ -129,7 +137,7 @@ Be precise and objective in your analysis.
     async def classify_existing_links(self, index_file: Path = Path("index.json")) -> Dict[str, tuple]:
         """Classify all existing crawled links from index file."""
         if not index_file.exists():
-            print(f"Index file {index_file} not found")
+            logger.error("Index file %s not found", index_file)
             return {}
 
         index_data = json.loads(index_file.read_text())
@@ -148,13 +156,13 @@ Be precise and objective in your analysis.
 
             file_path = Path("dat") / filename
             if not file_path.exists():
-                print(f"File not found: {file_path}")
+                logger.warning("File not found: %s", file_path)
                 continue
 
             content = ContentProcessor.extract_content_from_file(file_path)
             title = filename
 
-            print(f"Classifying {link}...")
+            logger.info("Classifying %s", link)
             classification = await self.classify_content(link, title, content)
             classifications[link] = (classification, file_hash)
 
@@ -200,4 +208,4 @@ Be precise and objective in your analysis.
                 }
 
         output_file.write_text(json.dumps(output_data, indent=2, ensure_ascii=False))
-        print(f"Saved {len(classifications)} classifications to {output_file}")
+        logger.info("Saved %d classifications to %s", len(classifications), output_file)

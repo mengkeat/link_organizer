@@ -7,6 +7,10 @@ from typing import Protocol
 
 import numpy as np
 
+from ..logging_config import get_logger
+
+logger = get_logger("embedding")
+
 
 class EmbeddingProvider(Protocol):
     """Protocol for embedding providers (allows easy test mocking)."""
@@ -29,10 +33,13 @@ class LiteLLMEmbeddingClient:
         """Compute embedding for text using litellm."""
         import litellm
 
+        logger.debug("Embedding request: model=%s, input_len=%d", self.model, len(text))
         response = await litellm.aembedding(
             model=self.model,
             input=[text[:8000]],
             api_key=self.api_key,
         )
         vector = response.data[0]["embedding"]
-        return np.array(vector, dtype=np.float64)
+        result = np.array(vector, dtype=np.float64)
+        logger.debug("Embedding success: dim=%d", result.shape[0])
+        return result

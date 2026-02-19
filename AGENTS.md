@@ -103,9 +103,9 @@ uv run python cli.py crawl -f my-links.md --workers 10
 ### Memory Commands
 
 ```bash
-# Route one or more URLs directly into memory
+# Crawl and route one or more URLs into memory
 uv run python cli.py memory-add https://example.com/article
-uv run python cli.py memory-add https://example.com/a https://example.com/b -t "Optional title"
+uv run python cli.py memory-add https://example.com/a https://example.com/b
 
 # List current memory topics
 uv run python cli.py memory-topics
