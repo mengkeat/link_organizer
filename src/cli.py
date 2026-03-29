@@ -58,8 +58,28 @@ async def cmd_sync(args):
         logger.warning("Search index refresh failed", exc_info=True)
 
 
+def _check_index_sync(index):
+    """Warn if .cache/index.json and memory/ are out of sync."""
+    config = get_config()
+    links_dir = Path(config.memory.output_dir) / config.memory.links_subdir
+    if not links_dir.exists():
+        return
+    memory_notes = set(p.name for p in links_dir.glob("*.md"))
+    index_notes = set(e.memory_link_file for e in index.get_all() if e.memory_link_file)
+    # Normalize index entries to just filenames for comparison
+    index_notes = set(Path(f).name for f in index_notes)
+    if memory_notes and not memory_notes.issubset(index_notes):
+        untracked = len(memory_notes - index_notes)
+        print(
+            f"Warning: {untracked} note(s) in memory/links/ are not tracked in .cache/index.json. "
+            f"Run 'link sync --all' to re-sync.",
+            file=sys.stderr,
+        )
+
+
 def cmd_list(args):
     index = get_index()
+    _check_index_sync(index)
     entries = index.get_all()
     if args.category:
         entries = [
