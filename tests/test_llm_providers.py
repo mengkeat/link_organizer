@@ -5,10 +5,10 @@ Tests for LLM providers
 import pytest
 import os
 from unittest.mock import AsyncMock, MagicMock, patch
-from src.llm.base import LLMProvider, LLMResponse
-from src.llm.litellm_provider import LiteLLMProvider
-from src.llm.openrouter_provider import OpenRouterProvider
-from src.llm.factory import LLMProviderFactory, LLMProviderType
+from src.classifier import LLMProvider, LLMResponse
+from src.classifier import LiteLLMProvider
+from src.classifier import OpenRouterProvider
+from src.classifier import LLMProviderFactory, LLMProviderType
 
 
 class TestLLMResponse:

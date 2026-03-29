@@ -17,7 +17,7 @@ dependencies = [
 ]
 
 [project.scripts]
-link = "cli:main"
+link = "src.cli:main"
 
 [project.optional-dependencies]
 dev = [

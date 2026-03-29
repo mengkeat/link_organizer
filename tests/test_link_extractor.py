@@ -4,7 +4,7 @@ Tests for LinkExtractor
 
 import pytest
 from pathlib import Path
-from src.link_extractor import LinkExtractor, extract_links_from_file
+from src.index import LinkExtractor, extract_links_from_file
 
 
 class TestLinkExtractorFromText:

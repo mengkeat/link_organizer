@@ -5,7 +5,7 @@ Tests for ContentProcessor
 import pytest
 from pathlib import Path
 from unittest.mock import MagicMock, patch
-from src.content_processor import ContentProcessor
+from src.crawler import ContentProcessor
 
 
 class TestHashLink:

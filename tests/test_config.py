@@ -4,7 +4,7 @@ Tests for Config module
 
 import pytest
 from pathlib import Path
-from src.config import (
+from src.core import (
     Config,
     ClassificationConfig,
     CrawlerConfigSettings,
@@ -45,9 +45,9 @@ class TestCrawlerConfigSettings:
         """Test default crawler settings"""
         config = CrawlerConfigSettings()
 
-        assert config.data_dir == "dat"
-        assert config.index_file == "index.json"
-        assert config.classifications_file == "classifications.json"
+        assert config.data_dir == ".cache/dat"
+        assert config.index_file == ".cache/index.json"
+        assert config.classifications_file == ".cache/classifications.json"
         assert config.max_retries == 3
         assert config.classification_workers == 5
         assert config.fetch_workers == 5
@@ -91,7 +91,7 @@ class TestConfig:
         config = Config.load(tmp_path / "nonexistent.yaml")
 
         assert config.default_input_file == "links.md"
-        assert config.crawler.data_dir == "dat"
+        assert config.crawler.data_dir == ".cache/dat"
 
     def test_load_from_yaml(self, tmp_path):
         """Test loading config from YAML file"""
@@ -131,7 +131,7 @@ crawler:
         config = Config.load(config_file)
 
         assert config.crawler.max_retries == 10
-        assert config.crawler.data_dir == "dat"
+        assert config.crawler.data_dir == ".cache/dat"
         assert config.default_input_file == "links.md"
 
     def test_load_empty_yaml(self, tmp_path):
@@ -142,7 +142,7 @@ crawler:
         config = Config.load(config_file)
 
         assert config.default_input_file == "links.md"
-        assert config.crawler.data_dir == "dat"
+        assert config.crawler.data_dir == ".cache/dat"
 
     def test_load_yaml_with_null_values(self, tmp_path):
         """Test loading YAML with null values"""
@@ -231,7 +231,7 @@ class TestConfigFromDict:
         config = Config._from_dict({})
 
         assert config.default_input_file == "links.md"
-        assert config.crawler.data_dir == "dat"
+        assert config.crawler.data_dir == ".cache/dat"
 
     def test_from_full_dict(self):
         """Test creating config from complete dict"""

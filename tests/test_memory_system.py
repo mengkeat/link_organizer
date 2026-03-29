@@ -13,11 +13,11 @@ import pytest
 import numpy as np
 from pathlib import Path
 
-from src.memory.topic_index_manager import TopicIndexManager
-from src.memory.link_writer import LinkMarkdownWriter
-from src.memory.markdown_writer import MarkdownWriter, slugify
-from src.memory.memory_router import MemoryRouter, cosine_similarity
-from src.memory.models import MemoryLinkEntry, TopicEntry, TopicIndex
+from src.memory import TopicIndexManager
+from src.memory import LinkMarkdownWriter
+from src.memory import MarkdownWriter, slugify
+from src.memory import MemoryRouter, cosine_similarity
+from src.memory import MemoryLinkEntry, TopicEntry
 
 
 # --- Deterministic fake embedding client ---

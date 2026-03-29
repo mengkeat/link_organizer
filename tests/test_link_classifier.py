@@ -7,12 +7,12 @@ import json
 from pathlib import Path
 from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
-from link_classifier import LinkClassifier
-from src.models import ClassificationResult
-from src.content_processor import ContentProcessor
-from src.llm.base import LLMResponse
-from src.llm.litellm_provider import LiteLLMProvider
-from src.llm.openrouter_provider import OpenRouterProvider
+from src.classifier import ClassificationService as LinkClassifier
+from src.core import ClassificationResult
+from src.crawler import ContentProcessor
+from src.classifier import LLMResponse
+from src.classifier import LiteLLMProvider
+from src.classifier import OpenRouterProvider
 
 
 class TestClassificationResult:
@@ -50,7 +50,7 @@ class TestLinkClassifier:
 
     def test_initialization_default(self):
         """Test LinkClassifier initialization with default LLM provider."""
-        with patch('src.llm.factory.LLMProviderFactory.from_env') as mock_factory:
+        with patch('src.classifier.LLMProviderFactory.from_env') as mock_factory:
             mock_provider = MagicMock()
             mock_factory.return_value = mock_provider
 
@@ -68,7 +68,7 @@ class TestLinkClassifier:
 
     def test_categories_and_types(self):
         """Test that categories and content types are defined"""
-        with patch('src.llm.factory.LLMProviderFactory.from_env'):
+        with patch('src.classifier.LLMProviderFactory.from_env'):
             classifier = LinkClassifier()
 
         assert len(classifier.categories) > 0
@@ -78,7 +78,7 @@ class TestLinkClassifier:
 
     def test_get_classification_prompt(self):
         """Test classification prompt generation"""
-        with patch('src.llm.factory.LLMProviderFactory.from_env'):
+        with patch('src.classifier.LLMProviderFactory.from_env'):
             classifier = LinkClassifier()
 
         prompt = classifier.get_classification_prompt(
@@ -95,7 +95,7 @@ class TestLinkClassifier:
 
     def test_parse_llm_response_valid_json(self):
         """Test parsing valid JSON response"""
-        with patch('src.llm.factory.LLMProviderFactory.from_env'):
+        with patch('src.classifier.LLMProviderFactory.from_env'):
             classifier = LinkClassifier()
 
         json_response = '''
@@ -121,7 +121,7 @@ class TestLinkClassifier:
 
     def test_parse_llm_response_json_with_text(self):
         """Test parsing JSON response with surrounding text"""
-        with patch('src.llm.factory.LLMProviderFactory.from_env'):
+        with patch('src.classifier.LLMProviderFactory.from_env'):
             classifier = LinkClassifier()
 
         response_with_text = '''
@@ -148,7 +148,7 @@ class TestLinkClassifier:
 
     def test_parse_llm_response_text_fallback(self):
         """Test fallback text parsing for non-JSON responses"""
-        with patch('src.llm.factory.LLMProviderFactory.from_env'):
+        with patch('src.classifier.LLMProviderFactory.from_env'):
             classifier = LinkClassifier()
 
         text_response = "This is a general article about technology and web development."
@@ -161,7 +161,7 @@ class TestLinkClassifier:
 
     def test_parse_llm_response_invalid_json(self):
         """Test parsing invalid JSON response falls back to text parsing"""
-        with patch('src.llm.factory.LLMProviderFactory.from_env'):
+        with patch('src.classifier.LLMProviderFactory.from_env'):
             classifier = LinkClassifier()
 
         invalid_json = '{"category": "Technology", "invalid": json}'
@@ -174,7 +174,7 @@ class TestLinkClassifier:
 
     def test_get_fallback_classification(self):
         """Test fallback classification generation"""
-        with patch('src.llm.factory.LLMProviderFactory.from_env'):
+        with patch('src.classifier.LLMProviderFactory.from_env'):
             classifier = LinkClassifier()
 
         fallback = classifier.get_fallback_classification(
@@ -280,7 +280,7 @@ class TestLinkClassifier:
 
     def test_save_classifications(self, tmp_path):
         """Test saving classifications to file"""
-        with patch('src.llm.factory.LLMProviderFactory.from_env'):
+        with patch('src.classifier.LLMProviderFactory.from_env'):
             classifier = LinkClassifier()
 
         classifications = {
@@ -311,7 +311,7 @@ class TestLinkClassifier:
 
     def test_classify_existing_links_file_not_found(self, tmp_path):
         """Test classify_existing_links with missing index file"""
-        with patch('src.llm.factory.LLMProviderFactory.from_env'):
+        with patch('src.classifier.LLMProviderFactory.from_env'):
             classifier = LinkClassifier()
 
         result = asyncio.run(classifier.classify_existing_links(tmp_path / "nonexistent.json"))
@@ -320,7 +320,7 @@ class TestLinkClassifier:
 
     def test_classify_existing_links_empty_index(self, tmp_path):
         """Test classify_existing_links with empty index file"""
-        with patch('src.llm.factory.LLMProviderFactory.from_env'):
+        with patch('src.classifier.LLMProviderFactory.from_env'):
             classifier = LinkClassifier()
 
         index_file = tmp_path / "empty_index.json"

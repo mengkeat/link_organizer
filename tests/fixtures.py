@@ -9,8 +9,8 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 from unittest.mock import AsyncMock, MagicMock
 
-from src.models import ClassificationResult, LinkData
-from src.link_index import IndexEntry, LinkIndex
+from src.core import ClassificationResult, LinkData
+from src.index import IndexEntry, LinkIndex
 
 
 @dataclass
