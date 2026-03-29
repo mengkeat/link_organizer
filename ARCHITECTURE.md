@@ -1,68 +1,119 @@
 # Architecture
 
-## Core Architecture
+## Overview
 
-The project is structured as a consolidated pipeline with five core modules in the `src/` directory. It uses a single CLI entry point (`cli.py`) to manage the entire workflow.
+The project is a CLI-first pipeline that turns Markdown link lists into an Obsidian-compatible note collection. It combines crawling, classification, topic routing, and local search on top of a small set of Python modules in `src/`.
 
-### Entry Points
-1. **`cli.py`** - Main CLI interface (`link` command) for all user operations.
+## Entry Points
 
-### Core Modules (`src/` directory)
+1. **`src/cli.py`**: main CLI implementation for the installed `link` command.
+2. **`src/__main__.py`**: module entry point for `python -m src`.
+3. **`cli.py`**: compatibility shim that forwards to `src.cli:main`.
 
-#### 1. `src/core.py` (Configuration & Base Models)
-- Merges configuration management (YAML-based) and Pydantic data models (`LinkData`, `ClassificationResult`, etc.).
-- Centralizes logging and environment setup.
+## Source Modules
 
-#### 2. `src/index.py` (Link Index & Extraction)
-- Manages the `LinkIndex` (the master record of processed links) and the `LinkExtractor`.
-- Responsible for parsing `links.md` (or any other markdown file) for new URLs.
+### `src/core.py`
 
-#### 3. `src/crawler.py` (Crawling & Processing)
-- Merges the `UnifiedCrawler`, `ContentProcessor`, and `FilenameGenerator`.
-- Handles fetching web content (via `crawl4ai` for HTML or `requests` for PDFs), extracting text, and generating human-readable filenames.
+- Defines application configuration using dataclasses.
+- Loads optional `config.yaml` overrides.
+- Centralizes logging.
+- Holds shared Pydantic models such as `LinkData` and `ClassificationResult`.
 
-#### 4. `src/classifier.py` (AI Classification)
-- Merges the `ClassificationService` and LLM provider abstractions (`LiteLLM`, `OpenRouter`).
-- Uses LLM prompts to categorize links, generate summaries, and assign tags.
+### `src/index.py`
 
-#### 5. `src/memory.py` (Obsidian Memory System)
-- Merges the topic memory system, including the `MemoryRouter`, `TopicIndexManager` (SQLite-based), and Markdown writers.
-- Routes new links into topic hubs (`memory/topics/`) and creates individual canonical link notes (`memory/links/`) with full content.
+- Extracts URLs from Markdown input files.
+- Manages the persisted link index stored in `.cache/index.json`.
+- Provides the data access layer used by listing, stats, export, and incremental sync.
+- The CLI detects when `memory/links/` contains notes not tracked in `.cache/index.json` and warns the user to re-sync.
 
-### Test Components (`tests/` directory)
-- **`test_config.py`** - Configuration and core model tests.
-- **`test_content_processor.py`** - Text and PDF processing tests.
-- **`test_link_classifier.py`** - AI classification logic tests.
-- **`test_link_extractor.py`** - URL parsing from markdown tests.
-- **`test_llm_providers.py`** - LLM backend provider tests.
-- **`test_models.py`** - Pydantic model validation tests.
-- **`test_memory_system.py`** - Topic routing and markdown output tests.
-- **`fixtures.py`** - Shared test fixtures and mocks.
+### `src/crawler.py`
 
-## Data Structure
+- Orchestrates sync execution over extracted links.
+- Fetches HTML and PDF content.
+- Saves downloaded artifacts under `.cache/dat/`.
+- Coordinates classification and memory writes.
 
-The project hides internal complexity by using a `.cache/` directory, while keeping the user-facing output in `memory/`.
+### `src/classifier.py`
+
+- Handles AI-based content classification.
+- Produces category, summary, tags, and other structured metadata.
+- Uses provider-backed LLM calls configured from environment variables.
+
+### `src/memory.py`
+
+- Implements topic routing and Markdown output generation.
+- Persists topic centroids in `.cache/topic_index.db`.
+- Writes topic hubs to `memory/topics/` and canonical link notes to `memory/links/`.
+
+### `src/search_documents.py`
+
+- Walks the `memory/` tree and normalizes notes into searchable documents.
+- Parses lightweight YAML-style frontmatter from generated Markdown notes.
+- Distinguishes `link` versus `topic` note types based on directory layout.
+
+### `src/search_index.py`
+
+- Builds and updates the SQLite FTS5 text index in `.cache/search.db`.
+- Tracks note modification times for incremental refresh.
+- Executes ranked full-text search queries.
+
+### `src/embeddings.py`
+
+- Stores semantic embeddings in SQLite alongside search metadata.
+- Calls an OpenAI-compatible embeddings endpoint.
+- Implements vector normalization and cosine-similarity-based retrieval.
+
+### `src/search.py`
+
+- Provides the public search orchestration layer.
+- Supports `text`, `semantic`, and `hybrid` modes.
+- Refreshes the text index before search and falls back gracefully when semantic search is unavailable.
+
+## Data Layout
+
+The project keeps user-facing notes in `memory/` and implementation state in `.cache/`.
 
 | File/Directory | Description |
 |----------------|-------------|
-| `links.md` | Primary source of truth for all links. |
-| `memory/` | The user's Markdown vault (ready for Obsidian). |
-| `memory/topics/` | Topic hub files grouping related link references. |
-| `memory/links/` | Detailed individual link notes with full content. |
-| `.cache/` | **Hidden** internal state directory. |
-| `.cache/index.json` | Master index mapping URLs to their processing status and metadata. |
-| `.cache/dat/` | Stored raw downloaded files (HTML/PDF). |
-| `.cache/topic_index.db` | SQLite database storing topic centroid vectors for semantic matching. |
+| `links.md` | Default source file containing URLs to process. |
+| `memory/` | User-facing Markdown vault. |
+| `memory/topics/` | Topic hub notes with grouped link references. |
+| `memory/links/` | Canonical per-link notes with summaries and captured content. |
+| `.cache/` | Internal state directory. |
+| `.cache/index.json` | Master index of link status and metadata. |
+| `.cache/classifications.json` | Export of standalone classification results. |
+| `.cache/dat/` | Downloaded raw content and related artifacts. |
+| `.cache/topic_index.db` | SQLite topic centroid store for routing. |
+| `.cache/search.db` | SQLite FTS and embedding store for local search. |
 
 ## Processing Pipeline
 
-The `link sync` command executes the following 7-step pipeline:
+`link sync` runs the following high-level flow:
 
-1. **Extract**: Parse all URLs from `links.md`.
-2. **Filter**: Compare URLs against `.cache/index.json` to identify new or failed links.
-3. **Fetch**: Download content (HTML converted to Markdown, or raw PDFs).
-4. **Save**: Persist the raw content into `.cache/dat/` using human-readable filenames.
-5. **Classify**: Send content samples to the LLM for categorization, tagging, and summarization.
-6. **Route**: Use embedding similarity to assign the link to an existing or new topic hub.
-7. **Write**: Generate the canonical link note and append the backlink to the relevant topic hub in `memory/`.
-8. **Finalize**: Update the index to ensure subsequent runs skip these links.
+1. **Extract**: parse all supported URLs from `links.md` or a supplied input file.
+2. **De-duplicate**: drop repeated links before any network work begins.
+3. **Filter**: compare links against `.cache/index.json` to decide what should run incrementally.
+4. **Fetch**: download and normalize source content from web pages or PDFs.
+5. **Persist raw content**: save fetched artifacts into `.cache/dat/`.
+6. **Classify**: generate summaries, tags, and category metadata using the configured LLM provider.
+7. **Route**: compare embeddings against existing topic centroids in `.cache/topic_index.db`.
+8. **Write notes**: create or update the Markdown outputs in `memory/links/` and `memory/topics/`.
+9. **Update indexes**: persist the latest processing state and refresh the local search index as a best-effort follow-up step.
+
+## Search Architecture
+
+- **Text search**: uses SQLite FTS5 over normalized note content.
+- **Semantic search**: stores embeddings in `.cache/search.db` and requires API credentials.
+- **Hybrid search**: combines text and semantic ranking with reciprocal rank fusion.
+
+## Test Coverage
+
+- **`tests/test_config.py`**: configuration loading and defaults.
+- **`tests/test_content_processor.py`**: content extraction and processing behavior.
+- **`tests/test_link_classifier.py`**: classification result handling.
+- **`tests/test_link_extractor.py`**: Markdown URL extraction.
+- **`tests/test_llm_providers.py`**: LLM provider integrations.
+- **`tests/test_memory_system.py`**: topic routing and Markdown note generation.
+- **`tests/test_models.py`**: model validation.
+- **`tests/test_search.py`**: search document parsing, indexing, and orchestration.
+- **`tests/fixtures.py`**: shared fixtures and helpers.
